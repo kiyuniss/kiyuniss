@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiyuni Secondary School - Education Determines The Future</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green:#1B5E20;
+  --green-mid:#2E7D32;
+  --green-light:#4CAF50;
+  --green-pale:#E8F5E9;
+  --gold:#F9A825;
+  --gold-light:#FFF8E1;
+  --white:#FFFFFF;
+  --dark:#0D1B0F;
+  --gray:#555;
+  --gray-light:#F5F5F5;
+  --border:#ddd;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#222;background:#fff;overflow-x:hidden}
+
+/* TOP BAR */
+.topbar{background:var(--green);color:#fff;font-size:13px;padding:7px 0}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.topbar a{color:#fff;text-decoration:none;margin-left:14px;opacity:.85;transition:opacity .2s}
+.topbar a:hover{opacity:1}
+.topbar-left{display:flex;gap:16px;align-items:center}
+.topbar-left span{display:flex;align-items:center;gap:6px}
+
+/* NAVBAR */
+nav{background:#fff;border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo-area{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-circle{width:52px;height:52px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-circle svg{width:30px;height:30px;fill:#fff}
+.logo-text h1{font-family:'Merriweather',serif;font-size:16px;color:var(--green);font-weight:900;line-height:1.2}
+.logo-text p{font-size:11px;color:var(--gold);font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{text-decoration:none;color:#333;font-size:14px;font-weight:500;padding:8px 14px;border-radius:6px;transition:all .2s;display:block}
+.nav-links a:hover,.nav-links a.active{background:var(--green-pale);color:var(--green)}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--border);border-radius:8px;min-width:210px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:999;padding:8px 0}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{padding:10px 18px;font-size:13px;color:#333;border-radius:0}
+.dropdown-menu a:hover{background:var(--green-pale);color:var(--green)}
+.nav-apply{background:var(--green);color:#fff!important;border-radius:6px;padding:9px 18px!important;font-weight:600!important}
+.nav-apply:hover{background:var(--green-mid)!important;color:#fff!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:24px;height:2px;background:#333;border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:2000;padding:24px;overflow-y:auto}
+.mobile-menu.open{display:block}
+.mobile-close{float:right;font-size:28px;cursor:pointer;color:#333;margin-bottom:20px}
+.mobile-menu a{display:block;padding:14px 0;border-bottom:1px solid var(--border);color:#333;text-decoration:none;font-size:16px;font-weight:500}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--green) 0%,#1a3a1c 60%,#0a2010 100%);min-height:88vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-inner{max-width:1200px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-block;background:rgba(249,168,37,.2);border:1px solid var(--gold);color:var(--gold);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.hero h2{font-family:'Merriweather',serif;font-size:48px;color:#fff;font-weight:900;line-height:1.15;margin-bottom:16px}
+.hero h2 span{color:var(--gold)}
+.hero-motto{font-size:15px;color:rgba(255,255,255,.75);font-style:italic;margin-bottom:24px;border-left:3px solid var(--gold);padding-left:16px}
+.hero p{font-size:16px;color:rgba(255,255,255,.85);line-height:1.8;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--dark);font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:15px;transition:all .2s;display:inline-block}
+.btn-primary:hover{background:#F57F17;transform:translateY(-2px)}
+.btn-outline{border:2px solid rgba(255,255,255,.5);color:#fff;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-size:15px;transition:all .2s;display:inline-block}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:18px 16px;text-align:center}
+.hero-stat .num{font-size:28px;font-weight:700;color:var(--gold);font-family:'Merriweather',serif}
+.hero-stat .lbl{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px}
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:32px;backdrop-filter:blur(10px)}
+.hero-card h3{font-family:'Merriweather',serif;color:#fff;font-size:20px;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:12px}
+.hero-card ul{list-style:none}
+.hero-card li{color:rgba(255,255,255,.85);font-size:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px}
+.hero-card li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.hero-card .apply-now{display:block;background:var(--gold);color:var(--dark);text-align:center;padding:13px;border-radius:8px;font-weight:700;text-decoration:none;margin-top:20px;transition:.2s}
+.hero-card .apply-now:hover{background:#F57F17}
+
+/* SECTION COMMONS */
+section{padding:80px 0}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+.section-tag{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-light);margin-bottom:10px}
+.section-title{font-family:'Merriweather',serif;font-size:34px;font-weight:900;color:var(--dark);margin-bottom:16px;line-height:1.25}
+.section-subtitle{font-size:16px;color:var(--gray);max-width:600px;line-height:1.8}
+.section-head{margin-bottom:50px}
+.divider{width:50px;height:4px;background:var(--gold);border-radius:2px;margin:14px 0 20px}
+
+/* ABOUT */
+.about{background:var(--gray-light)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{border-radius:16px;overflow:hidden;position:relative}
+.about-img-placeholder{background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);height:420px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:40px}
+.about-img-placeholder svg{width:80px;height:80px;fill:rgba(255,255,255,.3);margin-bottom:16px}
+.about-img-placeholder h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.about-img-placeholder p{font-size:14px;opacity:.75}
+.about-badge{display:inline-block;background:var(--gold);color:var(--dark);font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;margin-bottom:12px}
+.about-content p{font-size:15px;color:#444;line-height:1.85;margin-bottom:16px}
+.about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.about-hl{background:#fff;border-left:4px solid var(--green);border-radius:6px;padding:14px 16px}
+.about-hl h4{font-size:14px;font-weight:600;color:var(--green);margin-bottom:4px}
+.about-hl p{font-size:13px;color:var(--gray);line-height:1.5}
+
+/* VALUE PROPS */
+.values{background:#fff}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.value-card{border:1px solid var(--border);border-radius:12px;padding:28px 22px;transition:all .3s;text-align:center}
+.value-card:hover{border-color:var(--green);box-shadow:0 8px 24px rgba(27,94,32,.1);transform:translateY(-4px)}
+.value-icon{width:56px;height:56px;background:var(--green-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.value-icon svg{width:28px;height:28px;fill:var(--green)}
+.value-card h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px}
+.value-card p{font-size:13px;color:var(--gray);line-height:1.7}
+
+/* ACADEMICS */
+.academics{background:var(--green);position:relative;overflow:hidden}
+.academics::before{content:'';position:absolute;right:-100px;top:-100px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.04)}
+.academics .section-title{color:#fff}
+.academics .section-tag{color:var(--gold)}
+.academics .section-subtitle{color:rgba(255,255,255,.8)}
+.academics .divider{background:var(--gold)}
+.academics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.acad-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:28px 24px;transition:.3s}
+.acad-card:hover{background:rgba(255,255,255,.14)}
+.acad-icon{font-size:36px;margin-bottom:14px}
+.acad-card h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:10px}
+.acad-card p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:16px}
+.acad-tags{display:flex;flex-wrap:wrap;gap:6px}
+.acad-tag{background:rgba(249,168,37,.2);border:1px solid rgba(249,168,37,.4);color:var(--gold);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+
+/* VOCATIONAL */
+.vocational{background:#fff}
+.voc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.voc-card{border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:.3s}
+.voc-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-3px)}
+.voc-top{height:120px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.voc-top.green{background:var(--green-pale)}
+.voc-top.gold{background:var(--gold-light)}
+.voc-body{padding:18px}
+.voc-body h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.voc-body p{font-size:13px;color:var(--gray);line-height:1.6}
+.voc-badge{display:inline-block;background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;margin-top:10px;letter-spacing:.5px}
+
+/* HEADMASTER */
+.headmaster{background:var(--gray-light)}
+.hm-grid{display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:center}
+.hm-photo{background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);border-radius:16px;height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:30px}
+.hm-photo svg{width:90px;height:90px;fill:rgba(255,255,255,.25);margin-bottom:16px}
+.hm-photo h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.hm-photo p{font-size:13px;opacity:.75}
+.hm-content blockquote{font-family:'Merriweather',serif;font-size:20px;color:var(--green);font-style:italic;line-height:1.7;border-left:4px solid var(--gold);padding-left:20px;margin-bottom:24px}
+.hm-content p{font-size:15px;color:#444;line-height:1.85;margin-bottom:14px}
+.hm-sig{font-weight:700;color:var(--green);font-size:16px}
+.hm-sig span{display:block;font-weight:400;color:var(--gray);font-size:13px}
+
+/* FACILITIES */
+.facilities{background:#fff}
+.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.fac-card{border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.fac-top{height:160px;display:flex;align-items:center;justify-content:center;font-size:56px}
+.fac-top.g1{background:linear-gradient(135deg,#E8F5E9,#C8E6C9)}
+.fac-top.g2{background:linear-gradient(135deg,#FFF8E1,#FFE082)}
+.fac-top.g3{background:linear-gradient(135deg,#E3F2FD,#BBDEFB)}
+.fac-top.g4{background:linear-gradient(135deg,#FCE4EC,#F8BBD0)}
+.fac-top.g5{background:linear-gradient(135deg,#F3E5F5,#E1BEE7)}
+.fac-top.g6{background:linear-gradient(135deg,#E0F2F1,#B2DFDB)}
+.fac-body{padding:18px}
+.fac-body h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.fac-body p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ADMISSIONS */
+.admissions{background:var(--gold-light);border-top:4px solid var(--gold)}
+.adm-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.adm-steps{list-style:none;counter-reset:steps}
+.adm-step{counter-increment:steps;display:flex;gap:16px;margin-bottom:24px;align-items:flex-start}
+.adm-step-num{width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.adm-step-body h4{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.adm-step-body p{font-size:13px;color:var(--gray);line-height:1.6}
+.fees-table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;font-size:14px}
+.fees-table th{background:var(--green);color:#fff;padding:12px 16px;text-align:left;font-weight:600}
+.fees-table td{padding:12px 16px;border-bottom:1px solid var(--border)}
+.fees-table tr:last-child td{border-bottom:none}
+.fees-table tr:nth-child(even) td{background:var(--green-pale)}
+.fees-note{font-size:12px;color:var(--gray);margin-top:10px;font-style:italic}
+
+/* NEWS */
+.news{background:var(--gray-light)}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.news-card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:.3s}
+.news-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.news-top{height:140px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.news-top.n1{background:linear-gradient(135deg,var(--green-pale),#A5D6A7)}
+.news-top.n2{background:linear-gradient(135deg,var(--gold-light),#FFE082)}
+.news-top.n3{background:linear-gradient(135deg,#E3F2FD,#BBDEFB)}
+.news-body{padding:18px}
+.news-date{font-size:11px;color:var(--green-light);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.news-body h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.4}
+.news-body p{font-size:13px;color:var(--gray);line-height:1.6}
+.read-more{display:inline-block;color:var(--green);font-size:13px;font-weight:600;margin-top:12px;text-decoration:none}
+.read-more:hover{text-decoration:underline}
+
+/* CONTACT */
+.contact{background:var(--green)}
+.contact .section-title{color:#fff}
+.contact .section-tag{color:var(--gold)}
+.contact .divider{background:var(--gold)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.contact-info{color:rgba(255,255,255,.9)}
+.contact-item{display:flex;gap:16px;margin-bottom:28px;align-items:flex-start}
+.contact-icon{width:44px;height:44px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:22px;height:22px;fill:#fff}
+.contact-item h4{font-weight:600;color:#fff;margin-bottom:4px}
+.contact-item p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6}
+.contact-form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:32px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:.2s;font-family:'Inter',sans-serif}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.4)}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);background:rgba(255,255,255,.12)}
+.form-group textarea{height:110px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.submit-btn{background:var(--gold);color:var(--dark);border:none;padding:13px 32px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:.2s;font-family:'Inter',sans-serif}
+.submit-btn:hover{background:#F57F17}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:28px;right:28px;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;transition:.3s}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(255,255,255,.75);padding:60px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:0 24px}
+.footer-brand h3{font-family:'Merriweather',serif;color:#fff;font-size:18px;margin-bottom:8px}
+.footer-brand p{font-size:14px;line-height:1.8;margin-bottom:16px}
+.footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.footer-logo-circle{width:44px;height:44px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
+.footer-logo-circle svg{width:24px;height:24px;fill:#fff}
+.footer-col h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--gold);display:inline-block}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{color:rgba(255,255,255,.65);text-decoration:none;font-size:13px;transition:.2s}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-col p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.8}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding:20px 24px;max-width:1200px;margin:48px auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,.45)}
+.footer-bottom .motto{color:var(--gold);font-style:italic;font-size:13px;font-weight:500}
+.footer-padding{padding-bottom:40px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .values-grid,.voc-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-inner,.about-grid,.adm-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .hero{min-height:auto}
+  .hero h2{font-size:36px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hm-grid{grid-template-columns:1fr;gap:30px}
+}
+@media(max-width:768px){
+  .nav-links,.topbar-left{display:none}
+  .hamburger{display:flex}
+  .hero h2{font-size:30px}
+  .academics-grid,.fac-grid,.news-grid{grid-template-columns:1fr}
+  .about-highlights,.form-row{grid-template-columns:1fr}
+  .section-title{font-size:26px}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .voc-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .hero-stats{grid-template-columns:1fr}
+  .voc-grid,.values-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:6px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.53 15.53 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 6a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+        0704488636 / 0786512025
+      </span>
+      <span style="display:flex;align-items:center;gap:6px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+        Kiyuni Town, Mubende | P.O Box 08
+      </span>
+    </div>
+    <div>
+      <a href="#admissions">Apply Now</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo-area">
+      <div class="logo-circle">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4L8 10v10c0 7.5 5.2 14.5 12 16.5C27.8 34.5 33 27.5 33 20V10L20 4z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <h1>Kiyuni Secondary School</h1>
+        <p>Education Determines The Future</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li class="dropdown">
+        <a href="#about">About ▾</a>
+        <div class="dropdown-menu">
+          <a href="#about">Our School</a>
+          <a href="#headmaster">Head Teacher's Message</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="#academics">Academics ▾</a>
+        <div class="dropdown-menu">
+          <a href="#academics">O & A Level</a>
+          <a href="#vocational">Vocational Skills</a>
+        </div>
+      </li>
+      <li><a href="#facilities">Facilities</a></li>
+      <li><a href="#admissions">Admissions</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#admissions" class="nav-apply">Apply Now</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="toggleMobile()">✕</span>
+  <a href="#" onclick="toggleMobile()">Home</a>
+  <a href="#about" onclick="toggleMobile()">About</a>
+  <a href="#academics" onclick="toggleMobile()">Academics</a>
+  <a href="#vocational" onclick="toggleMobile()">Vocational Skills</a>
+  <a href="#facilities" onclick="toggleMobile()">Facilities</a>
+  <a href="#admissions" onclick="toggleMobile()">Admissions</a>
+  <a href="#news" onclick="toggleMobile()">News</a>
+  <a href="#contact" onclick="toggleMobile()">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">✦ Mubende's Premier Secondary School</div>
+      <h2>Shaping <span>Tomorrow's</span> Leaders Today</h2>
+      <p class="hero-motto">"Education Determines The Future"</p>
+      <p>Kiyuni Secondary School offers quality O and A Level education combined with practical vocational skills — building well-rounded students ready for university and life.</p>
+      <div class="hero-btns">
+        <a href="#admissions" class="btn-primary">Apply for Admission</a>
+        <a href="#about" class="btn-outline">Learn More</a>
+      </div>
+      <div class="hero-stats" style="margin-top:40px">
+        <div class="hero-stat">
+          <div class="num">O&A</div>
+          <div class="lbl">Level Programs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">4+</div>
+          <div class="lbl">Vocational Courses</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">100%</div>
+          <div class="lbl">Committed to Excellence</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>📋 Quick Information</h3>
+      <ul>
+        <li>O Level (S1 – S4) Classes Available</li>
+        <li>A Level (S5 – S6) Classes Available</li>
+        <li>Computer & Coding Vocational Skills</li>
+        <li>Tailoring & Fashion Skills</li>
+        <li>Agriculture & Farming Programme</li>
+        <li>Experienced & Dedicated Teaching Staff</li>
+        <li>Located in Kiyuni Town, Mubende</li>
+      </ul>
+      <a href="#contact" class="apply-now">📞 Call Us: 0704488636</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img">
+        <div class="about-img-placeholder">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8L8 20v4h4v20H8v4h48v-4h-4V24h4v-4L32 8zm-8 36V24h6v20h-6zm10 0V24h6v20h-6zm10 0V24h6v20h-6zM32 14l14 7H18l14-7z"/>
+          </svg>
+          <h3>Kiyuni Secondary School</h3>
+          <p>Kiyuni Town, Mubende District</p>
+          <p style="margin-top:8px;font-size:12px;opacity:.6">Est. — Building Future Leaders</p>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag">About Our School</div>
+        <h2 class="section-title">A School Built on Excellence & Values</h2>
+        <div class="divider"></div>
+        <div class="about-badge">Mubende, Uganda</div>
+        <p>Kiyuni Secondary School is a dedicated institution located in the heart of Kiyuni Town, Mubende District. We offer both O Level and A Level education, preparing our students for national examinations and beyond.</p>
+        <p>Our mission goes beyond classroom learning. We equip students with vocational and practical skills — from computer technology and coding to tailoring and modern farming — ensuring every graduate is ready for both university and the world of work.</p>
+        <p>Under the leadership of our Head Teacher, Mr. Musa Bosa Mpungu, Kiyuni Secondary School is committed to nurturing academic excellence, discipline, and community values.</p>
+        <div class="about-highlights">
+          <div class="about-hl">
+            <h4>🎓 O & A Level</h4>
+            <p>Full secondary education from Senior 1 through Senior 6</p>
+          </div>
+          <div class="about-hl">
+            <h4>🛠️ Vocational Skills</h4>
+            <p>Practical training alongside academics for real-world readiness</p>
+          </div>
+          <div class="about-hl">
+            <h4>📍 Mubende District</h4>
+            <p>Conveniently located in Kiyuni Town, accessible from all areas</p>
+          </div>
+          <div class="about-hl">
+            <h4>✉️ P.O Box 08</h4>
+            <p>Mubende — reach us anytime for inquiries and admissions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITIONS -->
+<section class="values" id="values">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-title" style="margin:0 auto">Our Value Proposition</h2>
+      <div class="divider" style="margin:14px auto 16px"></div>
+      <p class="section-subtitle" style="margin:0 auto">What makes Kiyuni Secondary School the right choice for your child</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        </div>
+        <h3>Quality Education</h3>
+        <p>Experienced teachers delivering the Uganda national curriculum to the highest standard for O and A Level students.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 9V7h-2V5a2 2 0 00-2-2H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-2h2v-2h-2v-2h2v-2h-2V9h2zm-4 10H4V5h14v14z"/></svg>
+        </div>
+        <h3>Vocational Skills</h3>
+        <p>Practical skills in computers, coding, tailoring, and farming that prepare students for both employment and entrepreneurship.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <h3>Supportive Community</h3>
+        <p>A nurturing environment where students from Mubende and beyond are supported to reach their full potential.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        </div>
+        <h3>Discipline & Values</h3>
+        <p>Strong emphasis on character formation, discipline, and moral values alongside academic achievement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMICS -->
+<section class="academics" id="academics">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Academics</div>
+      <h2 class="section-title">Our Academic Programmes</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">Comprehensive O and A Level education following the Uganda National Curriculum under UNEB</p>
+    </div>
+    <div class="academics-grid">
+      <div class="acad-card">
+        <div class="acad-icon">📗</div>
+        <h3>O Level (S1 – S4)</h3>
+        <p>A broad-based secondary education covering sciences, humanities, languages, and technical subjects leading to the Uganda Certificate of Education (UCE).</p>
+        <div class="acad-tags">
+          <span class="acad-tag">Mathematics</span>
+          <span class="acad-tag">English</span>
+          <span class="acad-tag">Physics</span>
+          <span class="acad-tag">Biology</span>
+          <span class="acad-tag">Chemistry</span>
+          <span class="acad-tag">History</span>
+          <span class="acad-tag">Geography</span>
+        </div>
+      </div>
+      <div class="acad-card">
+        <div class="acad-icon">📘</div>
+        <h3>A Level (S5 – S6)</h3>
+        <p>Advanced level studies tailored to university entry requirements, with subject combinations in Sciences, Arts, and Business streams leading to the Uganda Advanced Certificate of Education (UACE).</p>
+        <div class="acad-tags">
+          <span class="acad-tag">Sciences</span>
+          <span class="acad-tag">Arts</span>
+          <span class="acad-tag">Business</span>
+          <span class="acad-tag">Subsidiary Maths</span>
+          <span class="acad-tag">General Paper</span>
+        </div>
+      </div>
+      <div class="acad-card">
+        <div class="acad-icon">📊</div>
+        <h3>Examinations & Results</h3>
+        <p>Our students sit for UNEB national examinations (UCE and UACE). We are committed to continuous improvement in our academic performance and pass rates.</p>
+        <div class="acad-tags">
+          <span class="acad-tag">UNEB Registered</span>
+          <span class="acad-tag">UCE Exams</span>
+          <span class="acad-tag">UACE Exams</span>
+          <span class="acad-tag">Term Results</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOCATIONAL SKILLS -->
+<section class="vocational" id="vocational">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Vocational Skills</div>
+      <h2 class="section-title">Practical Skills for Life & Work</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">Beyond the classroom — we equip every student with hands-on skills for employment and entrepreneurship</p>
+    </div>
+    <div class="voc-grid">
+      <div class="voc-card">
+        <div class="voc-top green">💻</div>
+        <div class="voc-body">
+          <h3>Computer Studies</h3>
+          <p>Students learn essential computer skills including Microsoft Office, internet use, and digital literacy for the modern workplace.</p>
+          <span class="voc-badge">ICT</span>
+        </div>
+      </div>
+      <div class="voc-card">
+        <div class="voc-top gold">⌨️</div>
+        <div class="voc-body">
+          <h3>Coding & Programming</h3>
+          <p>Introduction to programming and software development — building tomorrow's tech entrepreneurs right here in Mubende.</p>
+          <span class="voc-badge">TECHNOLOGY</span>
+        </div>
+      </div>
+      <div class="voc-card">
+        <div class="voc-top green">🧵</div>
+        <div class="voc-body">
+          <h3>Tailoring & Fashion</h3>
+          <p>Practical tailoring, garment making, and fashion design skills providing students with a marketable trade upon graduation.</p>
+          <span class="voc-badge">VOCATIONAL</span>
+        </div>
+      </div>
+      <div class="voc-card">
+        <div class="voc-top gold">🌱</div>
+        <div class="voc-body">
+          <h3>Agriculture & Farming</h3>
+          <p>Modern farming techniques, crop management, and agribusiness knowledge to support Uganda's agricultural economy.</p>
+          <span class="voc-badge">AGRICULTURE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEADMASTER MESSAGE -->
+<section class="headmaster" id="headmaster">
+  <div class="section-inner">
+    <div class="hm-grid">
+      <div class="hm-photo">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="20" r="14"/>
+          <path d="M8 56c0-13.3 10.7-24 24-24s24 10.7 24 24"/>
+        </svg>
+        <h3>Mr. Musa Bosa Mpungu</h3>
+        <p>Head Teacher</p>
+        <p style="margin-top:6px;font-size:11px;opacity:.6">Kiyuni Secondary School</p>
+      </div>
+      <div class="hm-content">
+        <div class="section-tag">Head Teacher's Message</div>
+        <h2 class="section-title">A Word From Our Head Teacher</h2>
+        <div class="divider"></div>
+        <blockquote>"Education is not merely the passing of examinations — it is the total development of a young person into a responsible, skilled, and confident citizen ready to contribute to Uganda and the world."</blockquote>
+        <p>Welcome to Kiyuni Secondary School. It is our firm belief that every child who walks through our gates deserves a quality education that prepares them not only for university, but for life itself.</p>
+        <p>We are proud to offer both O and A Level education, supplemented by vocational skills in computing, coding, tailoring, and agriculture. This combination makes our graduates among the most well-rounded young people in Mubende District.</p>
+        <p>I invite parents and students to be part of the Kiyuni family — where education truly determines the future.</p>
+        <div class="hm-sig">
+          Mr. Musa Bosa Mpungu
+          <span>Head Teacher, Kiyuni Secondary School</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="facilities" id="facilities">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">School Facilities</div>
+      <h2 class="section-title" style="margin:0 auto">Our Learning Environment</h2>
+      <div class="divider" style="margin:14px auto 16px"></div>
+      <p class="section-subtitle" style="margin:0 auto">Equipped to support every aspect of student learning and growth</p>
+    </div>
+    <div class="fac-grid">
+      <div class="fac-card">
+        <div class="fac-top g1">📚</div>
+        <div class="fac-body">
+          <h3>Library</h3>
+          <p>A well-stocked library with reference books, textbooks, and study materials supporting all subjects offered at the school.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-top g2">🖥️</div>
+        <div class="fac-body">
+          <h3>Computer Laboratory</h3>
+          <p>A computer lab equipped for ICT lessons and vocational coding classes, giving students hands-on technology experience.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-top g3">🏫</div>
+        <div class="fac-body">
+          <h3>Classrooms</h3>
+          <p>Spacious, well-lit classrooms designed for effective learning across all O and A Level subjects.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-top g4">🧵</div>
+        <div class="fac-body">
+          <h3>Tailoring Workshop</h3>
+          <p>A dedicated tailoring room with sewing machines and materials where students learn garment making and fashion design.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-top g5">🌾</div>
+        <div class="fac-body">
+          <h3>School Farm</h3>
+          <p>Practical farming grounds where students learn modern agriculture, crop growing, and agribusiness management.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-top g6">⚽</div>
+        <div class="fac-body">
+          <h3>Sports Grounds</h3>
+          <p>Open grounds for football, athletics, and other co-curricular activities supporting holistic student development.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section class="admissions" id="admissions">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Admissions</div>
+      <h2 class="section-title">How to Join Kiyuni Secondary School</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">Applications are open. Follow these steps to secure a place for your child.</p>
+    </div>
+    <div class="adm-grid">
+      <div>
+        <h3 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:24px">Application Process</h3>
+        <ol class="adm-steps">
+          <li class="adm-step">
+            <div class="adm-step-num">1</div>
+            <div class="adm-step-body">
+              <h4>Contact the School</h4>
+              <p>Call us on 0704488636 or 0786512025 to express interest and get initial guidance on requirements.</p>
+            </div>
+          </li>
+          <li class="adm-step">
+            <div class="adm-step-num">2</div>
+            <div class="adm-step-body">
+              <h4>Visit the School</h4>
+              <p>Come to Kiyuni Town, Mubende and visit the school with your child and relevant academic documents.</p>
+            </div>
+          </li>
+          <li class="adm-step">
+            <div class="adm-step-num">3</div>
+            <div class="adm-step-body">
+              <h4>Submit Documents</h4>
+              <p>Provide previous school reports, PLE/UCE results (where applicable), birth certificate, and passport photos.</p>
+            </div>
+          </li>
+          <li class="adm-step">
+            <div class="adm-step-num">4</div>
+            <div class="adm-step-body">
+              <h4>Pay Fees & Enrol</h4>
+              <p>Upon acceptance, pay the required fees and your child officially becomes a student of Kiyuni Secondary School.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:24px">Fees Structure</h3>
+        <table class="fees-table">
+          <thead>
+            <tr><th>Item</th><th>Amount (UGX)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>School Fees (per term)</td><td>Contact School</td></tr>
+            <tr><td>Development Fund</td><td>Contact School</td></tr>
+            <tr><td>Vocational Skills Fee</td><td>Contact School</td></tr>
+            <tr><td>Examination Fees</td><td>Contact School</td></tr>
+            <tr><td>Boarding (if applicable)</td><td>Contact School</td></tr>
+          </tbody>
+        </table>
+        <p class="fees-note">* Call 0704488636 or 0786512025 for the current detailed fees structure. Fees are payable per term.</p>
+        <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:20px">Request Fees Structure</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="section-inner">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="section-tag">Latest News</div>
+        <h2 class="section-title" style="margin-bottom:0">What's Happening at Kiyuni</h2>
+      </div>
+      <a href="#contact" style="color:var(--green);font-weight:600;text-decoration:none;font-size:14px">Contact us for latest updates →</a>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-top n1">🏆</div>
+        <div class="news-body">
+          <div class="news-date">Academic Excellence</div>
+          <h3>Students Excel in National Examinations</h3>
+          <p>Kiyuni Secondary School students continue to perform well in UNEB examinations, with outstanding results across O and A Level classes.</p>
+          <a href="#contact" class="read-more">Read more →</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-top n2">💻</div>
+        <div class="news-body">
+          <div class="news-date">Vocational Skills</div>
+          <h3>Coding & Computer Programme Gains Momentum</h3>
+          <p>Our technology vocational programme continues to attract students eager to learn coding, computer skills, and digital literacy.</p>
+          <a href="#contact" class="read-more">Read more →</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-top n3">🌱</div>
+        <div class="news-body">
+          <div class="news-date">Agriculture</div>
+          <h3>School Farm Produces First Harvest</h3>
+          <p>Students in the agriculture vocational programme celebrated a successful first harvest, putting classroom learning into real practice.</p>
+          <a href="#contact" class="read-more">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Contact Us</div>
+      <h2 class="section-title">Get in Touch with Kiyuni Secondary School</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.53 15.53 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 6a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <h4>Phone Numbers</h4>
+            <p>0704488636<br>0786512025</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+          </div>
+          <div>
+            <h4>Physical Address</h4>
+            <p>Kiyuni Town<br>Mubende District, Uganda</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <h4>Postal Address</h4>
+            <p>P.O. Box 08<br>Mubende, Uganda</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 17.93V18a1 1 0 00-2 0v1.93A8 8 0 014.07 13H6a1 1 0 000-2H4.07A8 8 0 0111 4.07V6a1 1 0 002 0V4.07A8 8 0 0119.93 11H18a1 1 0 000 2h1.93A8 8 0 0113 19.93z"/></svg>
+          </div>
+          <div>
+            <h4>School Hours</h4>
+            <p>Weekdays: 7:00 AM – 6:00 PM<br>Saturday: 8:00 AM – 1:00 PM</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 style="color:#fff;font-size:18px;font-weight:700;margin-bottom:20px">Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="07XXXXXXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select style="width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:11px 14px;color:rgba(255,255,255,.85);font-size:14px;outline:none">
+            <option value="" style="color:#000">Select subject...</option>
+            <option style="color:#000">Admissions Inquiry</option>
+            <option style="color:#000">Fees Structure</option>
+            <option style="color:#000">Vocational Programmes</option>
+            <option style="color:#000">Academic Information</option>
+            <option style="color:#000">General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Type your message here..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="alert('Thank you for your message! We will contact you shortly on the number provided.')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid footer-padding">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-circle">
+          <svg viewBox="0 0 40 40"><path d="M20 4L8 10v10c0 7.5 5.2 14.5 12 16.5C27.8 34.5 33 27.5 33 20V10L20 4z"/></svg>
+        </div>
+        <div>
+          <h3>Kiyuni Secondary School</h3>
+          <p style="font-size:12px;color:var(--gold);margin:0">"Education Determines The Future"</p>
+        </div>
+      </div>
+      <p>A premier secondary school in Kiyuni Town, Mubende District offering quality O and A Level education alongside practical vocational skills for well-rounded graduates.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#academics">Academics</a></li>
+        <li><a href="#vocational">Vocational Skills</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#admissions">Admissions</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Programmes</h4>
+      <ul>
+        <li><a href="#academics">O Level (S1–S4)</a></li>
+        <li><a href="#academics">A Level (S5–S6)</a></li>
+        <li><a href="#vocational">Computer Studies</a></li>
+        <li><a href="#vocational">Coding</a></li>
+        <li><a href="#vocational">Tailoring</a></li>
+        <li><a href="#vocational">Agriculture</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>📞 0704488636<br>📞 0786512025</p>
+      <p style="margin-top:10px">📍 Kiyuni Town<br>Mubende District</p>
+      <p style="margin-top:10px">📮 P.O. Box 08, Mubende</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Kiyuni Secondary School — All Rights Reserved.</p>
+    <p class="motto">"Education Determines The Future"</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://api.whatsapp.com/send?phone=256704488636&text=Hello%20Kiyuni%20Secondary%20School" class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+function toggleMobile(){
+  var m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+document.querySelectorAll('.mobile-menu a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+</script>
+</body>
+</html>
