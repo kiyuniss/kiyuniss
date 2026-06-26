@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academics - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.level-intro{padding:70px 0}
+.level-intro.gray{background:var(--gray-light)}
+.level-intro.white{background:#fff}
+.level-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.level-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:14px}
+.level-badge.o{background:#E8F5E9;color:#1B5E20}
+.level-badge.a{background:#FFF8E1;color:#E65100}
+.level-content p{font-size:15px;color:#444;line-height:1.85;margin-bottom:14px}
+.level-img{border-radius:14px;overflow:hidden;height:380px;background:#ccc}
+.level-img img{width:100%;height:100%;object-fit:cover}
+.subjects-block{margin-top:24px}
+.subjects-block h4{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:12px}
+.subjects-wrap{display:flex;flex-wrap:wrap;gap:8px}
+.subj-tag{background:#fff;border:1.5px solid var(--green);color:var(--green);font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px}
+.subj-tag.gold{border-color:var(--gold);color:#E65100;background:var(--gold-light)}
+.exam-strip{background:var(--green);padding:60px 0}
+.exam-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.exam-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:26px 22px;text-align:center}
+.exam-icon{font-size:36px;margin-bottom:12px}
+.exam-card h3{color:#fff;font-size:16px;font-weight:700;margin-bottom:10px}
+.exam-card p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.7}
+.combos-section{background:var(--gray-light);padding:70px 0}
+.combo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.combo-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:24px;transition:.3s}
+.combo-card:hover{border-color:var(--green);box-shadow:0 6px 18px rgba(27,94,32,.1)}
+.combo-label{display:inline-block;background:var(--gold-light);color:#E65100;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:10px;letter-spacing:.5px}
+.combo-card h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.combo-card p{font-size:13px;color:var(--gray);line-height:1.6}
+.combo-subjects{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.combo-sub{background:var(--green-pale);color:var(--green);font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px}
+@media(max-width:1024px){.level-grid{grid-template-columns:1fr;gap:36px}.exam-grid,.combo-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.combo-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html" class="active">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+
+<div class="page-hero"><h2>Academic Programmes</h2><p>O Level and A Level education following the Uganda National Curriculum</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Academics</span></div></div>
+
+<!-- O LEVEL -->
+<section class="level-intro gray" id="olevel">
+  <div class="section-inner">
+    <div class="level-grid">
+      <div class="level-img"><img src="images/compound/compound1.jpg" alt="O Level Classes"></div>
+      <div class="level-content">
+        <span class="level-badge o">O Level — Senior 1 to Senior 4</span>
+        <h2 class="section-title">Ordinary Level Education</h2>
+        <div class="divider"></div>
+        <p>Our O Level programme runs from Senior 1 (S1) through Senior 4 (S4) and follows the Uganda National Curriculum as set by the Uganda National Examinations Board (UNEB). Students sit the Uganda Certificate of Education (UCE) examinations at the end of S4.</p>
+        <p>We offer a broad range of subjects covering sciences, humanities, languages, technical, and vocational options, giving every student the opportunity to pursue their strengths while meeting national requirements.</p>
+        <div class="subjects-block">
+          <h4>Subjects Offered at O Level:</h4>
+          <div class="subjects-wrap">
+            <span class="subj-tag">Mathematics</span><span class="subj-tag">English Language</span><span class="subj-tag">Physics</span><span class="subj-tag">Chemistry</span><span class="subj-tag">Biology</span><span class="subj-tag">History</span><span class="subj-tag">Geography</span><span class="subj-tag">Literature in English</span><span class="subj-tag">Luganda</span><span class="subj-tag">Agriculture</span><span class="subj-tag">CRE</span><span class="subj-tag">IRE</span><span class="subj-tag">Computer Studies</span><span class="subj-tag">Music</span><span class="subj-tag">Physical Education</span><span class="subj-tag">Fine Art</span><span class="subj-tag">Commerce</span><span class="subj-tag">Entrepreneurship</span>
+          </div>
+        </div>
+        <a href="admissions.html" class="btn-green" style="margin-top:22px">Apply for S1 Admission</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A LEVEL -->
+<section class="level-intro white" id="alevel">
+  <div class="section-inner">
+    <div class="level-grid">
+      <div class="level-content">
+        <span class="level-badge a">A Level — Senior 5 to Senior 6</span>
+        <h2 class="section-title">Advanced Level Education</h2>
+        <div class="divider"></div>
+        <p>Our A Level programme covers Senior 5 (S5) and Senior 6 (S6), leading to the Uganda Advanced Certificate of Education (UACE) examinations. A Level is designed for students who have completed O Level and wish to pursue university education.</p>
+        <p>Students choose subject combinations aligned to their intended university courses. We offer Science, Arts, and Business combinations to cater to every student's career path.</p>
+        <div class="subjects-block">
+          <h4>Subjects Offered at A Level:</h4>
+          <div class="subjects-wrap">
+            <span class="subj-tag gold">Physics</span><span class="subj-tag gold">Chemistry</span><span class="subj-tag gold">Biology</span><span class="subj-tag gold">Mathematics</span><span class="subj-tag gold">Subsidiary Mathematics</span><span class="subj-tag gold">Economics</span><span class="subj-tag gold">History</span><span class="subj-tag gold">Geography</span><span class="subj-tag gold">Literature in English</span><span class="subj-tag gold">General Paper</span><span class="subj-tag gold">Entrepreneurship</span><span class="subj-tag gold">ICT</span><span class="subj-tag gold">Art & Design</span>
+          </div>
+        </div>
+        <a href="admissions.html" class="btn-green" style="margin-top:22px">Apply for S5 Admission</a>
+      </div>
+      <div class="level-img"><img src="images/compound/compound1.jpg" alt="A Level Classes"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECT COMBINATIONS -->
+<section class="combos-section">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">A Level Combinations</div>
+      <h2 class="section-title" style="margin:0 auto">Subject Combinations We Offer</h2>
+      <div class="divider" style="margin:14px auto 0"></div>
+    </div>
+    <div class="combo-grid" style="margin-top:40px">
+      <div class="combo-card"><span class="combo-label">SCIENCES</span><h3>PCB — Sciences</h3><p>Physics, Chemistry, and Biology. Ideal for students pursuing Medicine, Pharmacy, Nursing, or Science-related university courses.</p><div class="combo-subjects"><span class="combo-sub">Physics</span><span class="combo-sub">Chemistry</span><span class="combo-sub">Biology</span><span class="combo-sub">Sub Maths</span></div></div>
+      <div class="combo-card"><span class="combo-label">SCIENCES</span><h3>PCM — Sciences</h3><p>Physics, Chemistry, and Mathematics. Ideal for Engineering, Architecture, Statistics, and Computer Science pathways.</p><div class="combo-subjects"><span class="combo-sub">Physics</span><span class="combo-sub">Chemistry</span><span class="combo-sub">Maths</span><span class="combo-sub">Sub Maths</span></div></div>
+      <div class="combo-card"><span class="combo-label">ARTS</span><h3>HEG — Humanities</h3><p>History, Economics, and Geography. Suitable for Law, Social Sciences, Public Administration, and Development Studies.</p><div class="combo-subjects"><span class="combo-sub">History</span><span class="combo-sub">Economics</span><span class="combo-sub">Geography</span><span class="combo-sub">General Paper</span></div></div>
+      <div class="combo-card"><span class="combo-label">ARTS</span><h3>HEL — Arts</h3><p>History, Economics, and Literature. Great for Journalism, Mass Communication, Education, and Arts pathways.</p><div class="combo-subjects"><span class="combo-sub">History</span><span class="combo-sub">Economics</span><span class="combo-sub">Literature</span><span class="combo-sub">General Paper</span></div></div>
+      <div class="combo-card"><span class="combo-label">BUSINESS</span><h3>MEG — Business</h3><p>Mathematics, Economics, and Geography. Prepares students for Business Administration, Commerce, and Finance courses.</p><div class="combo-subjects"><span class="combo-sub">Maths</span><span class="combo-sub">Economics</span><span class="combo-sub">Geography</span><span class="combo-sub">General Paper</span></div></div>
+      <div class="combo-card"><span class="combo-label">TECHNOLOGY</span><h3>ICT Combination</h3><p>ICT with supporting subjects for students pursuing Computer Science, Information Technology, and related tech fields.</p><div class="combo-subjects"><span class="combo-sub">ICT</span><span class="combo-sub">Mathematics</span><span class="combo-sub">Economics</span><span class="combo-sub">General Paper</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMS -->
+<section class="exam-strip">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag" style="color:var(--gold)">Examinations</div>
+      <h2 class="section-title" style="color:#fff">National Examinations</h2>
+      <div class="divider" style="background:var(--gold)"></div>
+    </div>
+    <div class="exam-grid">
+      <div class="exam-card"><div class="exam-icon">📋</div><h3>Uganda Certificate of Education (UCE)</h3><p>Sat at the end of S4. Set and marked by UNEB. Results determine A Level entry and vocational pathways.</p></div>
+      <div class="exam-card"><div class="exam-icon">🎓</div><h3>Uganda Advanced Certificate (UACE)</h3><p>Sat at the end of S6. Results are used for university admissions to Makerere and other institutions.</p></div>
+      <div class="exam-card"><div class="exam-icon">📊</div><h3>Internal Assessments</h3><p>Term examinations, continuous assessment tests (CATs), and mock examinations are conducted every term to track student progress.</p></div>
+    </div>
+  </div>
+</section>
+
+<div style="background:var(--gold-light);padding:50px 0;text-align:center">
+  <div class="section-inner">
+    <h2 style="font-family:'Merriweather',serif;font-size:26px;color:var(--dark);margin-bottom:10px">Ready to Join Our Academic Programme?</h2>
+    <p style="color:var(--gray);font-size:15px;margin-bottom:24px">Contact us or apply for admission today.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="admissions.html" class="btn-green">Apply for Admission</a>
+      <a href="library.html" class="btn-outline">Access Study Materials</a>
+    </div>
+  </div>
+</div>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Quality O and A Level education in Kiyuni Town, Mubende District.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="staff.html">Our Staff</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="student.html">Student Portal</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="notices.html">Notices</a></li>
+<li><a href="fees.html">Fees</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul></div>
+  <div class="footer-col"><h4>Programmes</h4><ul><li><a href="academics.html">O Level</a></li><li><a href="academics.html#alevel">A Level</a></li><li><a href="vocational.html">Vocational Skills</a></li><li><a href="library.html">Digital Library</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+<script>function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}</script>
+</body></html>

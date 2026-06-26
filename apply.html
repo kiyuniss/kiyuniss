@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Admission Form - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.form-wrap{max-width:800px;margin:0 auto}
+.form-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:36px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.form-card h3{font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:var(--dark);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:10px}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.fg{margin-bottom:0}
+.fg label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;color:#222;outline:none;font-family:'Inter',sans-serif;transition:.2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--green)}
+.fg textarea{height:90px;resize:vertical}
+.required{color:#C62828}
+.step-bar{display:flex;gap:0;margin-bottom:32px;border-radius:10px;overflow:hidden}
+.step{flex:1;padding:12px;text-align:center;font-size:13px;font-weight:600;background:#fff;border:1px solid var(--border);color:var(--gray);transition:.3s}
+.step.active{background:var(--green);color:#fff;border-color:var(--green)}
+.step.done{background:var(--green-pale);color:var(--green);border-color:var(--green)}
+.step-panel{display:none}.step-panel.active{display:block}
+.nav-btns{display:flex;justify-content:space-between;align-items:center;margin-top:24px;flex-wrap:wrap;gap:12px}
+.btn-next{background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
+.btn-next:hover{background:var(--green-mid)}
+.btn-prev{background:#fff;color:var(--green);border:1.5px solid var(--green);border-radius:8px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
+.btn-prev:hover{background:var(--green-pale)}
+.success-screen{display:none;text-align:center;padding:50px 20px}
+.success-screen .icon{font-size:72px;margin-bottom:20px}
+.success-screen h2{font-family:'Merriweather',serif;font-size:26px;color:var(--green);font-weight:900;margin-bottom:10px}
+.success-screen p{font-size:15px;color:var(--gray);line-height:1.8;max-width:500px;margin:0 auto 24px}
+.ref-box{background:var(--green-pale);border:2px solid var(--green);border-radius:10px;padding:16px;margin:0 auto 24px;max-width:300px}
+.ref-box .ref{font-size:22px;font-weight:700;font-family:monospace;letter-spacing:3px;color:var(--dark)}
+.ref-box p{font-size:12px;color:var(--gray);margin-top:4px}
+.checkbox-group{display:flex;align-items:flex-start;gap:10px;padding:4px 0}
+.checkbox-group input{width:auto;margin-top:3px;flex-shrink:0}
+.checkbox-group label{font-size:13px;color:#444;margin:0;font-weight:400}
+@media(max-width:768px){.f-grid,.f-grid-3{grid-template-columns:1fr}.step{font-size:11px;padding:10px 6px}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Admissions Info</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li>
+    <li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li>
+    <li><a href="library.html">Library</a></li>
+    <li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li>
+    <li><a href="notices.html">Notices</a></li>
+    <li><a href="fees.html">Fees</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="apply.html" class="nav-apply">Apply Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
+<a href="index.html">Home</a><a href="about.html">About</a><a href="staff.html">Staff</a><a href="academics.html">Academics</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="notices.html">Notices</a><a href="fees.html">Fees</a><a href="admissions.html">Admissions</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+
+<div class="page-hero"><h2>📋 Online Admission Form</h2><p>Apply for admission to Kiyuni Secondary School — 2025/2026</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="admissions.html" style="color:var(--gold)">Admissions</a><span>›</span><span style="color:#fff">Apply Online</span></div></div>
+
+<section style="padding:50px 0;background:var(--gray-light)">
+  <div class="section-inner">
+    <div class="form-wrap">
+
+      <!-- STEP BAR -->
+      <div class="step-bar">
+        <div class="step active" id="step1">1. Student Info</div>
+        <div class="step" id="step2">2. Parent Info</div>
+        <div class="step" id="step3">3. Academic Info</div>
+        <div class="step" id="step4">4. Review & Submit</div>
+      </div>
+
+      <!-- STEP 1 — STUDENT -->
+      <div class="step-panel active" id="panel1">
+        <div class="form-card">
+          <h3>👨‍🎓 Student Information</h3>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>First Name <span class="required">*</span></label><input type="text" id="s_fname" placeholder="e.g. Alice"></div>
+            <div class="fg"><label>Last Name <span class="required">*</span></label><input type="text" id="s_lname" placeholder="e.g. Nakamya"></div>
+          </div>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>Date of Birth <span class="required">*</span></label><input type="date" id="s_dob"></div>
+            <div class="fg"><label>Gender <span class="required">*</span></label>
+              <select id="s_gender"><option value="">Select</option><option>Male</option><option>Female</option></select>
+            </div>
+          </div>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>Home Village / Town <span class="required">*</span></label><input type="text" id="s_home" placeholder="e.g. Kiyuni, Mubende"></div>
+            <div class="fg"><label>Religion</label>
+              <select id="s_rel"><option value="">Select</option><option>Catholic</option><option>Protestant</option><option>Pentecostal</option><option>Muslim</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="fg" style="margin-bottom:16px"><label>Medical Condition / Special Needs</label><input type="text" id="s_med" placeholder="e.g. Asthma — leave blank if none"></div>
+          <div class="fg"><label>Previous School <span class="required">*</span></label><input type="text" id="s_prev" placeholder="e.g. Kiyuni Primary School"></div>
+        </div>
+        <div class="nav-btns">
+          <span style="font-size:13px;color:var(--gray)">Step 1 of 4</span>
+          <button class="btn-next" onclick="nextStep(1)">Next: Parent Info →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — PARENT -->
+      <div class="step-panel" id="panel2">
+        <div class="form-card">
+          <h3>👨‍👩‍👧 Parent / Guardian Information</h3>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>Parent / Guardian Name <span class="required">*</span></label><input type="text" id="p_name" placeholder="e.g. Mr. Ssemakula John"></div>
+            <div class="fg"><label>Relationship to Student <span class="required">*</span></label>
+              <select id="p_rel"><option value="">Select</option><option>Father</option><option>Mother</option><option>Guardian</option><option>Uncle/Aunt</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>Phone Number <span class="required">*</span></label><input type="tel" id="p_phone" placeholder="e.g. 0704488636"></div>
+            <div class="fg"><label>Alternative Phone</label><input type="tel" id="p_phone2" placeholder="e.g. 0786512025"></div>
+          </div>
+          <div class="fg" style="margin-bottom:16px"><label>Email Address (optional)</label><input type="email" id="p_email" placeholder="e.g. parent@gmail.com"></div>
+          <div class="fg"><label>Home Address / Village <span class="required">*</span></label><input type="text" id="p_addr" placeholder="e.g. Kiyuni Town, Mubende District"></div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-prev" onclick="prevStep(2)">← Back</button>
+          <button class="btn-next" onclick="nextStep(2)">Next: Academic Info →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — ACADEMIC -->
+      <div class="step-panel" id="panel3">
+        <div class="form-card">
+          <h3>📚 Academic Information</h3>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>Applying for Class <span class="required">*</span></label>
+              <select id="a_class"><option value="">Select class</option><option>S1 (O Level entry)</option><option>S2 (Transfer)</option><option>S3 (Transfer)</option><option>S4 (Transfer)</option><option>S5 (A Level entry)</option><option>S6 (Transfer)</option></select>
+            </div>
+            <div class="fg"><label>Academic Year <span class="required">*</span></label>
+              <select id="a_year"><option>2025/2026</option><option>2026/2027</option></select>
+            </div>
+          </div>
+          <div class="f-grid" style="margin-bottom:16px">
+            <div class="fg"><label>PLE Index Number (S1 applicants)</label><input type="text" id="a_ple" placeholder="e.g. U0001/001 or N/A"></div>
+            <div class="fg"><label>PLE Total Aggregate</label><input type="text" id="a_agg" placeholder="e.g. 4 or N/A"></div>
+          </div>
+          <div class="fg" style="margin-bottom:16px"><label>UCE Index Number (S5 applicants)</label><input type="text" id="a_uce" placeholder="e.g. U0001/001 or N/A"></div>
+          <div class="fg" style="margin-bottom:16px"><label>Preferred Subject Combination (A Level applicants)</label>
+            <select id="a_combo"><option value="">Not applicable / Not decided</option><option>PCB — Physics, Chemistry, Biology</option><option>PCM — Physics, Chemistry, Maths</option><option>HEG — History, Economics, Geography</option><option>HEL — History, Economics, Literature</option><option>MEG — Maths, Economics, Geography</option><option>ICT Combination</option></select>
+          </div>
+          <div class="fg" style="margin-bottom:16px"><label>Vocational Skills Interest</label>
+            <select id="a_voc"><option value="">Not sure yet</option><option>Computer Studies</option><option>Coding &amp; Programming</option><option>Tailoring &amp; Fashion</option><option>Agriculture &amp; Farming</option><option>All of the above</option></select>
+          </div>
+          <div class="fg"><label>Additional Information / Questions</label><textarea id="a_notes" placeholder="Any questions or additional information you'd like to share..."></textarea></div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-prev" onclick="prevStep(3)">← Back</button>
+          <button class="btn-next" onclick="nextStep(3)">Review Application →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — REVIEW -->
+      <div class="step-panel" id="panel4">
+        <div class="form-card">
+          <h3>📋 Review Your Application</h3>
+          <div id="reviewContent"></div>
+          <div style="margin-top:20px;background:var(--gold-light);border:1px solid var(--gold);border-radius:10px;padding:16px 18px">
+            <div class="checkbox-group"><input type="checkbox" id="agree1"><label for="agree1">I confirm that all information provided is accurate and truthful.</label></div>
+            <div class="checkbox-group" style="margin-top:8px"><input type="checkbox" id="agree2"><label for="agree2">I understand that this is an application and admission is subject to availability and school requirements.</label></div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-prev" onclick="prevStep(4)">← Back</button>
+          <button class="btn-next" onclick="submitForm()" style="background:var(--gold);color:var(--dark)">✅ Submit Application</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-screen" id="successScreen">
+        <div class="icon">🎉</div>
+        <h2>Application Submitted!</h2>
+        <p>Thank you for applying to Kiyuni Secondary School. Your application has been received. The school will contact you on the phone number provided within a few days.</p>
+        <div class="ref-box">
+          <p style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:4px">Your Reference Number</p>
+          <div class="ref" id="refNum"></div>
+          <p>Keep this number for your records</p>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="index.html" class="btn-green">🏠 Go to Homepage</a>
+          <a href="admissions.html" class="btn-outline">📋 Admissions Info</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Kiyuni Town, Mubende District, Uganda.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="academics.html">Academics</a></li><li><a href="fees.html">Fees</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="apply.html">Apply Online</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Admissions</h4><ul><li><a href="apply.html">Apply Online</a></li><li><a href="admissions.html">Requirements</a></li><li><a href="fees.html">Fees Structure</a></li><li><a href="contact.html">Contact Bursar</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+
+<script type="text/javascript">
+var currentStep = 1;
+
+function gi(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+
+function nextStep(step){
+  // Validate
+  if(step===1){
+    if(!gi('s_fname')||!gi('s_lname')||!gi('s_dob')||!gi('s_gender')||!gi('s_home')||!gi('s_prev')){
+      alert('Please fill in all required fields marked with *');return;
+    }
+  }
+  if(step===2){
+    if(!gi('p_name')||!gi('p_rel')||!gi('p_phone')||!gi('p_addr')){
+      alert('Please fill in all required fields marked with *');return;
+    }
+  }
+  if(step===3){
+    if(!gi('a_class')){alert('Please select the class you are applying for.');return;}
+    buildReview();
+  }
+  document.getElementById('panel'+step).classList.remove('active');
+  document.getElementById('step'+step).classList.remove('active');
+  document.getElementById('step'+step).classList.add('done');
+  currentStep = step+1;
+  document.getElementById('panel'+currentStep).classList.add('active');
+  document.getElementById('step'+currentStep).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function prevStep(step){
+  document.getElementById('panel'+step).classList.remove('active');
+  document.getElementById('step'+step).classList.remove('active');
+  currentStep = step-1;
+  document.getElementById('panel'+currentStep).classList.add('active');
+  document.getElementById('step'+currentStep).classList.remove('done');
+  document.getElementById('step'+currentStep).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildReview(){
+  var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">';
+  var fields = [
+    ['Student Name', gi('s_fname')+' '+gi('s_lname')],
+    ['Date of Birth', gi('s_dob')],
+    ['Gender', gi('s_gender')],
+    ['Home Village', gi('s_home')],
+    ['Religion', gi('s_rel')||'—'],
+    ['Previous School', gi('s_prev')],
+    ['Medical', gi('s_med')||'None'],
+    ['Parent Name', gi('p_name')],
+    ['Relationship', gi('p_rel')],
+    ['Parent Phone', gi('p_phone')],
+    ['Alt Phone', gi('p_phone2')||'—'],
+    ['Email', gi('p_email')||'—'],
+    ['Home Address', gi('p_addr')],
+    ['Applying for', gi('a_class')],
+    ['Academic Year', gi('a_year')],
+    ['PLE Index', gi('a_ple')||'—'],
+    ['PLE Aggregate', gi('a_agg')||'—'],
+    ['UCE Index', gi('a_uce')||'—'],
+    ['Combination', gi('a_combo')||'—'],
+    ['Vocational Interest', gi('a_voc')||'—'],
+  ];
+  fields.forEach(function(f){
+    html += '<div style="background:var(--gray-light);border-radius:8px;padding:10px 14px">'
+      +'<div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">'+f[0]+'</div>'
+      +'<div style="font-size:14px;color:var(--dark);font-weight:500">'+f[1]+'</div>'
+      +'</div>';
+  });
+  if(gi('a_notes')){
+    html += '</div><div style="background:var(--gray-light);border-radius:8px;padding:10px 14px;margin-top:16px">'
+      +'<div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Additional Notes</div>'
+      +'<div style="font-size:14px;color:var(--dark)">'+gi('a_notes')+'</div>'
+      +'</div>';
+  } else {
+    html += '</div>';
+  }
+  document.getElementById('reviewContent').innerHTML = html;
+}
+
+function submitForm(){
+  if(!document.getElementById('agree1').checked||!document.getElementById('agree2').checked){
+    alert('Please tick both checkboxes to confirm your application.');return;
+  }
+  // Save to localStorage for admin
+  var apps = JSON.parse(localStorage.getItem('kss_applications')||'[]');
+  var ref = 'KSS-APP-'+Date.now().toString().slice(-6);
+  var app = {
+    ref:ref,date:new Date().toLocaleDateString('en-UG'),
+    student:gi('s_fname')+' '+gi('s_lname'),
+    dob:gi('s_dob'),gender:gi('s_gender'),home:gi('s_home'),
+    religion:gi('s_rel'),medical:gi('s_med'),prev:gi('s_prev'),
+    parent:gi('p_name'),prel:gi('p_rel'),phone:gi('p_phone'),
+    phone2:gi('p_phone2'),email:gi('p_email'),addr:gi('p_addr'),
+    class:gi('a_class'),year:gi('a_year'),ple:gi('a_ple'),
+    agg:gi('a_agg'),uce:gi('a_uce'),combo:gi('a_combo'),
+    voc:gi('a_voc'),notes:gi('a_notes'),status:'New'
+  };
+  apps.unshift(app);
+  localStorage.setItem('kss_applications',JSON.stringify(apps));
+
+  // Send via WhatsApp to school
+  var msg = 'NEW ADMISSION APPLICATION\nRef: '+ref+'\nStudent: '+app.student+'\nClass: '+app.class+'\nParent: '+app.parent+'\nPhone: '+app.phone+'\nPrev School: '+app.prev;
+  window.open('https://api.whatsapp.com/send?phone=256704488636&text='+encodeURIComponent(msg),'_blank');
+
+  // Show success
+  document.getElementById('panel4').style.display='none';
+  document.getElementById('refNum').textContent=ref;
+  document.getElementById('successScreen').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+</script>
+</body>
+</html>

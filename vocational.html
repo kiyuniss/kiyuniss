@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocational Skills - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.voc-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:50px}
+.voc-big-card{border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:.3s}
+.voc-big-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.voc-top{padding:40px 32px;display:flex;align-items:center;gap:20px}
+.voc-top.green{background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%)}
+.voc-top.gold{background:linear-gradient(135deg,#E65100 0%,var(--gold) 100%)}
+.voc-top.teal{background:linear-gradient(135deg,#006064 0%,#00ACC1 100%)}
+.voc-top.earth{background:linear-gradient(135deg,#33691E 0%,#8BC34A 100%)}
+.voc-emoji{font-size:52px}
+.voc-top h3{color:#fff;font-size:22px;font-weight:700;margin-bottom:4px}
+.voc-top p{color:rgba(255,255,255,.85);font-size:14px}
+.voc-body{padding:28px 32px;background:#fff}
+.voc-body p{font-size:14px;color:#444;line-height:1.85;margin-bottom:16px}
+.voc-outcomes h4{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:10px}
+.voc-outcomes ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.voc-outcomes li{background:var(--green-pale);color:var(--green);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px}
+.voc-outcomes li::before{content:'✓ '}
+.why-voc{background:var(--green);padding:70px 0}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.why-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:24px;text-align:center}
+.why-icon{font-size:32px;margin-bottom:12px}
+.why-card h3{color:#fff;font-size:15px;font-weight:700;margin-bottom:8px}
+.why-card p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.7}
+@media(max-width:768px){.voc-cards{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html" class="active">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+
+<div class="page-hero"><h2>Vocational Skills</h2><p>Practical training for employment and entrepreneurship alongside academics</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Vocational Skills</span></div></div>
+
+<section style="padding:70px 0;background:var(--gray-light)">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">Vocational Programmes</div>
+      <h2 class="section-title" style="margin:0 auto">Skills That Last a Lifetime</h2>
+      <div class="divider" style="margin:14px auto 0"></div>
+      <p class="section-subtitle" style="margin:14px auto 0">At Kiyuni Secondary School, every student learns a practical skill alongside their academic subjects — giving them a competitive edge in life, work, and business.</p>
+    </div>
+    <div class="voc-cards">
+      <div class="voc-big-card">
+        <div class="voc-top green"><div class="voc-emoji">💻</div><div><h3>Computer Studies</h3><p>Digital Literacy & Office Skills</p></div></div>
+        <div class="voc-body">
+          <p>Our computer studies programme introduces students to the fundamentals of computing, digital literacy, and the use of office productivity tools. Students gain hands-on experience with real computers in our computer laboratory.</p>
+          <p>This programme equips students with skills essential for virtually every modern workplace and university course.</p>
+          <div class="voc-outcomes"><h4>What students learn:</h4><ul><li>Computer basics & hardware</li><li>Microsoft Word & Excel</li><li>Internet & email</li><li>Data entry & typing</li><li>Digital safety</li></ul></div>
+        </div>
+      </div>
+      <div class="voc-big-card">
+        <div class="voc-top gold"><div class="voc-emoji">⌨️</div><div><h3>Coding & Programming</h3><p>Software Development Skills</p></div></div>
+        <div class="voc-body">
+          <p>Our coding programme is one of the most forward-looking offerings in Mubende District. Students learn the fundamentals of programming and software development — preparing them for careers in technology and the digital economy.</p>
+          <p>From building simple websites to writing basic programmes, students graduate with skills that open doors to tech careers and entrepreneurship.</p>
+          <div class="voc-outcomes"><h4>What students learn:</h4><ul><li>HTML & CSS basics</li><li>Introduction to programming</li><li>Web design fundamentals</li><li>Problem solving with code</li><li>Digital entrepreneurship</li></ul></div>
+        </div>
+      </div>
+      <div class="voc-big-card">
+        <div class="voc-top teal"><div class="voc-emoji">🧵</div><div><h3>Tailoring & Fashion</h3><p>Garment Making & Design</p></div></div>
+        <div class="voc-body">
+          <p>Our tailoring programme teaches students the art and science of garment making, fashion design, and textile work. Using our dedicated tailoring workshop equipped with sewing machines, students develop a trade they can use immediately after school.</p>
+          <p>Many of our tailoring graduates have started their own businesses in Mubende and beyond.</p>
+          <div class="voc-outcomes"><h4>What students learn:</h4><ul><li>Sewing machine operation</li><li>Pattern making & cutting</li><li>Garment construction</li><li>Fashion design basics</li><li>Business & pricing skills</li></ul></div>
+        </div>
+      </div>
+      <div class="voc-big-card">
+        <div class="voc-top earth"><div class="voc-emoji">🌱</div><div><h3>Agriculture & Farming</h3><p>Modern Farming & Agribusiness</p></div></div>
+        <div class="voc-body">
+          <p>Uganda's economy is deeply rooted in agriculture, and our farming programme prepares students to participate in and benefit from this sector. Using our school farm, students learn modern farming techniques, crop management, and basic agribusiness skills.</p>
+          <p>This programme links classroom agriculture theory with real practical farming experience on school grounds.</p>
+          <div class="voc-outcomes"><h4>What students learn:</h4><ul><li>Crop production & soil science</li><li>Animal husbandry basics</li><li>Modern farming methods</li><li>Agribusiness management</li><li>Post-harvest handling</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-voc">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag" style="color:var(--gold)">Why Vocational Skills?</div>
+      <h2 class="section-title" style="color:#fff;margin:0 auto">Beyond the Classroom</h2>
+      <div class="divider" style="background:var(--gold);margin:14px auto 0"></div>
+    </div>
+    <div class="why-grid" style="margin-top:40px">
+      <div class="why-card"><div class="why-icon">💼</div><h3>Employability</h3><p>Students graduate with marketable skills that give them an edge in the job market alongside their academic qualifications.</p></div>
+      <div class="why-card"><div class="why-icon">🚀</div><h3>Entrepreneurship</h3><p>Many of our vocational graduates start their own businesses — creating jobs and contributing to the local economy in Mubende.</p></div>
+      <div class="why-card"><div class="why-icon">🎓</div><h3>University Readiness</h3><p>Practical skills complement academic studies and prepare students for technology, business, and science university programmes.</p></div>
+    </div>
+  </div>
+</section>
+
+<div style="background:var(--gold-light);padding:50px 0;text-align:center">
+  <div class="section-inner">
+    <h2 style="font-family:'Merriweather',serif;font-size:26px;color:var(--dark);margin-bottom:10px">Enrol Your Child Today</h2>
+    <p style="color:var(--gray);font-size:15px;margin-bottom:24px">Give them academics AND a skill for life at Kiyuni Secondary School.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="admissions.html" class="btn-green">Apply for Admission</a>
+      <a href="contact.html" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Practical skills and academic excellence in Mubende District.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="staff.html">Our Staff</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="student.html">Student Portal</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="notices.html">Notices</a></li>
+<li><a href="fees.html">Fees</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul></div>
+  <div class="footer-col"><h4>Vocational Skills</h4><ul><li><a href="vocational.html">Computer Studies</a></li><li><a href="vocational.html">Coding & Programming</a></li><li><a href="vocational.html">Tailoring & Fashion</a></li><li><a href="vocational.html">Agriculture & Farming</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+<script>function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}</script>
+</body></html>

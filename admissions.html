@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admissions - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.adm-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.steps-list{list-style:none}
+.step-item{display:flex;gap:16px;margin-bottom:28px;align-items:flex-start}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-body h4{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.step-body p{font-size:13px;color:var(--gray);line-height:1.6}
+.req-card{background:var(--gray-light);border-radius:12px;padding:28px;margin-top:30px}
+.req-card h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold)}
+.req-list{list-style:none}
+.req-list li{padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;color:#444;display:flex;align-items:center;gap:10px}
+.req-list li::before{content:'📌';flex-shrink:0}
+.fees-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:28px}
+.fees-card h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold)}
+.fees-table{width:100%;border-collapse:collapse;font-size:14px}
+.fees-table th{background:var(--green);color:#fff;padding:11px 14px;text-align:left;font-weight:600;font-size:13px}
+.fees-table td{padding:11px 14px;border-bottom:1px solid var(--border)}
+.fees-table tr:last-child td{border-bottom:none}
+.fees-table tr:nth-child(even) td{background:var(--green-pale)}
+.fees-note{font-size:12px;color:var(--gray);margin-top:10px;font-style:italic;line-height:1.6}
+.intake-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.intake-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:24px;text-align:center;transition:.3s}
+.intake-card:hover{border-color:var(--green);box-shadow:0 6px 18px rgba(27,94,32,.1)}
+.intake-icon{font-size:36px;margin-bottom:12px}
+.intake-card h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.intake-card p{font-size:13px;color:var(--gray);line-height:1.6}
+@media(max-width:1024px){.adm-grid{grid-template-columns:1fr}.intake-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+
+<div class="page-hero"><h2>Admissions</h2><p>Join the Kiyuni Secondary School family — applications are open</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Admissions</span></div></div>
+
+<!-- INTAKE OPTIONS -->
+<section style="padding:70px 0;background:var(--gray-light)">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">Who Can Join</div>
+      <h2 class="section-title" style="margin:0 auto">Open to All Qualified Students</h2>
+      <div class="divider" style="margin:14px auto 0"></div>
+    </div>
+    <div class="intake-grid">
+      <div class="intake-card"><div class="intake-icon">📗</div><h3>Senior 1 (S1) Entry</h3><p>For students who have completed Primary 7 (P7) and have their PLE results. This is our main entry point for O Level education.</p></div>
+      <div class="intake-card"><div class="intake-icon">📘</div><h3>Senior 5 (S5) Entry</h3><p>For students who have completed O Level (S4) and have their UCE results. Entry into our A Level programme (Sciences, Arts, or Business combinations).</p></div>
+      <div class="intake-card"><div class="intake-icon">🔄</div><h3>Transfer Students</h3><p>Students transferring from other schools at any level (S2, S3, S4, S6) are welcome. Placement is based on previous results and available space.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS + FEES -->
+<section style="padding:70px 0;background:#fff">
+  <div class="section-inner">
+    <div class="adm-grid">
+      <div>
+        <div class="section-tag">How to Apply</div>
+        <h2 class="section-title">Application Process</h2>
+        <div class="divider"></div>
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-num">1</div><div class="step-body"><h4>Contact the School</h4><p>Call us on 0704488636 or 0786512025, or come in person to our offices in Kiyuni Town to express interest and get initial guidance.</p></div></li>
+          <li class="step-item"><div class="step-num">2</div><div class="step-body"><h4>Visit the School</h4><p>Come to Kiyuni Secondary School with your child and all relevant academic documents for a guided tour and meeting with the head teacher.</p></div></li>
+          <li class="step-item"><div class="step-num">3</div><div class="step-body"><h4>Submit Documents</h4><p>Hand in all required documents at the school office. The admissions team will review and confirm acceptance within a short period.</p></div></li>
+          <li class="step-item"><div class="step-num">4</div><div class="step-body"><h4>Pay School Fees</h4><p>Upon acceptance, pay the required fees for the term. A payment receipt will be issued and your child will be officially enrolled.</p></div></li>
+          <li class="step-item"><div class="step-num">5</div><div class="step-body"><h4>Report & Begin School</h4><p>Your child reports on the official opening date with all required items. They will be assigned a class, given a timetable, and begin their education at Kiyuni.</p></div></li>
+        </ol>
+        <div class="req-card">
+          <h3>📋 Required Documents</h3>
+          <ul class="req-list">
+            <li>PLE results slip (for S1 entry) or UCE results (for S5 entry)</li>
+            <li>Previous school's end-of-year/term report</li>
+            <li>Birth certificate or baptism card</li>
+            <li>4 recent passport-size photographs</li>
+            <li>Transfer letter (for transfer students)</li>
+            <li>Parent or guardian National ID copy</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="fees-card">
+          <h3>💰 Fees Structure</h3>
+          <table class="fees-table">
+            <thead><tr><th>Item</th><th>Amount (UGX)</th></tr></thead>
+            <tbody>
+              <tr><td>Tuition Fees (per term)</td><td>Contact School</td></tr>
+              <tr><td>Development Fund (per year)</td><td>Contact School</td></tr>
+              <tr><td>Functional Fees</td><td>Contact School</td></tr>
+              <tr><td>Vocational Skills Fee</td><td>Contact School</td></tr>
+              <tr><td>UNEB Examination Fees</td><td>Contact School</td></tr>
+              <tr><td>Library & Digital Access</td><td>Contact School</td></tr>
+            </tbody>
+          </table>
+          <p class="fees-note">📞 Call 0704488636 or 0786512025 for the current and detailed fees structure. Fees are payable per term at the beginning of each term. Discounts may apply for early payment.</p>
+          <a href="contact.html" class="btn-green" style="display:block;text-align:center;margin-top:18px">Request Full Fees Structure</a>
+        </div>
+        <div style="background:var(--green);border-radius:12px;padding:26px;margin-top:22px;text-align:center">
+          <div style="font-size:32px;margin-bottom:10px">📞</div>
+          <h3 style="color:#fff;font-size:17px;font-weight:700;margin-bottom:8px">Talk to Us Directly</h3>
+          <p style="color:rgba(255,255,255,.85);font-size:13px;margin-bottom:16px">Our admissions team is available during school hours to answer all your questions.</p>
+          <a href="tel:0704488636" class="btn-primary" style="display:block;margin-bottom:10px">📞 Call 0704488636</a>
+          <a href="https://api.whatsapp.com/send?phone=256704488636&text=Hello%2C%20I%20want%20to%20inquire%20about%20admissions" target="_blank" class="btn-outline" style="display:block;border-color:rgba(255,255,255,.5);color:#fff">💬 WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Admissions open for S1, S5, and transfer students in Mubende District.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="staff.html">Our Staff</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="student.html">Student Portal</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="notices.html">Notices</a></li>
+<li><a href="fees.html">Fees</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul></div>
+  <div class="footer-col"><h4>Admissions</h4><ul><li><a href="admissions.html">S1 Entry</a></li><li><a href="admissions.html">S5 Entry</a></li><li><a href="admissions.html">Transfers</a></li><li><a href="admissions.html">Fees Structure</a></li><li><a href="admissions.html">Requirements</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p><p style="margin-top:10px">📮 P.O. Box 08</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+<script>function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}</script>
+</body></html>

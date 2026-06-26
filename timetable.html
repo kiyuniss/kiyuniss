@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timetable - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.tt-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.tt-tab{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:.2s;font-family:'Inter',sans-serif}
+.tt-tab:hover,.tt-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.tt-wrap{overflow-x:auto}
+.tt-table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tt-table th{background:var(--green);color:#fff;padding:12px 10px;text-align:center;font-size:12px;font-weight:700}
+.tt-table th:first-child{text-align:left;padding-left:16px;min-width:90px}
+.tt-table td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
+.tt-table td:first-child{font-weight:700;color:var(--green);text-align:left;padding-left:16px;background:var(--green-pale);white-space:nowrap}
+.tt-table tr:last-child td{border-bottom:none}
+.subj{background:var(--green-pale);color:var(--green);font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;display:inline-block}
+.brk{background:#FFF8E1;color:#E65100;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;display:inline-block}
+.empty{color:#ccc;font-size:12px}
+.top-bar-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.print-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.print-btn:hover{background:var(--green-mid)}
+.tt-note{background:var(--gold-light);border:1px solid var(--gold);border-radius:10px;padding:14px 18px;font-size:13px;color:#555;margin-bottom:20px}
+.updated-tag{font-size:12px;color:var(--gray);font-style:italic}
+@media print{.print-btn,.tt-tabs,nav,.topbar,footer,.wa-float,.top-bar-row .print-btn{display:none!important}.tt-table{font-size:10px}}
+@media(max-width:768px){.tt-table th,.tt-table td{padding:7px 5px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li>
+    <li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li>
+    <li><a href="library.html">Library</a></li>
+    <li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li>
+    <li><a href="notices.html">Notices</a></li>
+    <li><a href="fees.html">Fees</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="admissions.html" class="nav-apply">Apply Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
+<a href="index.html">Home</a><a href="about.html">About</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact</a><a href="admin.html">Admin Portal</a></div>
+
+<div class="page-hero"><h2>📅 Class Timetable</h2><p>Weekly lesson schedule for all classes — managed by school administration</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Timetable</span></div></div>
+
+<section style="padding:50px 0;background:var(--gray-light)">
+  <div class="section-inner">
+    <div class="tt-note">📌 This timetable is updated by the school administration. Contact <strong>0704488636</strong> for any questions.</div>
+    <div class="top-bar-row">
+      <div class="tt-tabs" id="classTabs"></div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="updated-tag" id="updatedTag"></span>
+        <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+      </div>
+    </div>
+    <div class="tt-wrap"><div id="ttContainer"></div></div>
+  </div>
+</section>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Kiyuni Town, Mubende District, Uganda.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="staff.html">Our Staff</a></li><li><a href="academics.html">Academics</a></li><li><a href="library.html">Library</a></li><li><a href="student.html">Student Portal</a></li><li><a href="assignments.html">Assignments</a></li><li><a href="timetable.html">Timetable</a></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Portals</h4><ul><li><a href="student.html">Student Portal</a></li><li><a href="assignments.html">Assignments</a></li><li><a href="library.html">Library</a></li><li><a href="admin.html">Admin Portal</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+
+<script type="text/javascript">
+var DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+var PERIODS = ['7:01-7:40','7:40-8:20','8:20-9:00','BREAK','9:20-10:00','10:00-10:40','10:40-11:20','LUNCH','1:00-1:40','1:40-2:20','2:20-3:00'];
+var CLASSES = ['S1','S2','S3','S4','S5','S6'];
+
+var DEFAULT_TT = {
+  S1:{Monday:['Mathematics','English','Physics','—','Chemistry','Biology','History','—','Geography','Agriculture','CRE'],Tuesday:['English','Mathematics','Chemistry','—','Physics','History','Literature','—','Biology','Geography','IRE'],Wednesday:['Biology','Chemistry','Mathematics','—','English','Geography','CRE','—','History','Physics','PE'],Thursday:['History','Biology','English','—','Mathematics','Literature','Physics','—','Chemistry','IRE','Agriculture'],Friday:['Geography','Physics','History','—','Biology','Mathematics','English','—','Agriculture','Music','Art']},
+  S2:{Monday:['Mathematics','Chemistry','English','—','Physics','Biology','History','—','Geography','Literature','CRE'],Tuesday:['Physics','Mathematics','Biology','—','English','History','Chemistry','—','Literature','Geography','IRE'],Wednesday:['Biology','English','Mathematics','—','Chemistry','Geography','Physics','—','History','Agriculture','PE'],Thursday:['History','Physics','Chemistry','—','Mathematics','Literature','Biology','—','English','IRE','Agriculture'],Friday:['Geography','Biology','History','—','English','Mathematics','Chemistry','—','Physics','Music','Art']},
+  S3:{Monday:['Mathematics','Physics','Chemistry','—','Biology','English','History','—','Geography','Literature','CRE'],Tuesday:['Chemistry','Mathematics','English','—','Physics','Geography','Biology','—','History','IRE','Agriculture'],Wednesday:['Biology','English','Physics','—','Mathematics','History','Chemistry','—','Literature','Geography','PE'],Thursday:['History','Chemistry','Mathematics','—','English','Biology','Physics','—','Geography','Agriculture','IRE'],Friday:['Physics','Biology','History','—','Chemistry','Mathematics','English','—','Literature','Music','Art']},
+  S4:{Monday:['Mathematics','Chemistry','Biology','—','Physics','English','History','—','Geography','Literature','CRE'],Tuesday:['Physics','Mathematics','English','—','Chemistry','History','Biology','—','Geography','IRE','Agriculture'],Wednesday:['English','Biology','Mathematics','—','Physics','Geography','History','—','Chemistry','Literature','PE'],Thursday:['History','Physics','Chemistry','—','Biology','Mathematics','English','—','Geography','Agriculture','IRE'],Friday:['Biology','History','Physics','—','Mathematics','Chemistry','English','—','Literature','Music','Art']},
+  S5:{Monday:['Mathematics','Physics','Chemistry','—','Biology','General Paper','Economics','—','History','Geography','Sub ICT'],Tuesday:['Chemistry','Mathematics','General Paper','—','Physics','History','Biology','—','Economics','Geography','Sub Maths'],Wednesday:['Biology','Chemistry','Physics','—','Mathematics','Economics','General Paper','—','History','Geography','PE'],Thursday:['History','Biology','Mathematics','—','Chemistry','Physics','Economics','—','General Paper','Sub Maths','Sub ICT'],Friday:['Physics','History','Chemistry','—','Biology','Mathematics','General Paper','—','Economics','Geography','Art']},
+  S6:{Monday:['Physics','Chemistry','Mathematics','—','Biology','General Paper','Economics','—','History','Sub Maths','Sub ICT'],Tuesday:['Mathematics','Physics','General Paper','—','Chemistry','History','Biology','—','Economics','Geography','Literature'],Wednesday:['Chemistry','Biology','Physics','—','Mathematics','Economics','General Paper','—','History','Sub ICT','PE'],Thursday:['History','Mathematics','Chemistry','—','Physics','Biology','Economics','—','General Paper','Sub Maths','Geography'],Friday:['Biology','History','Physics','—','Chemistry','Mathematics','General Paper','—','Economics','Literature','Art']}
+};
+
+var currentClass = 'S1';
+
+function getTT(){
+  try{var s=localStorage.getItem('kss_timetable');return s?JSON.parse(s):DEFAULT_TT;}
+  catch(e){return DEFAULT_TT;}
+}
+
+function getUpdated(){
+  try{return localStorage.getItem('kss_tt_updated')||'';}
+  catch(e){return '';}
+}
+
+function renderTabs(){
+  var tabs = document.getElementById('classTabs');
+  tabs.innerHTML = CLASSES.map(function(cls){
+    return '<button class="tt-tab'+(cls===currentClass?' active':'')+'" onclick="switchClass(\''+cls+'\')">'+cls+'</button>';
+  }).join('');
+}
+
+function switchClass(cls){
+  currentClass = cls;
+  renderTabs();
+  renderTT();
+}
+
+function renderTT(){
+  var tt = getTT();
+  var classData = tt[currentClass] || DEFAULT_TT[currentClass];
+  var updated = getUpdated();
+  var utag = document.getElementById('updatedTag');
+  if(utag) utag.textContent = updated ? 'Last updated: '+updated : '';
+
+  var html = '<table class="tt-table"><thead><tr><th>Period / Time</th>';
+  DAYS.forEach(function(d){html += '<th>'+d+'</th>';});
+  html += '</tr></thead><tbody>';
+
+  PERIODS.forEach(function(period, i){
+    var isBreak = period==='BREAK'||period==='LUNCH';
+    html += '<tr><td>'+(isBreak?'<span class="brk">'+period+'</span>':period)+'</td>';
+    DAYS.forEach(function(day){
+      var subj = classData[day] ? classData[day][i] : '—';
+      if(isBreak){
+        html += '<td><span class="brk">'+(period==='BREAK'?'Break':'Lunch')+'</span></td>';
+      } else if(!subj||subj==='—'){
+        html += '<td><span class="empty">—</span></td>';
+      } else {
+        html += '<td><span class="subj">'+subj+'</span></td>';
+      }
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('ttContainer').innerHTML = html;
+}
+
+renderTabs();
+renderTT();
+function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+</script>
+</body>
+</html>

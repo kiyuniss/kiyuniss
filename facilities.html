@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facilities - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fac-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:.3s}
+.fac-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);transform:translateY(-3px)}
+.fac-img{height:200px;overflow:hidden;background:#ccc}
+.fac-img img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.fac-card:hover .fac-img img{transform:scale(1.05)}
+.fac-placeholder{height:200px;display:flex;align-items:center;justify-content:center;font-size:60px}
+.fac-body{padding:20px}
+.fac-tag{display:inline-block;background:var(--green-pale);color:var(--green);font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
+.fac-body h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.fac-body p{font-size:13px;color:var(--gray);line-height:1.6}
+.gallery-section{background:var(--gray-light);padding:70px 0}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gal-item{border-radius:10px;overflow:hidden;height:180px;background:#ccc;cursor:pointer}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-item.wide{grid-column:span 2;height:auto}
+.gal-item.tall{grid-row:span 2;height:auto}
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain}
+.lb-close{position:absolute;top:20px;right:24px;color:#fff;font-size:36px;cursor:pointer;background:none;border:none;line-height:1}
+@media(max-width:1024px){.fac-grid{grid-template-columns:repeat(2,1fr)}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.fac-grid{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr}.gal-item.wide{grid-column:span 1}.gal-item.tall{grid-row:span 1}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+
+<div class="page-hero"><h2>School Facilities</h2><p>Our learning environment — built to support every student</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Facilities</span></div></div>
+
+<section style="padding:70px 0;background:#fff">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">Our Facilities</div>
+      <h2 class="section-title" style="margin:0 auto">Equipped for Excellence</h2>
+      <div class="divider" style="margin:14px auto 0"></div>
+      <p class="section-subtitle" style="margin:14px auto 0">Kiyuni Secondary School provides a safe, well-equipped learning environment that supports both academic and vocational growth.</p>
+    </div>
+    <div class="fac-grid" style="margin-top:46px">
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7)">📚</div>
+        <div class="fac-body"><span class="fac-tag">Academic</span><h3>Library</h3><p>A well-stocked library with reference books, textbooks, past papers, and study materials supporting all subjects offered at the school. Students also access our digital library online.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9)">🖥️</div>
+        <div class="fac-body"><span class="fac-tag">Technology</span><h3>Computer Laboratory</h3><p>A dedicated computer lab equipped with desktop computers for ICT lessons and vocational coding classes. Students gain real hands-on experience with modern technology.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,var(--green-pale),#C8E6C9)">🏫</div>
+        <div class="fac-body"><span class="fac-tag">Academic</span><h3>Classrooms</h3><p>Spacious, well-ventilated classrooms designed for effective learning across all O and A Level subjects. Each room is equipped with teaching aids and furniture for all students.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-img"><img src="images/compound/compound1.jpg" alt="School Compound"></div>
+        <div class="fac-body"><span class="fac-tag">Environment</span><h3>School Compound</h3><p>Our spacious and well-maintained compound provides a clean, safe, and welcoming environment for all students, staff, and visitors to Kiyuni Secondary School.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#FCE4EC,#F8BBD0)">🧵</div>
+        <div class="fac-body"><span class="fac-tag">Vocational</span><h3>Tailoring Workshop</h3><p>A dedicated tailoring room equipped with sewing machines, cutting tables, and materials where students learn garment making, pattern cutting, and fashion design.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#F1F8E9,#DCEDC8)">🌾</div>
+        <div class="fac-body"><span class="fac-tag">Vocational</span><h3>School Farm</h3><p>Practical farming grounds where students learn modern agriculture, crop growing, soil management, and agribusiness skills under real conditions on the school premises.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#E0F2F1,#B2DFDB)">⚽</div>
+        <div class="fac-body"><span class="fac-tag">Sports</span><h3>Sports Grounds</h3><p>Open grounds for football, athletics, netball, and other sports and co-curricular activities, supporting holistic student development beyond the classroom.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#FFF8E1,#FFE082)">🍽️</div>
+        <div class="fac-body"><span class="fac-tag">Welfare</span><h3>Dining & Canteen</h3><p>A school canteen where students can access meals and refreshments during break and lunch periods, ensuring students are well-nourished throughout the school day.</p></div>
+      </div>
+      <div class="fac-card">
+        <div class="fac-placeholder" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)">🏥</div>
+        <div class="fac-body"><span class="fac-tag">Welfare</span><h3>Sick Bay</h3><p>A school sick bay for first aid and basic medical attention to students who fall ill during school hours, with referrals to nearby health facilities when needed.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="section-inner">
+    <div class="section-head" style="text-align:center">
+      <div class="section-tag">Photo Gallery</div>
+      <h2 class="section-title" style="margin:0 auto">Life at Kiyuni Secondary School</h2>
+      <div class="divider" style="margin:14px auto 0"></div>
+      <p class="section-subtitle" style="margin:14px auto 0">Click any photo to view it larger. Add your own photos to the <code>images/compound/</code> folder.</p>
+    </div>
+    <div class="gallery-grid" style="margin-top:40px">
+      <div class="gal-item wide tall" onclick="openLightbox(this.querySelector('img').src)"><img src="images/compound/compound1.jpg" alt="School"></div>
+      <div class="gal-item" onclick="openLightbox(this.querySelector('img').src)"><img src="images/compound/compound1.jpg" alt="School"></div>
+      <div class="gal-item" onclick="openLightbox(this.querySelector('img').src)"><img src="images/compound/compound1.jpg" alt="School"></div>
+      <div class="gal-item" onclick="openLightbox(this.querySelector('img').src)"><img src="images/compound/compound1.jpg" alt="School"></div>
+      <div class="gal-item" onclick="openLightbox(this.querySelector('img').src)"><img src="images/compound/compound1.jpg" alt="School"></div>
+      <div class="gal-item" onclick="openLightbox(this.querySelector('img').src)"><img src="images/compound/compound1.jpg" alt="School"></div>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--gray)">💡 To add more photos: drop images into <strong>images/compound/</strong> and update the src values in this page.</p>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lbImg" src="" alt="Gallery">
+</div>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>A well-equipped learning environment in Kiyuni Town, Mubende.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="staff.html">Our Staff</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="student.html">Student Portal</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="notices.html">Notices</a></li>
+<li><a href="fees.html">Fees</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul></div>
+  <div class="footer-col"><h4>Facilities</h4><ul><li><a href="facilities.html">Library</a></li><li><a href="facilities.html">Computer Lab</a></li><li><a href="facilities.html">School Farm</a></li><li><a href="facilities.html">Sports Grounds</a></li><li><a href="facilities.html">Gallery</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+<script>
+function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+function openLightbox(src){document.getElementById('lbImg').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
+</script>
+</body></html>

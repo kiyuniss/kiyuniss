@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Portal - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#1B5E20;--green2:#2E7D32;--pale:#E8F5E9;--gold:#F9A825;--dark:#0D1B0F;--gray:#666;--border:#ddd;--bg:#F5F5F5}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
+
+/* LOGIN */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--dark),var(--green));padding:20px}
+.login-box{background:#fff;border-radius:16px;padding:40px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.login-box img{width:60px;height:60px;border-radius:50%;border:3px solid var(--green);display:block;margin:0 auto 16px}
+.login-box h2{font-family:'Merriweather',serif;font-size:21px;color:var(--dark);text-align:center;font-weight:900;margin-bottom:4px}
+.login-box .sub{color:var(--gray);font-size:13px;text-align:center;margin-bottom:22px}
+.f-group{margin-bottom:14px}
+.f-group label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:5px}
+.f-group input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 13px;font-size:14px;font-family:'Inter',sans-serif;outline:none}
+.f-group input:focus{border-color:var(--green)}
+.login-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:8px;padding:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:6px}
+.login-btn:hover{background:var(--green2)}
+.err-msg{color:#C62828;font-size:13px;text-align:center;margin-top:8px;display:none}
+.hint{font-size:11px;color:#aaa;text-align:center;margin-top:12px}
+
+/* PANEL */
+.panel{display:none}
+.topbar{background:var(--dark);padding:13px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.topbar h1{color:#fff;font-size:15px;font-weight:700}
+.topbar .tr{display:flex;align-items:center;gap:14px}
+.topbar .clock{color:rgba(255,255,255,.5);font-size:12px}
+.logout-btn{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:7px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.layout{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 48px)}
+.sidebar{background:var(--green);padding:16px 0;overflow-y:auto}
+.nav-sec{padding:14px 18px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase}
+.sidebar a{display:block;padding:11px 18px;color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:500;border-left:3px solid transparent;transition:.2s}
+.sidebar a:hover,.sidebar a.active{background:rgba(255,255,255,.1);color:#fff;border-left-color:var(--gold)}
+.content{padding:24px;overflow-y:auto}
+.sec{display:none}.sec.active{display:block}
+.sec h2{font-family:'Merriweather',serif;font-size:21px;color:var(--dark);font-weight:900;margin-bottom:4px}
+.sec .desc{font-size:13px;color:var(--gray);margin-bottom:20px}
+
+/* CARDS */
+.card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:22px;margin-bottom:20px}
+.card h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--border);text-align:center}
+.stat .n{font-size:26px;font-weight:700;color:var(--green);font-family:'Merriweather',serif}
+.stat .l{font-size:11px;color:var(--gray);margin-top:4px}
+.stat .ic{font-size:22px;margin-bottom:6px}
+
+/* FORMS */
+.fg{margin-bottom:13px}
+.fg label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:#222;outline:none;font-family:'Inter',sans-serif}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--green)}
+.fg textarea{height:90px;resize:vertical}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* BUTTONS */
+.btn{border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-g{background:var(--green);color:#fff}.btn-g:hover{background:var(--green2)}
+.btn-gold{background:var(--gold);color:var(--dark)}.btn-gold:hover{background:#F57F17}
+.btn-r{background:#C62828;color:#fff}
+.btn-sm{padding:5px 11px;font-size:12px}
+.ok{color:var(--green);font-size:13px;font-weight:600;margin-left:10px;display:none}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.tbl th{background:var(--green);color:#fff;padding:10px 12px;text-align:left;font-size:12px}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.tbl tr:nth-child(even) td{background:var(--pale)}
+.chip-g{background:var(--pale);color:var(--green);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.chip-r{background:#FFEBEE;color:#C62828;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.chip-code{background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:monospace;letter-spacing:1px}
+.chip-gold{background:#FFF8E1;color:#E65100;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.medical{background:#FFF3E0;color:#E65100;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px}
+.pin-chip{background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+
+/* SEARCH */
+.srow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.srow input,.srow select{border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Inter',sans-serif;outline:none}
+.srow input:focus,.srow select:focus{border-color:var(--green)}
+.stu-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:.2s}
+.stu-row:hover{border-color:var(--green);background:var(--pale)}
+.stu-row h4{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px}
+.stu-row p{font-size:12px;color:var(--gray)}
+
+/* SUBJECTS */
+.sg{display:grid;grid-template-columns:2fr 1fr 1fr 2fr;gap:8px;margin-bottom:7px;align-items:center}
+.sh{display:grid;grid-template-columns:2fr 1fr 1fr 2fr;gap:8px;margin-bottom:6px}
+.sh span{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px}
+.sg label{font-size:13px;font-weight:500;color:#333;padding:7px 0}
+.sg input,.sg select{border:1.5px solid var(--border);border-radius:6px;padding:7px 9px;font-size:13px;font-family:'Inter',sans-serif;outline:none}
+.sg input:focus,.sg select:focus{border-color:var(--green)}
+.sec-lbl{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 4px;grid-column:1/-1}
+
+/* CODE BOX */
+.codebox{background:var(--pale);border:2px solid var(--green);border-radius:10px;padding:16px;margin-top:14px;display:none}
+.codebox .code{font-size:24px;font-weight:700;font-family:monospace;letter-spacing:3px;color:var(--dark);margin:6px 0}
+.codebox p{font-size:12px;color:var(--gray)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.stats{grid-template-columns:1fr}.r2,.r3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="login-page">
+  <div class="login-box">
+    <img src="images/badge/badge.png" alt="Badge" onerror="this.style.display='none'">
+    <h2>Admin Portal</h2>
+    <p class="sub">Kiyuni Secondary School — Authorised Staff Only</p>
+    <div class="f-group"><label>Username</label><input type="text" id="u" placeholder="Enter username"></div>
+    <div class="f-group"><label>Password</label><input type="password" id="p" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()"></div>
+    <p class="err-msg" id="lerr">Incorrect username or password.</p>
+    <button class="login-btn" onclick="login()">Login</button>
+    <p class="hint">Default login: admin / kiyuni2025</p>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="panel" class="panel">
+  <div class="topbar">
+    <h1>Kiyuni SS Admin <span id="roleLabel" style="font-weight:400;color:rgba(255,255,255,.5);font-size:13px"></span></h1>
+    <div class="tr"><span class="clock" id="clk"></span><button class="logout-btn" onclick="logout()">Logout</button></div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <span class="nav-sec">Overview</span>
+      <a href="#" onclick="go('dash',this)">Dashboard</a>
+      <span class="nav-sec">Students</span>
+      <a href="#" onclick="go('reg',this)">Student Register</a>
+      <span class="nav-sec">Academic</span>
+      <a href="#" onclick="go('tch',this)">Teacher Codes</a>
+      <a href="#" onclick="go('asn',this)">Assignments</a>
+        <a href="#" onclick="go('tt',this)">Timetable</a>
+      <span class="nav-sec">Communication</span>
+      <a href="#" onclick="go('ntc',this)">Notice Board</a>
+      <a href="#" onclick="go('nws',this)">School News</a>
+      <a href="#" onclick="go('inq',this)">Admissions Inquiries</a>
+        <a href="#" onclick="go('apps',this)">Online Applications</a>
+      <span class="nav-sec">System</span>
+      <a href="#" onclick="go('lib',this)">Library Guide</a>
+      <a href="#" onclick="go('cfg',this)">Settings</a>
+      <span class="nav-sec">Links</span>
+      <a href="index.html" target="_blank">View Website</a>
+      <a href="notices.html" target="_blank">Notice Board</a>
+      <a href="assignments.html" target="_blank">Assignments</a>
+    </div>
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="sec active" id="sec-dash">
+        <h2>Dashboard</h2>
+        <p class="desc">Welcome to the Kiyuni Secondary School Admin Portal</p>
+        <div class="stats">
+          <div class="stat"><div class="ic">👨‍🎓</div><div class="n" id="d1">0</div><div class="l">Students on Register</div></div>
+          <div class="stat"><div class="ic">📝</div><div class="n" id="d2">0</div><div class="l">Assignments Posted</div></div>
+          <div class="stat"><div class="ic">📢</div><div class="n" id="d3">0</div><div class="l">Notices on Board</div></div>
+          <div class="stat"><div class="ic">👩‍🏫</div><div class="n" id="d4">0</div><div class="l">Teachers Registered</div></div>
+        </div>
+        <div class="card">
+          <h3>Quick Actions</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <button class="btn btn-g" onclick="go('reg',null)">Add Student</button>
+            <button class="btn btn-gold" onclick="go('ntc',null)">Post Notice</button>
+            <button class="btn btn-g" onclick="go('tch',null)">Manage Teachers</button>
+            <button class="btn btn-gold" onclick="go('nws',null)">Post News</button>
+          </div>
+        </div>
+        <div class="card"><h3>Summary</h3><p id="dsum" style="font-size:14px;color:#444;line-height:1.8">Loading...</p></div>
+      </div>
+
+      <!-- STUDENT REGISTER -->
+      <div class="sec" id="sec-reg">
+        <h2>Student Register</h2>
+        <p class="desc">Central record of all enrolled students</p>
+        <div class="card">
+          <h3>Add / Update Student</h3>
+          <div class="r2">
+            <div class="fg"><label>Full Name *</label><input type="text" id="rg_name" placeholder="e.g. Nakamya Alice Tendo"></div>
+            <div class="fg"><label>Admission Number *</label><input type="text" id="rg_adm" placeholder="e.g. KSS/2025/001"></div>
+          </div>
+          <div class="r3">
+            <div class="fg"><label>Class *</label><select id="rg_cls"><option value="">Select</option><option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option></select></div>
+            <div class="fg"><label>Stream</label><input type="text" id="rg_str" placeholder="e.g. PCB, HEG"></div>
+            <div class="fg"><label>Gender</label><select id="rg_gen"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+          </div>
+          <div class="r3">
+            <div class="fg"><label>Date of Birth</label><input type="date" id="rg_dob"></div>
+            <div class="fg"><label>Year Enrolled</label><input type="text" id="rg_yr" placeholder="e.g. 2025"></div>
+            <div class="fg"><label>Level</label><select id="rg_lvl"><option value="o">O Level</option><option value="a">A Level</option></select></div>
+          </div>
+          <div class="r2">
+            <div class="fg"><label>Parent / Guardian</label><input type="text" id="rg_par" placeholder="e.g. Mr. Ssemakula John"></div>
+            <div class="fg"><label>Parent Phone</label><input type="text" id="rg_pph" placeholder="07XXXXXXXX"></div>
+          </div>
+          <div class="r3">
+            <div class="fg"><label>Home / District</label><input type="text" id="rg_hm" placeholder="e.g. Kiyuni, Mubende"></div>
+            <div class="fg"><label>Religion</label><select id="rg_rel"><option value="">Select</option><option>Catholic</option><option>Protestant</option><option>Pentecostal</option><option>Muslim</option><option>Other</option></select></div>
+            <div class="fg"><label>Status</label><select id="rg_sta"><option>Active</option><option>Completed</option><option>Transferred</option><option>Withdrawn</option></select></div>
+          </div>
+          <div class="r2">
+            <div class="fg"><label>Previous School</label><input type="text" id="rg_prv" placeholder="e.g. Kiyuni Primary School"></div>
+            <div class="fg"><label>PLE / UCE Index No.</label><input type="text" id="rg_idx" placeholder="e.g. U0001/001"></div>
+          </div>
+          <div class="fg"><label>Medical Condition / Special Needs</label><input type="text" id="rg_med" placeholder="e.g. Asthma — leave blank if none"></div>
+          <div class="fg"><label>Notes</label><textarea id="rg_nte" placeholder="Any additional notes..."></textarea></div>
+          <button class="btn btn-g" onclick="saveReg()">Save Student</button>
+          <span class="ok" id="rg_ok"></span>
+        </div>
+        <div class="card">
+          <h3>All Students</h3>
+          <div class="srow">
+            <input type="text" id="rg_sq" placeholder="Search name or adm no..." oninput="renderReg()" style="flex:1;min-width:180px">
+            <select id="rg_fc" onchange="renderReg()"><option value="">All Classes</option><option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option></select>
+            <select id="rg_fs" onchange="renderReg()"><option value="">All Status</option><option>Active</option><option>Completed</option><option>Transferred</option><option>Withdrawn</option></select>
+            <span id="rg_cnt" style="font-size:12px;color:var(--gray);white-space:nowrap"></span>
+          </div>
+          <div id="rg_tbl" style="overflow-x:auto"></div>
+        </div>
+      </div>
+
+      <!-- TEACHER CODES -->
+      <div class="sec" id="sec-tch">
+        <h2>Teacher Codes</h2>
+        <p class="desc">Manage teacher login codes for the assignments portal</p>
+        <div class="card">
+          <h3>Add Teacher</h3>
+          <div class="r2">
+            <div class="fg"><label>Full Name *</label><input type="text" id="tc_nm" placeholder="e.g. Ms. Nakato Sarah"></div>
+            <div class="fg"><label>Subject(s) *</label><input type="text" id="tc_sb" placeholder="e.g. Physics, Chemistry"></div>
+          </div>
+          <div class="r2">
+            <div class="fg"><label>Login Code * (no spaces)</label><input type="text" id="tc_cd" placeholder="e.g. TCH017" oninput="this.value=this.value.toUpperCase()"></div>
+            <div class="fg"><label>Phone (optional)</label><input type="text" id="tc_ph" placeholder="07XXXXXXXX"></div>
+          </div>
+          <button class="btn btn-g" onclick="addTch()">Add Teacher</button>
+          <span class="ok" id="tc_ok"></span>
+        </div>
+        <div class="card"><h3>All Teachers</h3><div id="tc_tbl"></div></div>
+      </div>
+
+      <!-- ASSIGNMENTS -->
+      <div class="sec" id="sec-asn">
+        <h2>Assignments</h2>
+        <p class="desc">View and manage all assignments posted by teachers</p>
+        <div class="card"><h3>All Assignments</h3><div id="asn_tbl"></div></div>
+      </div>
+
+      <!-- NOTICES -->
+      <div class="sec" id="sec-ntc">
+        <h2>Notice Board</h2>
+        <p class="desc">Post and manage school announcements</p>
+        <div class="card">
+          <h3>Post Notice</h3>
+          <div class="fg"><label>Title *</label><input type="text" id="nt_ti" placeholder="e.g. School Timetable - Term 2 2025"></div>
+          <div class="r3">
+            <div class="fg"><label>Category *</label>
+              <select id="nt_ca"><option value="academic">Academic</option><option value="exams">Exams</option><option value="timetable">Timetable</option><option value="events">Events</option><option value="elections">Elections</option><option value="fees">Fees</option><option value="sports">Sports</option><option value="general">General</option></select>
+            </div>
+            <div class="fg"><label>Date</label><input type="date" id="nt_dt"></div>
+            <div class="fg"><label>Expires (optional)</label><input type="date" id="nt_ex"></div>
+          </div>
+          <div class="r2">
+            <div class="fg"><label>Posted By</label><input type="text" id="nt_by" placeholder="e.g. Head Teacher"></div>
+            <div class="fg" style="display:flex;align-items:center;gap:8px;padding-top:22px">
+              <input type="checkbox" id="nt_pn" style="width:auto;margin:0">
+              <label for="nt_pn" style="margin:0;font-size:14px;cursor:pointer">Pin this notice</label>
+            </div>
+          </div>
+          <div class="fg"><label>Content *</label><textarea id="nt_co" placeholder="Full notice content..."></textarea></div>
+          <button class="btn btn-gold" onclick="postNtc()">Post Notice</button>
+          <span class="ok" id="nt_ok"></span>
+        </div>
+        <div class="card"><h3>All Notices</h3><div id="nt_tbl"></div></div>
+      </div>
+
+      <!-- NEWS -->
+      <div class="sec" id="sec-nws">
+        <h2>School News</h2>
+        <p class="desc">Publish news articles for the school news page</p>
+        <div class="card">
+          <h3>Post Article</h3>
+          <div class="fg"><label>Headline *</label><input type="text" id="nw_ti" placeholder="e.g. Students Excel in Term 2 Examinations"></div>
+          <div class="r2">
+            <div class="fg"><label>Category</label><select id="nw_ca"><option>Academic</option><option>Sports</option><option>Technology</option><option>Agriculture</option><option>Events</option><option>General</option></select></div>
+            <div class="fg"><label>Date</label><input type="date" id="nw_dt"></div>
+          </div>
+          <div class="fg"><label>Content *</label><textarea id="nw_co" style="height:120px" placeholder="Full article content..."></textarea></div>
+          <button class="btn btn-g" onclick="postNws()">Publish</button>
+          <span class="ok" id="nw_ok"></span>
+        </div>
+        <div class="card"><h3>Published Articles</h3><div id="nw_tbl"></div></div>
+      </div>
+
+      <!-- INQUIRIES -->
+      <div class="sec" id="sec-inq">
+        <h2>Admissions Inquiries</h2>
+        <p class="desc">Track inquiries from parents and guardians</p>
+        <div class="card">
+          <h3>Record Inquiry</h3>
+          <div class="r2">
+            <div class="fg"><label>Parent Name *</label><input type="text" id="iq_nm" placeholder="Full name"></div>
+            <div class="fg"><label>Phone *</label><input type="text" id="iq_ph" placeholder="07XXXXXXXX"></div>
+          </div>
+          <div class="r2">
+            <div class="fg"><label>Student Name</label><input type="text" id="iq_st" placeholder="Prospective student"></div>
+            <div class="fg"><label>Entry Level</label><select id="iq_lv"><option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option><option>Transfer</option></select></div>
+          </div>
+          <div class="fg"><label>Notes</label><textarea id="iq_nt" placeholder="Any notes..."></textarea></div>
+          <div class="fg"><label>Status</label><select id="iq_st2"><option>New</option><option>Contacted</option><option>Enrolled</option><option>Declined</option></select></div>
+          <button class="btn btn-g" onclick="saveInq()">Save Inquiry</button>
+          <span class="ok" id="iq_ok"></span>
+        </div>
+        <div class="card"><h3>All Inquiries</h3><div id="iq_tbl"></div></div>
+      </div>
+
+
+      <!-- TIMETABLE -->
+      <div class="sec" id="sec-tt">
+        <h2>Class Timetable</h2>
+        <p class="desc">Edit the weekly timetable for any class — changes show instantly on the website</p>
+        <div class="card">
+          <h3>Edit Timetable</h3>
+          <div class="r3">
+            <div class="fg"><label>Class *</label>
+              <select id="tt_cls" onchange="loadTTForm()">
+                <option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option>
+              </select>
+            </div>
+            <div class="fg"><label>Day *</label>
+              <select id="tt_day" onchange="loadTTForm()">
+                <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option>
+              </select>
+            </div>
+            <div class="fg" style="display:flex;align-items:flex-end;padding-bottom:2px">
+              <button class="btn btn-g" onclick="saveTT()" style="width:100%">Save Changes</button>
+            </div>
+          </div>
+          <div style="background:var(--pale);border-radius:10px;padding:16px;margin-bottom:14px">
+            <p style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:4px">💡 How to edit: Select class and day above, then fill in subjects for each period below. Use — for free periods. BREAK and LUNCH are automatic.</p>
+          </div>
+          <div id="tt_form"></div>
+          <span class="ok" id="tt_ok"></span>
+        </div>
+        <div class="card">
+          <h3>Preview Timetable</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px" id="tt_prev_tabs"></div>
+          <div style="overflow-x:auto"><div id="tt_preview"></div></div>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-g" onclick="resetTT()">Reset to Default Timetable</button>
+            <a href="timetable.html" target="_blank" class="btn btn-gold" style="text-decoration:none;display:inline-block">View Live Timetable</a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ONLINE APPLICATIONS -->
+      <div class="sec" id="sec-apps">
+        <h2>Online Applications</h2>
+        <p class="desc">Applications submitted through the online admission form</p>
+        <div class="card">
+          <h3>All Applications</h3>
+          <div class="srow" style="margin-bottom:14px">
+            <input type="text" id="app_sq" placeholder="Search by name or reference..." oninput="renderApps()" style="flex:1;min-width:200px">
+            <select id="app_fs" onchange="renderApps()"><option value="">All Status</option><option>New</option><option>Reviewed</option><option>Admitted</option><option>Declined</option></select>
+            <span id="app_cnt" style="font-size:12px;color:var(--gray);white-space:nowrap"></span>
+          </div>
+          <div id="apps_tbl" style="overflow-x:auto"></div>
+        </div>
+      </div>
+
+      <!-- LIBRARY GUIDE -->
+      <div class="sec" id="sec-lib">
+        <h2>Library Management</h2>
+        <p class="desc">How to add PDF study materials to the student library</p>
+        <div class="card">
+          <h3>How to Upload PDFs</h3>
+          <ol style="font-size:14px;color:#444;line-height:2.2;padding-left:20px">
+            <li>Open your <strong>kiyuniss.github.io</strong> folder in VS Code</li>
+            <li>O Level PDFs go in: <strong>library/o-level/[subject]/</strong></li>
+            <li>A Level PDFs go in: <strong>library/a-level/[subject]/</strong></li>
+            <li>Name files clearly: e.g. <strong>physics-notes-waves.pdf</strong></li>
+            <li>Open <strong>library.html</strong> and change <code>path:"#"</code> to the file path</li>
+            <li>Save then run: <code>git add . &amp;&amp; git commit -m "added pdf" &amp;&amp; git push</code></li>
+          </ol>
+          <div style="background:var(--pale);border-radius:10px;padding:14px 18px;margin-top:14px">
+            <p style="font-size:13px;color:var(--green);font-weight:600">Developer: Mutumba Jamadah Jex-R — 0777824812</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="sec" id="sec-cfg">
+        <h2>Settings</h2>
+        <p class="desc">Manage admin accounts and passwords</p>
+        <div class="card">
+          <h3>Change Password</h3>
+          <div class="fg"><label>Current Password</label><input type="password" id="pw_cu" placeholder="Current password"></div>
+          <div class="r2">
+            <div class="fg"><label>New Password</label><input type="password" id="pw_nw" placeholder="New password (min 6 chars)"></div>
+            <div class="fg"><label>Confirm</label><input type="password" id="pw_cf" placeholder="Confirm new password"></div>
+          </div>
+          <button class="btn btn-g" onclick="chgPw()">Change Password</button>
+          <span class="ok" id="pw_ok"></span>
+        </div>
+        <div class="card">
+          <h3>Add Admin Account</h3>
+          <div class="r3">
+            <div class="fg"><label>Username</label><input type="text" id="na_u" placeholder="e.g. deputy_head"></div>
+            <div class="fg"><label>Password</label><input type="password" id="na_p" placeholder="Password"></div>
+            <div class="fg"><label>Role</label><input type="text" id="na_r" placeholder="e.g. Bursar"></div>
+          </div>
+          <button class="btn btn-g" onclick="addAdm()">Add Admin</button>
+          <span class="ok" id="na_ok"></span>
+        </div>
+        <div class="card"><h3>Admin Accounts</h3><div id="cfg_tbl"></div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+// STORAGE
+function gd(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function sd(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function td(){return new Date().toISOString().split('T')[0];}
+function ok(id,t){var e=document.getElementById(id);if(!e)return;e.textContent=t||'Saved!';e.style.display='inline';setTimeout(function(){e.style.display='none';},3000);}
+function gi(id){var e=document.getElementById(id);return e?e.value:'';}
+function si(id,v){var e=document.getElementById(id);if(e)e.value=v||'';}
+
+// AUTH
+function getAdmins(){
+  var a=gd('kss_adm',null);
+  if(!a){a=[{u:'admin',p:'kiyuni2025',r:'Head Administrator'}];sd('kss_adm',a);}
+  return a;
+}
+function login(){
+  var u=gi('u').trim(),p=gi('p');
+  var f=getAdmins().find(function(a){return a.u===u&&a.p===p;});
+  document.getElementById('lerr').style.display=f?'none':'block';
+  if(!f)return;
+  sessionStorage.setItem('kss_s',JSON.stringify(f));
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('panel').style.display='block';
+  document.getElementById('roleLabel').textContent='— '+f.r;
+  startClk();loadDash();
+}
+function logout(){
+  sessionStorage.removeItem('kss_s');
+  document.getElementById('loginPage').style.display='flex';
+  document.getElementById('panel').style.display='none';
+  si('u','');si('p','');
+}
+window.addEventListener('load',function(){
+  var s=sessionStorage.getItem('kss_s');
+  if(s){
+    var f=JSON.parse(s);
+    document.getElementById('loginPage').style.display='none';
+    document.getElementById('panel').style.display='block';
+    document.getElementById('roleLabel').textContent='— '+f.r;
+    startClk();loadDash();
+  }
+});
+function startClk(){
+  function t(){var e=document.getElementById('clk');if(e)e.textContent=new Date().toLocaleString('en-UG',{dateStyle:'medium',timeStyle:'short'});}
+  t();setInterval(t,1000);
+}
+
+// NAV
+function go(name,link){
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.sidebar a').forEach(function(a){a.classList.remove('active');});
+  var s=document.getElementById('sec-'+name);if(s)s.classList.add('active');
+  if(link)link.classList.add('active');
+  if(name==='dash')loadDash();
+  if(name==='reg')renderReg();
+  if(name==='tch')renderTch();
+  if(name==='asn')renderAsn();
+  if(name==='tt'){loadTTForm();renderTTPreview();}
+  if(name==='ntc'){renderNtc();var d=document.getElementById('nt_dt');if(d&&!d.value)d.value=td();}
+  if(name==='nws'){renderNws();var d2=document.getElementById('nw_dt');if(d2&&!d2.value)d2.value=td();}
+  if(name==='inq')renderInq();
+  if(name==='apps')renderApps();
+  if(name==='cfg')renderCfg();
+  return false;
+}
+
+// DASHBOARD
+function loadDash(){
+  var reg=gd('kss_reg',[]);
+  var asn=gd('kiyuni_assignments',[]);
+  var appsCount=JSON.parse(localStorage.getItem('kss_applications')||'[]').length;
+  var ntc=gd('kiyuni_notices',[]);
+  var tch=gd('kiyuni_teachers',[]);
+  document.getElementById('d1').textContent=reg.length;
+  document.getElementById('d2').textContent=asn.length;
+  document.getElementById('d3').textContent=ntc.length;
+  document.getElementById('d4').textContent=tch.length;
+  document.getElementById('dsum').innerHTML=
+    '<b>'+reg.length+'</b> students on register &nbsp;|&nbsp; '+
+    '<b>'+appsCount+'</b> online applications &nbsp;|&nbsp; <b>'+asn.length+'</b> assignments posted &nbsp;|&nbsp; '+
+    '<b>'+ntc.length+'</b> notices on board &nbsp;|&nbsp; '+
+    '<b>'+tch.length+'</b> teachers registered';
+}
+
+// REGISTER
+function saveReg(){
+  var name=gi('rg_name').trim(),adm=gi('rg_adm').trim(),cls=gi('rg_cls');
+  if(!name||!adm||!cls){alert('Please fill in Name, Admission Number and Class.');return;}
+  var reg=gd('kss_reg',[]);
+  var idx=reg.findIndex(function(r){return r.adm===adm;});
+  var s={id:idx>=0?reg[idx].id:Date.now(),name:name,adm:adm,cls:cls,
+    str:gi('rg_str'),gen:gi('rg_gen'),dob:gi('rg_dob'),yr:gi('rg_yr'),
+    lvl:gi('rg_lvl'),par:gi('rg_par'),pph:gi('rg_pph'),hm:gi('rg_hm'),
+    rel:gi('rg_rel'),sta:gi('rg_sta'),prv:gi('rg_prv'),idx2:gi('rg_idx'),
+    med:gi('rg_med'),nte:gi('rg_nte'),added:idx>=0?reg[idx].added:td()};
+  if(idx>=0){reg[idx]=s;}else{reg.push(s);}
+  sd('kss_reg',reg);
+  ok('rg_ok','Student '+(idx>=0?'updated':'saved')+'!');
+  ['rg_name','rg_adm','rg_str','rg_dob','rg_yr','rg_par','rg_pph','rg_hm','rg_prv','rg_idx','rg_med','rg_nte'].forEach(function(id){si(id,'');});
+  si('rg_cls','');si('rg_gen','');si('rg_rel','');
+  renderReg();loadDash();
+}
+function renderReg(){
+  var reg=gd('kss_reg',[]);
+  var q=gi('rg_sq').toLowerCase(),fc=gi('rg_fc'),fs=gi('rg_fs');
+  var f=reg.filter(function(r){return(!q||r.name.toLowerCase().includes(q)||r.adm.toLowerCase().includes(q))&&(!fc||r.cls===fc)&&(!fs||r.sta===fs);});
+  var cnt=document.getElementById('rg_cnt');if(cnt)cnt.textContent=f.length+' student'+(f.length===1?'':'s');
+  var tbl=document.getElementById('rg_tbl');if(!tbl)return;
+  if(!f.length){tbl.innerHTML='<p style="color:var(--gray);padding:10px 0;font-size:14px">No students found. Add students using the form above.</p>';return;}
+  tbl.innerHTML='<table class="tbl"><thead><tr><th>Name</th><th>Adm No</th><th>Class</th><th>Parent</th><th>Medical</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+
+    f.map(function(r){
+      var sc=r.sta==='Active'?'color:var(--green);font-weight:700':r.sta==='Completed'?'color:#1565C0':'color:#C62828';
+      return '<tr><td style="font-weight:600">'+r.name+'</td>'+
+        '<td><code style="font-size:11px">'+r.adm+'</code></td>'+
+        '<td>'+r.cls+(r.str?' <small style="color:var(--gray)">'+r.str+'</small>':'')+'</td>'+
+        '<td>'+(r.par||'—')+(r.pph?' <small>'+r.pph+'</small>':'')+'</td>'+
+        '<td>'+(r.med?'<span class="medical">'+r.med+'</span>':'<span style="color:#ccc;font-size:12px">None</span>')+'</td>'+
+        '<td style="'+sc+'">'+r.sta+'</td>'+
+        '<td style="white-space:nowrap">'+
+        '<button class="btn btn-g btn-sm" onclick="editReg(\''+r.adm+'\')">Edit</button> '+
+        '<button class="btn btn-r btn-sm" onclick="delReg(\''+r.adm+'\')">Del</button>'+
+        '</td></tr>';
+    }).join('')+'</tbody></table>';
+}
+function editReg(adm){
+  var reg=gd('kss_reg',[]);
+  var r=reg.find(function(x){return x.adm===adm;});if(!r)return;
+  si('rg_name',r.name);si('rg_adm',r.adm);si('rg_str',r.str);si('rg_dob',r.dob);
+  si('rg_yr',r.yr);si('rg_par',r.par);si('rg_pph',r.pph);si('rg_hm',r.hm);
+  si('rg_prv',r.prv);si('rg_idx',r.idx2);si('rg_med',r.med);si('rg_nte',r.nte);
+  si('rg_cls',r.cls);si('rg_gen',r.gen);si('rg_rel',r.rel);si('rg_sta',r.sta);si('rg_lvl',r.lvl);
+  document.querySelector('#sec-reg .card h3').scrollIntoView({behavior:'smooth'});
+}
+function delReg(adm){
+  if(!confirm('Delete student '+adm+'?'))return;
+  sd('kss_reg',gd('kss_reg',[]).filter(function(r){return r.adm!==adm;}));
+  renderReg();loadDash();
+}
+
+// TEACHERS
+function getTch(){return gd('kiyuni_teachers',[
+  {code:'TCH001',name:'Mr. Okello James',subject:'Mathematics',phone:''},
+  {code:'TCH002',name:'Ms. Nakato Sarah',subject:'Physics',phone:''},
+  {code:'TCH003',name:'Mr. Ssemakula Paul',subject:'Chemistry',phone:''},
+  {code:'TCH004',name:'Ms. Nantongo Grace',subject:'Biology',phone:''},
+  {code:'TCH005',name:'Mr. Mutebi John',subject:'English',phone:''},
+]);}
+function addTch(){
+  var nm=gi('tc_nm').trim(),sb=gi('tc_sb').trim(),cd=gi('tc_cd').trim().toUpperCase();
+  if(!nm||!sb||!cd){alert('Please fill in Name, Subject and Code.');return;}
+  var t=getTch();
+  if(t.find(function(x){return x.code===cd;})){alert('Code already exists.');return;}
+  t.push({code:cd,name:nm,subject:sb,phone:gi('tc_ph').trim()});
+  sd('kiyuni_teachers',t);
+  si('tc_nm','');si('tc_sb','');si('tc_cd','');si('tc_ph','');
+  ok('tc_ok','Teacher added!');renderTch();loadDash();
+}
+function delTch(cd){
+  if(!confirm('Remove teacher?'))return;
+  sd('kiyuni_teachers',getTch().filter(function(t){return t.code!==cd;}));
+  renderTch();loadDash();
+}
+function renderTch(){
+  var t=getTch(),el=document.getElementById('tc_tbl');if(!el)return;
+  if(!t.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No teachers yet.</p>';return;}
+  el.innerHTML='<table class="tbl"><thead><tr><th>Name</th><th>Subject</th><th>Code</th><th>Phone</th><th>Action</th></tr></thead><tbody>'+
+    t.map(function(x){return '<tr><td>'+x.name+'</td><td>'+x.subject+'</td><td><span class="chip-code">'+x.code+'</span></td><td>'+(x.phone||'—')+'</td><td><button class="btn btn-r btn-sm" onclick="delTch(\''+x.code+'\')">Remove</button></td></tr>';}).join('')+'</tbody></table>';
+}
+
+// ASSIGNMENTS
+function renderAsn(){
+  var el=document.getElementById('asn_tbl');if(!el)return;
+  var a=gd('kiyuni_assignments',[]);
+  if(!a.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No assignments yet.</p>';return;}
+  el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Class</th><th>Subject</th><th>Teacher</th><th>Due</th><th>Action</th></tr></thead><tbody>'+
+    a.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.class+'</td><td>'+x.subject+'</td><td>'+x.teacher+'</td><td>'+x.due+'</td><td><button class="btn btn-r btn-sm" onclick="delAsn('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+}
+function delAsn(id){
+  if(!confirm('Delete?'))return;
+  sd('kiyuni_assignments',gd('kiyuni_assignments',[]).filter(function(a){return a.id!==id;}));
+  renderAsn();
+}
+
+// NOTICES
+function postNtc(){
+  var ti=gi('nt_ti').trim(),co=gi('nt_co').trim();
+  if(!ti||!co){alert('Please fill in Title and Content.');return;}
+  var n=gd('kiyuni_notices',[]);
+  n.unshift({id:Date.now(),title:ti,content:co,category:gi('nt_ca'),
+    date:gi('nt_dt')||td(),expires:gi('nt_ex'),postedBy:gi('nt_by'),
+    pinned:document.getElementById('nt_pn').checked});
+  sd('kiyuni_notices',n);
+  si('nt_ti','');si('nt_co','');si('nt_by','');si('nt_ex','');
+  document.getElementById('nt_pn').checked=false;
+  ok('nt_ok','Notice posted!');renderNtc();loadDash();
+}
+function delNtc(id){
+  if(!confirm('Delete?'))return;
+  sd('kiyuni_notices',gd('kiyuni_notices',[]).filter(function(n){return n.id!==id;}));
+  renderNtc();loadDash();
+}
+function renderNtc(){
+  var el=document.getElementById('nt_tbl');if(!el)return;
+  var n=gd('kiyuni_notices',[]);
+  if(!n.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No notices yet.</p>';return;}
+  el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Pinned</th><th>Action</th></tr></thead><tbody>'+
+    n.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td><td>'+(x.pinned?'<span class="pin-chip">YES</span>':'No')+'</td><td><button class="btn btn-r btn-sm" onclick="delNtc('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+}
+
+// NEWS
+function postNws(){
+  var ti=gi('nw_ti').trim(),co=gi('nw_co').trim();
+  if(!ti||!co){alert('Please fill in Headline and Content.');return;}
+  var n=gd('kiyuni_news',[]);
+  n.unshift({id:Date.now(),title:ti,content:co,category:gi('nw_ca'),date:gi('nw_dt')||td()});
+  sd('kiyuni_news',n);si('nw_ti','');si('nw_co','');
+  ok('nw_ok','Published!');renderNws();
+}
+function delNws(id){
+  if(!confirm('Delete?'))return;
+  sd('kiyuni_news',gd('kiyuni_news',[]).filter(function(n){return n.id!==id;}));
+  renderNws();
+}
+function renderNws(){
+  var el=document.getElementById('nw_tbl');if(!el)return;
+  var n=gd('kiyuni_news',[]);
+  if(!n.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No articles yet.</p>';return;}
+  el.innerHTML='<table class="tbl"><thead><tr><th>Headline</th><th>Category</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
+    n.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td><td><button class="btn btn-r btn-sm" onclick="delNws('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+}
+
+// INQUIRIES
+function saveInq(){
+  var nm=gi('iq_nm').trim(),ph=gi('iq_ph').trim();
+  if(!nm||!ph){alert('Please fill in Parent Name and Phone.');return;}
+  var inqs=gd('kss_inq',[]);
+  inqs.unshift({id:Date.now(),name:nm,phone:ph,student:gi('iq_st'),level:gi('iq_lv'),notes:gi('iq_nt'),status:gi('iq_st2'),date:td()});
+  sd('kss_inq',inqs);
+  si('iq_nm','');si('iq_ph','');si('iq_st','');si('iq_nt','');
+  ok('iq_ok','Saved!');renderInq();
+}
+function delInq(id){
+  if(!confirm('Delete?'))return;
+  sd('kss_inq',gd('kss_inq',[]).filter(function(i){return i.id!==id;}));
+  renderInq();
+}
+function renderInq(){
+  var el=document.getElementById('iq_tbl');if(!el)return;
+  var inqs=gd('kss_inq',[]);
+  if(!inqs.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No inquiries yet.</p>';return;}
+  el.innerHTML='<table class="tbl"><thead><tr><th>Parent</th><th>Phone</th><th>Student</th><th>Level</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody>'+
+    inqs.map(function(i){
+      var sc=i.status==='Enrolled'?'color:var(--green);font-weight:700':i.status==='Declined'?'color:#C62828':'color:#E65100';
+      return '<tr><td>'+i.name+'</td><td>'+i.phone+'</td><td>'+(i.student||'—')+'</td><td>'+i.level+'</td><td>'+i.date+'</td><td style="'+sc+'">'+i.status+'</td><td><button class="btn btn-r btn-sm" onclick="delInq('+i.id+')">Del</button></td></tr>';
+    }).join('')+'</tbody></table>';
+}
+
+// SETTINGS
+function chgPw(){
+  var cu=gi('pw_cu'),nw=gi('pw_nw'),cf=gi('pw_cf');
+  var ses=JSON.parse(sessionStorage.getItem('kss_s')||'{}');
+  var admins=getAdmins();
+  var idx=admins.findIndex(function(a){return a.u===ses.u&&a.p===cu;});
+  if(idx<0){alert('Current password is incorrect.');return;}
+  if(nw.length<6){alert('New password must be at least 6 characters.');return;}
+  if(nw!==cf){alert('Passwords do not match.');return;}
+  admins[idx].p=nw;sd('kss_adm',admins);
+  si('pw_cu','');si('pw_nw','');si('pw_cf','');
+  ok('pw_ok','Password changed!');
+}
+function addAdm(){
+  var u=gi('na_u').trim(),p=gi('na_p'),r=gi('na_r').trim();
+  if(!u||!p||!r){alert('Please fill in all fields.');return;}
+  var admins=getAdmins();
+  if(admins.find(function(a){return a.u===u;})){alert('Username already exists.');return;}
+  admins.push({u:u,p:p,r:r});sd('kss_adm',admins);
+  si('na_u','');si('na_p','');si('na_r','');
+  ok('na_ok','Admin added!');renderCfg();
+}
+function delAdm(u){
+  if(!confirm('Remove admin '+u+'?'))return;
+  sd('kss_adm',getAdmins().filter(function(a){return a.u!==u;}));
+  renderCfg();
+}
+function renderCfg(){
+  var el=document.getElementById('cfg_tbl');if(!el)return;
+  var admins=getAdmins();
+  el.innerHTML='<table class="tbl"><thead><tr><th>Username</th><th>Role</th><th>Action</th></tr></thead><tbody>'+
+    admins.map(function(a,i){return '<tr><td>'+a.u+'</td><td>'+a.r+'</td><td>'+(i===0?'<span style="color:var(--gray);font-size:12px">Main Admin</span>':'<button class="btn btn-r btn-sm" onclick="delAdm(\''+a.u+'\')">Remove</button>')+'</td></tr>';}).join('')+'</tbody></table>';
+}
+
+// ── TIMETABLE ──────────────────────────────────────────────
+var TT_PERIODS = ['7:00-7:40','7:40-8:20','8:20-9:00','BREAK','9:20-10:00','10:00-10:40','10:40-11:20','LUNCH','1:00-1:40','1:40-2:20','2:20-3:00'];
+var TT_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+var TT_CLASSES = ['S1','S2','S3','S4','S5','S6'];
+
+var TT_DEFAULT = {
+  S1:{Monday:['Mathematics','English','Physics','—','Chemistry','Biology','History','—','Geography','Agriculture','CRE'],Tuesday:['English','Mathematics','Chemistry','—','Physics','History','Literature','—','Biology','Geography','IRE'],Wednesday:['Biology','Chemistry','Mathematics','—','English','Geography','CRE','—','History','Physics','PE'],Thursday:['History','Biology','English','—','Mathematics','Literature','Physics','—','Chemistry','IRE','Agriculture'],Friday:['Geography','Physics','History','—','Biology','Mathematics','English','—','Agriculture','Music','Art']},
+  S2:{Monday:['Mathematics','Chemistry','English','—','Physics','Biology','History','—','Geography','Literature','CRE'],Tuesday:['Physics','Mathematics','Biology','—','English','History','Chemistry','—','Literature','Geography','IRE'],Wednesday:['Biology','English','Mathematics','—','Chemistry','Geography','Physics','—','History','Agriculture','PE'],Thursday:['History','Physics','Chemistry','—','Mathematics','Literature','Biology','—','English','IRE','Agriculture'],Friday:['Geography','Biology','History','—','English','Mathematics','Chemistry','—','Physics','Music','Art']},
+  S3:{Monday:['Mathematics','Physics','Chemistry','—','Biology','English','History','—','Geography','Literature','CRE'],Tuesday:['Chemistry','Mathematics','English','—','Physics','Geography','Biology','—','History','IRE','Agriculture'],Wednesday:['Biology','English','Physics','—','Mathematics','History','Chemistry','—','Literature','Geography','PE'],Thursday:['History','Chemistry','Mathematics','—','English','Biology','Physics','—','Geography','Agriculture','IRE'],Friday:['Physics','Biology','History','—','Chemistry','Mathematics','English','—','Literature','Music','Art']},
+  S4:{Monday:['Mathematics','Chemistry','Biology','—','Physics','English','History','—','Geography','Literature','CRE'],Tuesday:['Physics','Mathematics','English','—','Chemistry','History','Biology','—','Geography','IRE','Agriculture'],Wednesday:['English','Biology','Mathematics','—','Physics','Geography','History','—','Chemistry','Literature','PE'],Thursday:['History','Physics','Chemistry','—','Biology','Mathematics','English','—','Geography','Agriculture','IRE'],Friday:['Biology','History','Physics','—','Mathematics','Chemistry','English','—','Literature','Music','Art']},
+  S5:{Monday:['Mathematics','Physics','Chemistry','—','Biology','General Paper','Economics','—','History','Geography','Sub ICT'],Tuesday:['Chemistry','Mathematics','General Paper','—','Physics','History','Biology','—','Economics','Geography','Sub Maths'],Wednesday:['Biology','Chemistry','Physics','—','Mathematics','Economics','General Paper','—','History','Geography','PE'],Thursday:['History','Biology','Mathematics','—','Chemistry','Physics','Economics','—','General Paper','Sub Maths','Sub ICT'],Friday:['Physics','History','Chemistry','—','Biology','Mathematics','General Paper','—','Economics','Geography','Art']},
+  S6:{Monday:['Physics','Chemistry','Mathematics','—','Biology','General Paper','Economics','—','History','Sub Maths','Sub ICT'],Tuesday:['Mathematics','Physics','General Paper','—','Chemistry','History','Biology','—','Economics','Geography','Literature'],Wednesday:['Chemistry','Biology','Physics','—','Mathematics','Economics','General Paper','—','History','Sub ICT','PE'],Thursday:['History','Mathematics','Chemistry','—','Physics','Biology','Economics','—','General Paper','Sub Maths','Geography'],Friday:['Biology','History','Physics','—','Chemistry','Mathematics','General Paper','—','Economics','Literature','Art']}
+};
+
+var ttPrevClass = 'S1';
+
+function getTTData(){
+  try{var s=localStorage.getItem('kss_timetable');return s?JSON.parse(s):JSON.parse(JSON.stringify(TT_DEFAULT));}
+  catch(e){return JSON.parse(JSON.stringify(TT_DEFAULT));}
+}
+function saveTTData(d){
+  localStorage.setItem('kss_timetable',JSON.stringify(d));
+  localStorage.setItem('kss_tt_updated',new Date().toLocaleDateString('en-UG'));
+}
+
+function loadTTForm(){
+  var cls = document.getElementById('tt_cls')?document.getElementById('tt_cls').value:'S1';
+  var day = document.getElementById('tt_day')?document.getElementById('tt_day').value:'Monday';
+  var ttData = getTTData();
+  var dayData = (ttData[cls]&&ttData[cls][day]) ? ttData[cls][day] : TT_DEFAULT[cls][day];
+  var form = document.getElementById('tt_form');
+  if(!form) return;
+  var html = '<div style="display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:center">';
+  TT_PERIODS.forEach(function(p, i){
+    var isBreak = p==='BREAK'||p==='LUNCH';
+    if(isBreak){
+      html += '<div style="font-size:12px;font-weight:700;color:#E65100;padding:8px 0">'+p+'</div>'+
+              '<div style="background:#FFF8E1;border-radius:6px;padding:8px 12px;font-size:12px;color:#E65100;font-weight:600">'+(p==='BREAK'?'Break (9:00–9:20)':'Lunch (11:20–1:00)')+'</div>';
+    } else {
+      html += '<label style="font-size:12px;font-weight:600;color:var(--gray)">'+p+'</label>'+
+              '<input type="text" id="ttp_'+i+'" value="'+(dayData[i]||'')+'" style="border:1.5px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;font-family:Inter,sans-serif;outline:none" placeholder="Subject or — for free">';
+    }
+  });
+  html += '</div>';
+  form.innerHTML = html;
+}
+
+function saveTT(){
+  var cls = document.getElementById('tt_cls').value;
+  var day = document.getElementById('tt_day').value;
+  var ttData = getTTData();
+  if(!ttData[cls]) ttData[cls] = JSON.parse(JSON.stringify(TT_DEFAULT[cls]));
+  var periods = [];
+  TT_PERIODS.forEach(function(p,i){
+    if(p==='BREAK'||p==='LUNCH'){periods.push('—');}
+    else{var el=document.getElementById('ttp_'+i);periods.push(el?el.value.trim()||'—':'—');}
+  });
+  ttData[cls][day] = periods;
+  saveTTData(ttData);
+  ok('tt_ok','✅ '+cls+' '+day+' timetable saved!');
+  renderTTPreview();
+}
+
+function resetTT(){
+  if(!confirm('Reset ALL timetables to default? This cannot be undone.')) return;
+  localStorage.removeItem('kss_timetable');
+  localStorage.removeItem('kss_tt_updated');
+  ok('tt_ok','✅ Timetable reset to default!');
+  renderTTPreview();
+}
+
+function renderTTPreview(){
+  var tabs = document.getElementById('tt_prev_tabs');
+  if(!tabs) return;
+  tabs.innerHTML = TT_CLASSES.map(function(cls){
+    return '<button class="btn '+(cls===ttPrevClass?'btn-g':'btn-outline')+' btn-sm" onclick="ttPrevSwitch(\'' + cls + '\')">'+cls+'</button>';
+  }).join('');
+
+  var ttData = getTTData();
+  var classData = ttData[ttPrevClass]||TT_DEFAULT[ttPrevClass];
+  var html = '<table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:10px;overflow:hidden">'+
+    '<thead><tr style="background:var(--green)"><th style="color:#fff;padding:9px 10px;text-align:left;min-width:80px">Period</th>';
+  TT_DAYS.forEach(function(d){html+='<th style="color:#fff;padding:9px 8px;text-align:center">'+d+'</th>';});
+  html+='</tr></thead><tbody>';
+  TT_PERIODS.forEach(function(p,i){
+    var isBreak = p==='BREAK'||p==='LUNCH';
+    html+='<tr><td style="padding:8px 10px;font-weight:700;color:var(--green);background:var(--pale)">'+(isBreak?'<span style="color:#E65100">'+p+'</span>':p)+'</td>';
+    TT_DAYS.forEach(function(day){
+      var s = classData[day]?classData[day][i]:'—';
+      if(isBreak){html+='<td style="padding:8px;text-align:center;background:#FFF8E1;font-size:10px;font-weight:700;color:#E65100">'+(p==='BREAK'?'Break':'Lunch')+'</td>';}
+      else if(!s||s==='—'){html+='<td style="padding:8px;text-align:center;color:#ccc">—</td>';}
+      else{html+='<td style="padding:8px;text-align:center"><span style="background:var(--pale);color:var(--green);font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px">'+s+'</span></td>';}
+    });
+    html+='</tr>';
+  });
+  html+='</tbody></table>';
+  document.getElementById('tt_preview').innerHTML = html;
+}
+
+function ttPrevSwitch(cls){
+  ttPrevClass = cls;
+  renderTTPreview();
+}
+
+
+
+
+function delApp(ref){
+  if(!confirm('Delete this application?')) return;
+  var apps = JSON.parse(localStorage.getItem('kss_applications')||'[]').filter(function(a){return a.ref!==ref;});
+  localStorage.setItem('kss_applications',JSON.stringify(apps));
+  renderApps();
+}
+
+
+// ── APPLICATIONS ─────────────────────
+function renderApps(){
+  var apps = JSON.parse(localStorage.getItem('kss_applications')||'[]');
+  var qel = document.getElementById('app_sq');
+  var fel = document.getElementById('app_fs');
+  var q = qel ? qel.value.toLowerCase() : '';
+  var fs = fel ? fel.value : '';
+  var filtered = apps.filter(function(a){
+    return (!q||a.student.toLowerCase().includes(q)||a.ref.toLowerCase().includes(q))&&(!fs||a.status===fs);
+  });
+  var cnt = document.getElementById('app_cnt');
+  if(cnt) cnt.textContent = filtered.length+' application'+(filtered.length===1?'':'s');
+  var tbl = document.getElementById('apps_tbl');
+  if(!tbl) return;
+  if(!filtered.length){
+    tbl.innerHTML='<p style="color:var(--gray);font-size:14px;padding:10px 0">No applications yet. Applications submitted via the online form will appear here.</p>';
+    return;
+  }
+  var html = '<table class="tbl"><thead><tr><th>Ref</th><th>Student</th><th>Class</th><th>Parent</th><th>Phone</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody>';
+  filtered.forEach(function(a, i){
+    html += '<tr>';
+    html += '<td><span class="chip-code" style="font-size:10px">'+a.ref+'</span></td>';
+    html += '<td style="font-weight:600">'+a.student+'</td>';
+    html += '<td>'+a.class+'</td>';
+    html += '<td>'+a.parent+'</td>';
+    html += '<td>'+a.phone+'</td>';
+    html += '<td>'+a.date+'</td>';
+    html += '<td><select id="appsel_'+i+'" data-idx="'+i+'" onchange="appChangeStatus(this)" style="border:1px solid #ddd;border-radius:6px;padding:4px 8px;font-size:12px;font-family:Inter,sans-serif">';
+    ['New','Reviewed','Admitted','Declined'].forEach(function(s){
+      html += '<option'+(a.status===s?' selected':'')+'>'+s+'</option>';
+    });
+    html += '</select></td>';
+    html += '<td><button class="btn btn-r btn-sm" data-idx="'+i+'" onclick="appDelete(this)">Del</button></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  tbl.innerHTML = html;
+  tbl._filtered = filtered;
+  tbl._all = apps;
+}
+
+function appChangeStatus(el){
+  var tbl = document.getElementById('apps_tbl');
+  var filtered = tbl._filtered;
+  var all = JSON.parse(localStorage.getItem('kss_applications')||'[]');
+  var ref = filtered[parseInt(el.getAttribute('data-idx'))].ref;
+  var idx = all.findIndex(function(a){return a.ref===ref;});
+  if(idx>=0){all[idx].status=el.value;localStorage.setItem('kss_applications',JSON.stringify(all));}
+}
+
+function appDelete(btn){
+  if(!confirm('Delete this application?')) return;
+  var tbl = document.getElementById('apps_tbl');
+  var filtered = tbl._filtered;
+  var ref = filtered[parseInt(btn.getAttribute('data-idx'))].ref;
+  var all = JSON.parse(localStorage.getItem('kss_applications')||'[]').filter(function(a){return a.ref!==ref;});
+  localStorage.setItem('kss_applications',JSON.stringify(all));
+  renderApps();
+}
+
+</script>
+</body>
+</html>

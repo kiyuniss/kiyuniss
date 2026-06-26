@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-main{background:var(--gray-light);padding:70px 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:start}
+.contact-info-card{background:#fff;border-radius:14px;padding:32px;border:1px solid var(--border)}
+.contact-info-card h3{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--gold)}
+.contact-item{display:flex;gap:14px;margin-bottom:24px;align-items:flex-start}
+.contact-icon{width:46px;height:46px;background:var(--green-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-item h4{font-size:13px;font-weight:600;color:var(--gray);margin-bottom:4px}
+.contact-item p,.contact-item a{font-size:15px;color:var(--dark);font-weight:500;text-decoration:none;display:block}
+.contact-item a:hover{color:var(--green)}
+.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.quick-btn{display:block;padding:12px 16px;border-radius:10px;text-align:center;font-size:13px;font-weight:700;text-decoration:none;transition:.2s}
+.quick-btn.green{background:var(--green);color:#fff}
+.quick-btn.green:hover{background:var(--green-mid)}
+.quick-btn.wa{background:#25D366;color:#fff}
+.quick-btn.wa:hover{background:#128C7E}
+.hours-card{background:var(--green);border-radius:12px;padding:22px;margin-top:16px;color:#fff}
+.hours-card h4{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:14px}
+.hours-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:rgba(255,255,255,.8)}
+.hours-row span:last-child{color:#fff;font-weight:600}
+.contact-form-card{background:#fff;border-radius:14px;padding:32px;border:1px solid var(--border)}
+.contact-form-card h3{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--gold)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;color:#222;outline:none;font-family:'Inter',sans-serif;transition:.2s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--green)}
+.form-group textarea{height:120px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.submit-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:.2s;font-family:'Inter',sans-serif}
+.submit-btn:hover{background:var(--green-mid)}
+.map-section{padding:0}
+.map-placeholder{background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:40px}
+.map-placeholder h3{font-size:22px;font-weight:700;margin-bottom:10px}
+.map-placeholder p{font-size:15px;opacity:.85;margin-bottom:20px}
+.map-placeholder a{background:var(--gold);color:var(--dark);font-weight:700;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:14px}
+@media(max-width:1024px){.contact-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.form-row{grid-template-columns:1fr}.quick-actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html" class="active">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+
+<div class="page-hero"><h2>Contact Us</h2><p>We are here to help — reach out to Kiyuni Secondary School</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Contact Us</span></div></div>
+
+<section class="contact-main">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-card">
+          <h3>📍 Find Us</h3>
+          <div class="contact-item"><div class="contact-icon">📞</div><div><h4>Phone Numbers</h4><a href="tel:0704488636">0704488636</a><a href="tel:0786512025">0786512025</a></div></div>
+          <div class="contact-item"><div class="contact-icon">📍</div><div><h4>Physical Address</h4><p>Kiyuni Town, Mubende District<br>Central Region, Uganda</p></div></div>
+          <div class="contact-item"><div class="contact-icon">📮</div><div><h4>Postal Address</h4><p>P.O. Box 08<br>Mubende, Uganda</p></div></div>
+          <div class="contact-item"><div class="contact-icon">🏫</div><div><h4>Head Teacher</h4><p>Mr. Musa Bosa Mpungu</p></div></div>
+          <div class="quick-actions">
+            <a href="tel:0704488636" class="quick-btn green">📞 Call Now</a>
+            <a href="https://api.whatsapp.com/send?phone=256704488636&text=Hello%20Kiyuni%20Secondary%20School" target="_blank" class="quick-btn wa">💬 WhatsApp</a>
+          </div>
+        </div>
+        <div class="hours-card">
+          <h4>🕐 School Hours</h4>
+          <div class="hours-row"><span>Monday – Friday</span><span>7:00 AM – 6:00 PM</span></div>
+          <div class="hours-row"><span>Saturday</span><span>8:00 AM – 1:00 PM</span></div>
+          <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+          <div class="hours-row"><span>Public Holidays</span><span>Closed</span></div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <h3>✉️ Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Your Full Name *</label><input type="text" placeholder="Enter your full name" id="fname"></div>
+          <div class="form-group"><label>Phone Number *</label><input type="tel" placeholder="07XXXXXXXX" id="fphone"></div>
+        </div>
+        <div class="form-group"><label>Email Address (optional)</label><input type="email" placeholder="yourname@email.com" id="femail"></div>
+        <div class="form-group"><label>Subject *</label>
+          <select id="fsubject">
+            <option value="">-- Select a subject --</option>
+            <option>Admissions Inquiry</option>
+            <option>Fees Structure</option>
+            <option>Academic Information</option>
+            <option>Vocational Programmes</option>
+            <option>Library Access</option>
+            <option>Transfer Application</option>
+            <option>General Inquiry</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Your Message *</label><textarea id="fmessage" placeholder="Type your message here — we will respond as soon as possible..."></textarea></div>
+        <button class="submit-btn" onclick="submitForm()">📨 Send Message</button>
+        <p style="font-size:12px;color:var(--gray);margin-top:12px;text-align:center">Or call us directly on <strong>0704488636</strong> for immediate assistance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-placeholder">
+  <div style="font-size:48px;margin-bottom:14px">📍</div>
+  <h3>Kiyuni Secondary School</h3>
+  <p>Kiyuni Town, Mubende District, Uganda<br>P.O. Box 08, Mubende</p>
+  <a href="https://maps.google.com/?q=Kiyuni+Mubende+Uganda" target="_blank">🗺️ Open in Google Maps</a>
+</div>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>We welcome all inquiries from parents, students, and the community.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="staff.html">Our Staff</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="student.html">Student Portal</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="notices.html">Notices</a></li>
+<li><a href="fees.html">Fees</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul></div>
+  <div class="footer-col"><h4>Programmes</h4><ul><li><a href="academics.html">O Level</a></li><li><a href="academics.html#alevel">A Level</a></li><li><a href="vocational.html">Vocational Skills</a></li><li><a href="library.html">Digital Library</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p><p style="margin-top:10px">📮 P.O. Box 08</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+<script>
+function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+function submitForm(){
+  var name=document.getElementById('fname').value;
+  var phone=document.getElementById('fphone').value;
+  var subject=document.getElementById('fsubject').value;
+  var message=document.getElementById('fmessage').value;
+  if(!name||!phone||!subject||!message){alert('Please fill in all required fields marked with *');return;}
+  var wa='https://api.whatsapp.com/send?phone=256704488636&text='+encodeURIComponent('Hello Kiyuni Secondary School,\n\nName: '+name+'\nPhone: '+phone+'\nSubject: '+subject+'\n\nMessage:\n'+message);
+  window.open(wa,'_blank');
+}
+</script>
+</body></html>

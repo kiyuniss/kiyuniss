@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments - Kiyuni Secondary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:32px;flex-wrap:wrap}
+.tab-btn{padding:12px 22px;font-size:14px;font-weight:600;color:var(--gray);cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s;font-family:'Inter',sans-serif}
+.tab-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.assign-filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;align-items:center}
+.assign-filters select{border:1.5px solid var(--border);border-radius:8px;padding:9px 14px;font-size:14px;color:#222;outline:none;font-family:'Inter',sans-serif;min-width:160px}
+.assign-filters select:focus{border-color:var(--green)}
+.assign-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:22px 24px;margin-bottom:18px;transition:.3s}
+.assign-card:hover{border-color:var(--green);box-shadow:0 4px 14px rgba(27,94,32,.08)}
+.assign-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.assign-title{font-size:16px;font-weight:700;color:var(--dark)}
+.assign-meta{display:flex;gap:8px;flex-wrap:wrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.3px}
+.tag.green{background:var(--green-pale);color:var(--green)}
+.tag.gold{background:var(--gold-light);color:#E65100}
+.tag.blue{background:#E3F2FD;color:#1565C0}
+.tag.red{background:#FFEBEE;color:#C62828}
+.assign-body p{font-size:14px;color:#444;line-height:1.75;margin-bottom:10px}
+.assign-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+.assign-footer span{font-size:12px;color:var(--gray)}
+.due-badge{font-size:12px;font-weight:700;color:#C62828;background:#FFEBEE;padding:3px 10px;border-radius:20px}
+.no-assign{text-align:center;padding:50px 20px;color:var(--gray)}
+.no-assign .icon{font-size:48px;margin-bottom:12px}
+
+/* TEACHER LOGIN */
+.login-box{max-width:440px;margin:0 auto;background:#fff;border-radius:14px;border:1px solid var(--border);padding:36px}
+.login-box h3{font-size:20px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.login-box p{font-size:14px;color:var(--gray);margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;color:#222;outline:none;font-family:'Inter',sans-serif;transition:.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green)}
+.form-group textarea{height:130px;resize:vertical}
+.login-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
+.login-btn:hover{background:var(--green-mid)}
+.teacher-panel{display:none}
+.teacher-panel.show{display:block}
+.teacher-welcome{background:var(--green);border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.teacher-welcome h3{color:#fff;font-size:16px;font-weight:700;margin-bottom:2px}
+.teacher-welcome p{color:rgba(255,255,255,.8);font-size:13px}
+.logout-btn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.post-form{background:#fff;border-radius:12px;border:1px solid var(--border);padding:28px;margin-bottom:24px}
+.post-form h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--gold)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.post-btn{background:var(--gold);color:var(--dark);border:none;border-radius:8px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
+.post-btn:hover{background:#F57F17}
+.my-assigns h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:16px}
+.del-btn{background:#FFEBEE;color:#C62828;border:none;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.err{color:#C62828;font-size:13px;margin-top:8px;display:none}
+.student-result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:8px;flex-wrap:wrap;gap:8px;cursor:pointer;transition:.2s}
+.student-result-row:hover{border-color:var(--green);background:var(--green-pale)}
+.student-result-row h4{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px}
+.student-result-row p{font-size:12px;color:var(--gray)}
+.select-student-btn{background:var(--green);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.marks-history-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:center;padding:9px 12px;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;font-size:13px}
+.marks-history-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr auto;gap:8px;padding:0 12px 6px;font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px}
+@media(max-width:768px){.form-row{grid-template-columns:1fr}.assign-filters{flex-direction:column;align-items:stretch}.marks-history-row,.marks-history-header{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+
+<div class="page-hero"><h2>📝 Assignments</h2><p>Students view class assignments — Teachers log in to post</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Assignments</span></div></div>
+
+<section style="padding:60px 0;background:var(--gray-light)">
+  <div class="section-inner">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('students',this)">📚 View Assignments (Students)</button>
+      <button class="tab-btn" onclick="switchTab('teachers',this)">👩‍🏫 Teacher Login</button>
+    </div>
+
+    <!-- STUDENTS TAB -->
+    <div class="tab-panel active" id="tab-students">
+      <div class="assign-filters">
+        <select id="filterClass" onchange="renderAssignments()">
+          <option value="">All Classes</option>
+          <option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option>
+        </select>
+        <select id="filterSubject" onchange="renderAssignments()">
+          <option value="">All Subjects</option>
+          <optgroup label="O Level Subjects">
+            <option>Mathematics</option><option>English</option><option>Physics</option><option>Chemistry</option><option>Biology</option>
+            <option>History</option><option>Geography</option><option>Agriculture</option><option>Literature</option><option>CRE</option>
+            <option>IRE</option><option>Luganda</option><option>Kiswahili</option><option>ICT</option><option>Physical Education</option>
+            <option>Art and Design</option><option>Entrepreneurship</option>
+          </optgroup>
+          <optgroup label="A Level Sciences">
+            <option>A-Maths</option><option>A-Physics</option><option>A-Chemistry</option><option>A-Biology</option><option>A-Agriculture</option>
+          </optgroup>
+          <optgroup label="A Level Humanities">
+            <option>Economics</option><option>A-History</option><option>A-Geography</option><option>A-Literature</option>
+            <option>Divinity</option><option>A-IRE</option><option>A-Entrepreneurship</option><option>A-Art</option><option>Technical Drawing</option>
+          </optgroup>
+          <optgroup label="A Level Compulsory">
+            <option>General Paper</option><option>Subsidiary Mathematics</option><option>Subsidiary ICT</option>
+          </optgroup>
+        </select>
+        <select id="filterStatus" onchange="renderAssignments()">
+          <option value="">All</option>
+          <option value="active">Active</option>
+          <option value="past">Past Due</option>
+        </select>
+      </div>
+      <div id="assignList"></div>
+    </div>
+
+    <!-- TEACHER TAB -->
+    <div class="tab-panel" id="tab-teachers">
+      <!-- LOGIN FORM -->
+      <div id="loginSection">
+        <div class="login-box">
+          <h3>👩‍🏫 Teacher Login</h3>
+          <p>Enter your teacher code to access the assignment posting panel.</p>
+          <div class="form-group"><label>Teacher Code</label><input type="password" id="teacherCode" placeholder="Enter your code e.g. TCH001"></div>
+          <p class="err" id="loginErr">❌ Invalid teacher code. Contact the admin.</p>
+          <button class="login-btn" onclick="teacherLogin()">Login</button>
+          <p style="font-size:12px;color:var(--gray);margin-top:14px;text-align:center">Teacher codes are issued by the school admin. Contact <strong>admin portal</strong> to get yours.</p>
+        </div>
+      </div>
+
+      <!-- TEACHER PANEL -->
+      <div class="teacher-panel" id="teacherPanel">
+        <div class="teacher-welcome">
+          <div><h3 id="teacherName">Welcome, Teacher</h3><p id="teacherSubjectLabel">Subject Teacher</p></div>
+          <button class="logout-btn" onclick="teacherLogout()">Logout</button>
+        </div>
+
+        <div class="post-form">
+          <h3>📋 Post New Assignment</h3>
+          <div class="form-row">
+            <div class="form-group"><label>Class *</label>
+              <select id="aClass">
+                <option value="">Select class</option>
+                <option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Subject *</label>
+              <select id="aSubject">
+                <option value="">Select subject</option>
+                <optgroup label="O Level">
+                  <option>Mathematics</option><option>English</option><option>Physics</option><option>Chemistry</option><option>Biology</option>
+                  <option>History</option><option>Geography</option><option>Agriculture</option><option>Literature</option><option>CRE</option>
+                  <option>IRE</option><option>Luganda</option><option>Kiswahili</option><option>ICT</option><option>Physical Education</option>
+                  <option>Art and Design</option><option>Entrepreneurship</option>
+                </optgroup>
+                <optgroup label="A Level Sciences">
+                  <option>A-Maths</option><option>A-Physics</option><option>A-Chemistry</option><option>A-Biology</option><option>A-Agriculture</option>
+                </optgroup>
+                <optgroup label="A Level Humanities">
+                  <option>Economics</option><option>A-History</option><option>A-Geography</option><option>A-Literature</option>
+                  <option>Divinity</option><option>A-IRE</option><option>A-Entrepreneurship</option><option>A-Art</option><option>Technical Drawing</option>
+                </optgroup>
+                <optgroup label="A Level Compulsory">
+                  <option>General Paper</option><option>Subsidiary Mathematics</option><option>Subsidiary ICT</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>Assignment Title *</label><input type="text" id="aTitle" placeholder="e.g. Chapter 3 Questions — Waves and Sound"></div>
+          <div class="form-group"><label>Assignment Details *</label><textarea id="aDetails" placeholder="Write full assignment instructions here. Include page numbers, questions to answer, submission format, etc."></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label>Date Posted</label><input type="date" id="aDate"></div>
+            <div class="form-group"><label>Due Date *</label><input type="date" id="aDue"></div>
+          </div>
+          <button class="post-btn" onclick="postAssignment()">📤 Post Assignment</button>
+          <span id="postMsg" style="font-size:13px;color:var(--green);margin-left:14px;display:none">✅ Assignment posted!</span>
+        </div>
+
+        <div class="my-assigns">
+          <h3>📂 My Posted Assignments</h3>
+          <div id="myAssignList"></div>
+        </div>
+
+        <!-- MARKS ENTRY -->
+        <div class="post-form" style="margin-top:24px">
+          <h3>📊 Enter Student Marks</h3>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:18px">Search for a student by name or admission number, then enter their marks for your subject. Marks save directly to their result report.</p>
+
+          <!-- STEP 1: Find student -->
+          <div style="background:var(--gray-light);border-radius:10px;padding:18px;margin-bottom:16px">
+            <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">Step 1 — Find Student</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Search Student (Name or Adm No)</label>
+                <input type="text" id="markSearch" placeholder="e.g. Nakamya Alice or KSS/2024/001" oninput="searchStudentsForMarks()">
+              </div>
+              <div class="form-group">
+                <label>Filter by Class</label>
+                <select id="markClass" onchange="searchStudentsForMarks()">
+                  <option value="">All Classes</option>
+                  <option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option>
+                </select>
+              </div>
+            </div>
+            <div id="studentSearchResults" style="margin-top:10px"></div>
+          </div>
+
+          <!-- STEP 2: Enter marks -->
+          <div id="marksEntryPanel" style="display:none;background:#fff;border:1.5px solid var(--green);border-radius:10px;padding:20px">
+            <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:4px">Step 2 — Enter Marks for: <span id="selectedStudentName" style="color:var(--green)"></span></p>
+            <p style="font-size:12px;color:var(--gray);margin-bottom:16px">Adm No: <span id="selectedStudentAdm"></span> | Class: <span id="selectedStudentClass"></span></p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Subject *</label>
+                <input type="text" id="markSubject" placeholder="Your subject e.g. Physics" readonly style="background:#f9f9f9">
+              </div>
+              <div class="form-group">
+                <label>Term *</label>
+                <select id="markTerm">
+                  <option>Term 1 2025</option><option>Term 2 2025</option><option>Term 3 2025</option>
+                  <option>Term 1 2024</option><option>Term 2 2024</option><option>Term 3 2024</option>
+                  <option>Term 1 2023</option><option>Term 2 2023</option><option>Term 3 2023</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Marks (out of 100) *</label>
+                <input type="number" id="markScore" min="0" max="100" placeholder="e.g. 78">
+              </div>
+              <div class="form-group">
+                <label>Grade *</label>
+                <select id="markGrade">
+                  <option value="">-- Select Grade --</option>
+                  <optgroup label="O Level Grades">
+                    <option>D1</option><option>D2</option><option>C3</option><option>C4</option>
+                    <option>C5</option><option>C6</option><option>P7</option><option>P8</option><option>F9</option>
+                  </optgroup>
+                  <optgroup label="A Level Grades">
+                    <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>O</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Remarks (optional)</label>
+              <input type="text" id="markRemarks" placeholder="e.g. Excellent, Needs improvement, Good effort">
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <button class="post-btn" onclick="saveTeacherMarks()">💾 Save Marks to Report</button>
+              <button onclick="cancelMarkEntry()" style="background:none;border:1px solid var(--border);border-radius:8px;padding:11px 18px;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;color:var(--gray)">Cancel</button>
+              <span id="marksSaveMsg" style="font-size:13px;color:var(--green);font-weight:600;display:none"></span>
+            </div>
+          </div>
+
+          <!-- MY MARKS HISTORY -->
+          <div style="margin-top:20px">
+            <h4 style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:12px">📋 Marks I Have Entered</h4>
+            <div id="myMarksHistory"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Kiyuni Town, Mubende District, Uganda.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="staff.html">Our Staff</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="student.html">Student Portal</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="notices.html">Notices</a></li>
+<li><a href="fees.html">Fees</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul></div>
+  <div class="footer-col"><h4>Portals</h4><ul><li><a href="assignments.html">Assignment Portal</a></li><li><a href="results.html">Results Portal</a></li><li><a href="notices.html">Notice Board</a></li><li><a href="admin.html">Admin Portal</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+
+<script>
+// ============================================================
+// TEACHER CODES — Admin adds teachers in admin.html
+// ============================================================
+var DEFAULT_TEACHERS = [
+  {code:'TCH001',name:'Mr. Okello James',subject:'Mathematics'},
+  {code:'TCH002',name:'Ms. Nakato Sarah',subject:'Physics'},
+  {code:'TCH003',name:'Mr. Ssemakula Paul',subject:'Chemistry'},
+  {code:'TCH004',name:'Ms. Nantongo Grace',subject:'Biology'},
+  {code:'TCH005',name:'Mr. Mutebi John',subject:'English'},
+  {code:'TCH006',name:'Ms. Namukasa Rita',subject:'History'},
+  {code:'TCH007',name:'Mr. Bbosa David',subject:'Geography'},
+  {code:'TCH008',name:'Ms. Namutebi Faith',subject:'Agriculture'},
+  {code:'TCH009',name:'Mr. Ssekamate Tom',subject:'Literature'},
+  {code:'TCH010',name:'Ms. Nakayima Aisha',subject:'IRE/CRE'},
+  {code:'TCH011',name:'Mr. Wasswa Henry',subject:'ICT/Coding'},
+  {code:'TCH012',name:'Ms. Nabbosa Lydia',subject:'Luganda'},
+  {code:'TCH013',name:'Mr. Kizito Samuel',subject:'Physical Education'},
+  {code:'TCH014',name:'Ms. Nalwoga Brenda',subject:'Art and Design'},
+  {code:'TCH015',name:'Mr. Lule Moses',subject:'Entrepreneurship'},
+  {code:'TCH016',name:'Ms. Naiga Dorah',subject:'General Paper'},
+  {code:'ADMIN01',name:'Admin',subject:'All Subjects'}
+];
+
+var currentTeacher = null;
+
+function getTeachers(){
+  var stored = localStorage.getItem('kiyuni_teachers');
+  if(stored) return JSON.parse(stored);
+  return DEFAULT_TEACHERS;
+}
+
+function getAssignments(){
+  var stored = localStorage.getItem('kiyuni_assignments');
+  return stored ? JSON.parse(stored) : [];
+}
+
+function saveAssignments(data){
+  localStorage.setItem('kiyuni_assignments', JSON.stringify(data));
+}
+
+function switchTab(tab, btn){
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+  if(tab==='students') renderAssignments();
+}
+
+function teacherLogin(){
+  var code = document.getElementById('teacherCode').value.trim().toUpperCase();
+  var teachers = getTeachers();
+  var teacher = teachers.find(function(t){return t.code===code;});
+  if(!teacher){document.getElementById('loginErr').style.display='block';return;}
+  document.getElementById('loginErr').style.display='none';
+  currentTeacher = teacher;
+  document.getElementById('loginSection').style.display='none';
+  document.getElementById('teacherPanel').classList.add('show');
+  document.getElementById('teacherName').textContent='Welcome, '+teacher.name;
+  document.getElementById('teacherSubjectLabel').textContent=teacher.subject+' Teacher';
+  document.getElementById('aDate').value=new Date().toISOString().split('T')[0];
+  renderMyAssignments();
+}
+
+function teacherLogout(){
+  currentTeacher=null;
+  document.getElementById('loginSection').style.display='block';
+  document.getElementById('teacherPanel').classList.remove('show');
+  document.getElementById('teacherCode').value='';
+}
+
+function postAssignment(){
+  var cls=document.getElementById('aClass').value;
+  var subj=document.getElementById('aSubject').value;
+  var title=document.getElementById('aTitle').value.trim();
+  var details=document.getElementById('aDetails').value.trim();
+  var date=document.getElementById('aDate').value;
+  var due=document.getElementById('aDue').value;
+  if(!cls||!subj||!title||!details||!due){alert('Please fill in all required fields.');return;}
+  var assigns=getAssignments();
+  assigns.unshift({id:Date.now(),class:cls,subject:subj,title:title,details:details,date:date,due:due,teacher:currentTeacher.name,teacherCode:currentTeacher.code});
+  saveAssignments(assigns);
+  document.getElementById('aClass').value='';
+  document.getElementById('aSubject').value='';
+  document.getElementById('aTitle').value='';
+  document.getElementById('aDetails').value='';
+  document.getElementById('aDue').value='';
+  var msg=document.getElementById('postMsg');
+  msg.style.display='inline';
+  setTimeout(function(){msg.style.display='none';},3000);
+  renderMyAssignments();
+}
+
+function deleteAssignment(id){
+  if(!confirm('Delete this assignment?')) return;
+  var assigns=getAssignments().filter(function(a){return a.id!==id;});
+  saveAssignments(assigns);
+  renderMyAssignments();
+  renderAssignments();
+}
+
+function isDue(dueDate){
+  return new Date(dueDate) < new Date();
+}
+
+function renderAssignments(){
+  var cls=document.getElementById('filterClass').value;
+  var subj=document.getElementById('filterSubject').value;
+  var status=document.getElementById('filterStatus').value;
+  var assigns=getAssignments().filter(function(a){
+    var clsOk=!cls||a.class===cls;
+    var subjOk=!subj||a.subject===subj;
+    var statusOk=!status||(status==='active'&&!isDue(a.due))||(status==='past'&&isDue(a.due));
+    return clsOk&&subjOk&&statusOk;
+  });
+  var list=document.getElementById('assignList');
+  if(assigns.length===0){
+    list.innerHTML='<div class="no-assign"><div class="icon">📭</div><p>No assignments found. Try changing the filters above.</p></div>';
+    return;
+  }
+  list.innerHTML=assigns.map(function(a){
+    var past=isDue(a.due);
+    return '<div class="assign-card">'
+      +'<div class="assign-header">'
+      +'<span class="assign-title">'+a.title+'</span>'
+      +'<div class="assign-meta">'
+      +'<span class="tag green">'+a.class+'</span>'
+      +'<span class="tag blue">'+a.subject+'</span>'
+      +(past?'<span class="tag red">Past Due</span>':'<span class="tag gold">Active</span>')
+      +'</div></div>'
+      +'<div class="assign-body"><p>'+a.details.replace(/\n/g,'<br>')+'</p></div>'
+      +'<div class="assign-footer">'
+      +'<span>👩‍🏫 '+a.teacher+' &nbsp;|&nbsp; 📅 Posted: '+a.date+'</span>'
+      +'<span class="due-badge">⏰ Due: '+a.due+'</span>'
+      +'</div></div>';
+  }).join('');
+}
+
+function renderMyAssignments(){
+  if(!currentTeacher) return;
+  var assigns=getAssignments().filter(function(a){return a.teacherCode===currentTeacher.code;});
+  var list=document.getElementById('myAssignList');
+  if(assigns.length===0){list.innerHTML='<p style="color:var(--gray);font-size:14px">You have not posted any assignments yet.</p>';return;}
+  list.innerHTML=assigns.map(function(a){
+    var past=isDue(a.due);
+    return '<div class="assign-card">'
+      +'<div class="assign-header">'
+      +'<span class="assign-title">'+a.title+'</span>'
+      +'<div class="assign-meta">'
+      +'<span class="tag green">'+a.class+'</span>'
+      +'<span class="tag blue">'+a.subject+'</span>'
+      +(past?'<span class="tag red">Past Due</span>':'<span class="tag gold">Active</span>')
+      +'</div></div>'
+      +'<div class="assign-body"><p>'+a.details.replace(/\n/g,'<br>')+'</p></div>'
+      +'<div class="assign-footer">'
+      +'<span>📅 Posted: '+a.date+' &nbsp;|&nbsp; ⏰ Due: '+a.due+'</span>'
+      +'<button class="del-btn" onclick="deleteAssignment('+a.id+')">🗑 Delete</button>'
+      +'</div></div>';
+  }).join('');
+}
+
+function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+renderAssignments();
+
+// ============================================================
+// MARKS ENTRY SYSTEM
+// ============================================================
+var selectedStudentCode = null;
+
+function getResultsDB(){var d=localStorage.getItem('kiyuni_results');return d?JSON.parse(d):{};}
+function saveResultsDB(d){localStorage.setItem('kiyuni_results',JSON.stringify(d));}
+function getRegisterDB(){var d=localStorage.getItem('kiyuni_register');return d?JSON.parse(d):[];}
+function getMyMarks(){var d=localStorage.getItem('kiyuni_teacher_marks_'+( currentTeacher?currentTeacher.code:''));return d?JSON.parse(d):[];}
+function saveMyMarks(d){localStorage.setItem('kiyuni_teacher_marks_'+(currentTeacher?currentTeacher.code:''),JSON.stringify(d));}
+
+function searchStudentsForMarks(){
+  var q=(document.getElementById('markSearch').value||'').toLowerCase().trim();
+  var cls=document.getElementById('markClass').value;
+  var container=document.getElementById('studentSearchResults');
+  if(!q&&!cls){container.innerHTML='<p style="font-size:13px;color:var(--gray)">Type a student name or admission number to search.</p>';return;}
+
+  // Search from student register (primary source)
+  var register=getRegisterDB();
+  var matches=register.filter(function(s){
+    var nameMatch=!q||s.name.toLowerCase().includes(q)||(s.admNo||'').toLowerCase().includes(q);
+    var classMatch=!cls||s.class===cls;
+    return nameMatch&&classMatch&&s.status==='Active';
+  });
+
+  if(matches.length===0){
+    container.innerHTML='<p style="font-size:13px;color:#C62828">No students found in the school register. Ask admin to add them in the Student Register.</p>';
+    return;
+  }
+
+  container.innerHTML=matches.map(function(s){
+    return '<div class="student-result-row" onclick="selectStudent(\''+s.admNo+'\')">'
+      +'<div><h4>'+s.name+'</h4><p>Adm No: '+s.admNo+' &nbsp;|&nbsp; Class: '+s.class+(s.stream?' | '+s.stream:'')+'</p></div>'
+      +'<button class="select-student-btn">Select →</button>'
+      +'</div>';
+  }).join('');
+}
+
+function selectStudent(admNo){
+  var register=getRegisterDB();
+  var s=register.find(function(r){return r.admNo===admNo;});
+  if(!s){alert('Student not found in register.');return;}
+
+  // Ensure they have a result slot
+  var db=getResultsDB();
+  var code=Object.keys(db).find(function(c){return db[c].admNo===admNo;});
+  if(!code){
+    // Create result slot automatically
+    var chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var newCode='KSS-';
+    for(var i=0;i<4;i++) newCode+=chars[Math.floor(Math.random()*chars.length)];
+    newCode+='-';
+    for(var j=0;j<4;j++) newCode+=chars[Math.floor(Math.random()*chars.length)];
+    db[newCode]={name:s.name,admNo:s.admNo,class:s.class,level:s.level||'o',stream:s.stream||'',year:s.year||new Date().getFullYear().toString(),used:false,terms:{}};
+    saveResultsDB(db);
+    code=newCode;
+  }
+
+  selectedStudentCode=code;
+  document.getElementById('selectedStudentName').textContent=s.name;
+  document.getElementById('selectedStudentAdm').textContent=s.admNo;
+  document.getElementById('selectedStudentClass').textContent=s.class+(s.stream?' ('+s.stream+')':'');
+  if(currentTeacher) document.getElementById('markSubject').value=currentTeacher.subject;
+  document.getElementById('marksEntryPanel').style.display='block';
+  document.getElementById('studentSearchResults').innerHTML='<p style="font-size:13px;color:var(--green);font-weight:600">✅ Selected: '+s.name+'</p>';
+  document.getElementById('markSearch').value=s.name;
+  document.getElementById('marksEntryPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function cancelMarkEntry(){
+  selectedStudentCode=null;
+  document.getElementById('marksEntryPanel').style.display='none';
+  document.getElementById('markSearch').value='';
+  document.getElementById('studentSearchResults').innerHTML='';
+  document.getElementById('markScore').value='';
+  document.getElementById('markGrade').value='';
+  document.getElementById('markRemarks').value='';
+}
+
+function saveTeacherMarks(){
+  if(!selectedStudentCode){alert('Please select a student first.');return;}
+  var subject=document.getElementById('markSubject').value.trim();
+  var term=document.getElementById('markTerm').value;
+  var score=document.getElementById('markScore').value;
+  var grade=document.getElementById('markGrade').value;
+  var remarks=document.getElementById('markRemarks').value.trim();
+
+  if(!subject||!score||!grade){alert('Please fill in Subject, Marks and Grade.');return;}
+  if(parseInt(score)<0||parseInt(score)>100){alert('Marks must be between 0 and 100.');return;}
+
+  // Save to results DB
+  var db=getResultsDB();
+  var student=db[selectedStudentCode];
+  if(!student){alert('Student not found in system.');return;}
+
+  // Init terms
+  if(!student.terms) student.terms={};
+  if(!student.terms[term]) student.terms[term]={subjects:[],position:'',comment:''};
+
+  // Update or add subject mark
+  var subjectsList=student.terms[term].subjects;
+  var existingIdx=subjectsList.findIndex(function(s){return s.subject.toLowerCase()===subject.toLowerCase();});
+  var entry={subject:subject,marks:score,grade:grade,remarks:remarks||'—'};
+
+  if(existingIdx>=0){
+    subjectsList[existingIdx]=entry;
+  } else {
+    subjectsList.push(entry);
+  }
+
+  student.terms[term].subjects=subjectsList;
+  db[selectedStudentCode]=student;
+  saveResultsDB(db);
+
+  // Log this mark entry for teacher's history
+  var myMarks=getMyMarks();
+  myMarks.unshift({
+    id:Date.now(),
+    studentName:student.name,
+    admNo:student.admNo,
+    class:student.class,
+    subject:subject,
+    term:term,
+    score:score,
+    grade:grade,
+    savedAt:new Date().toLocaleDateString()
+  });
+  saveMyMarks(myMarks);
+
+  // Show success
+  var msg=document.getElementById('marksSaveMsg');
+  msg.textContent='✅ Marks saved for '+student.name+' — '+subject+' — '+term;
+  msg.style.display='inline';
+  setTimeout(function(){msg.style.display='none';},4000);
+
+  // Reset form
+  document.getElementById('markScore').value='';
+  document.getElementById('markGrade').value='';
+  document.getElementById('markRemarks').value='';
+  selectedStudentCode=null;
+  document.getElementById('marksEntryPanel').style.display='none';
+  document.getElementById('markSearch').value='';
+  document.getElementById('studentSearchResults').innerHTML='';
+
+  renderMyMarksHistory();
+}
+
+function renderMyMarksHistory(){
+  if(!currentTeacher) return;
+  var myMarks=getMyMarks();
+  var container=document.getElementById('myMarksHistory');
+  if(myMarks.length===0){
+    container.innerHTML='<p style="font-size:13px;color:var(--gray)">You have not entered any marks yet.</p>';
+    return;
+  }
+  container.innerHTML=
+    '<div class="marks-history-header"><span>Student</span><span>Class</span><span>Subject</span><span>Term</span><span>Marks/Grade</span><span>Date</span></div>'
+    +myMarks.slice(0,20).map(function(m){
+      return '<div class="marks-history-row">'
+        +'<span style="font-weight:600;color:var(--dark)">'+m.studentName+'</span>'
+        +'<span>'+m.class+'</span>'
+        +'<span>'+m.subject+'</span>'
+        +'<span style="font-size:11px">'+m.term+'</span>'
+        +'<span><strong>'+m.score+'</strong>/100 &nbsp;<span style="background:var(--green-pale);color:var(--green);font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px">'+m.grade+'</span></span>'
+        +'<span style="font-size:11px;color:var(--gray)">'+m.savedAt+'</span>'
+        +'</div>';
+    }).join('');
+}
+
+// Extend teacherLogin to load marks history
+var _origTeacherLogin = teacherLogin;
+teacherLogin = function(){
+  _origTeacherLogin();
+  setTimeout(renderMyMarksHistory, 100);
+};
+
+</script>
+</body></html>
