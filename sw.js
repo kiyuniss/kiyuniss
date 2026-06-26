@@ -1,5 +1,5 @@
 // Kiyuni Secondary School - Service Worker
-var CACHE = 'kiyuniss-v1';
+var CACHE = 'kiyuniss-v2';
 var FILES = [
   '/kiyuniss/index.html',
   '/kiyuniss/style.css',
