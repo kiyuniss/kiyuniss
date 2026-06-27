@@ -62,7 +62,7 @@
 <div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
 <a href="index.html">Home</a><a href="about.html">About</a><a href="staff.html">Staff</a><a href="academics.html">Academics</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="notices.html">Notices</a><a href="fees.html">Fees</a><a href="admissions.html">Admissions</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
 
-<div class="page-hero"><h2>📋 Online Admission Form</h2><p>Apply for admission to Kiyuni Secondary School — 2025/2026</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="admissions.html" style="color:var(--gold)">Admissions</a><span>›</span><span style="color:#fff">Apply Online</span></div></div>
+<div class="page-hero"><h2>📋 Online Admission Form</h2><p>Apply for admission to Kiyuni Secondary School — <span class="auto-year">2026</span>/<span id="ny">2027</span></p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="admissions.html" style="color:var(--gold)">Admissions</a><span>›</span><span style="color:#fff">Apply Online</span></div></div>
 
 <section style="padding:50px 0;background:var(--gray-light)">
   <div class="section-inner">
@@ -137,7 +137,7 @@
               <select id="a_class"><option value="">Select class</option><option>S1 (O Level entry)</option><option>S2 (Transfer)</option><option>S3 (Transfer)</option><option>S4 (Transfer)</option><option>S5 (A Level entry)</option><option>S6 (Transfer)</option></select>
             </div>
             <div class="fg"><label>Academic Year <span class="required">*</span></label>
-              <select id="a_year"><option>2025/2026</option><option>2026/2027</option></select>
+              <select id="a_year"><option><span class="auto-year">2026</span>/<span id="ny">2027</span></option><option>2026/2027</option></select>
             </div>
           </div>
           <div class="f-grid" style="margin-bottom:16px">
@@ -201,7 +201,7 @@
   <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="academics.html">Academics</a></li><li><a href="fees.html">Fees</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="apply.html">Apply Online</a></li><li><a href="contact.html">Contact</a></li></ul></div>
   <div class="footer-col"><h4>Admissions</h4><ul><li><a href="apply.html">Apply Online</a></li><li><a href="admissions.html">Requirements</a></li><li><a href="fees.html">Fees Structure</a></li><li><a href="contact.html">Contact Bursar</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
-</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
 
 <script type="text/javascript">
 var currentStep = 1;
@@ -317,6 +317,13 @@ function submitForm(){
 }
 
 function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+</script>
+<script>
+// Auto-update year
+(function(){
+  var y = new Date().getFullYear();
+  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
+})();
 </script>
 </body>
 </html>

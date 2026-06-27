@@ -897,5 +897,12 @@ function appDelete(btn){
 }
 
 </script>
+<script>
+// Auto-update year
+(function(){
+  var y = new Date().getFullYear();
+  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
+})();
+</script>
 </body>
 </html>

@@ -67,7 +67,7 @@
           <div class="contact-item"><div class="contact-icon">📞</div><div><h4>Phone Numbers</h4><a href="tel:0704488636">0704488636</a><a href="tel:0786512025">0786512025</a></div></div>
           <div class="contact-item"><div class="contact-icon">📍</div><div><h4>Physical Address</h4><p>Kiyuni Town, Mubende District<br>Central Region, Uganda</p></div></div>
           <div class="contact-item"><div class="contact-icon">📮</div><div><h4>Postal Address</h4><p>P.O. Box 08<br>Mubende, Uganda</p></div></div>
-          <div class="contact-item"><div class="contact-icon">🏫</div><div><h4>Head Teacher</h4><p>Mr. Musa Bosa Mpungu</p></div></div>
+          <div class="contact-item"><div class="contact-icon">🏫</div><div><h4>Head Teacher</h4><p>Mr.BBOSA MUSA MPUNGU</p></div></div>
           <div class="quick-actions">
             <a href="tel:0704488636" class="quick-btn green">📞 Call Now</a>
             <a href="https://api.whatsapp.com/send?phone=256704488636&text=Hello%20Kiyuni%20Secondary%20School" target="_blank" class="quick-btn wa">💬 WhatsApp</a>
@@ -136,7 +136,7 @@
 </ul></div>
   <div class="footer-col"><h4>Programmes</h4><ul><li><a href="academics.html">O Level</a></li><li><a href="academics.html#alevel">A Level</a></li><li><a href="vocational.html">Vocational Skills</a></li><li><a href="library.html">Digital Library</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p><p style="margin-top:10px">📮 P.O. Box 08</p></div>
-</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
 <script>
 function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
 function submitForm(){
@@ -148,5 +148,12 @@ function submitForm(){
   var wa='https://api.whatsapp.com/send?phone=256704488636&text='+encodeURIComponent('Hello Kiyuni Secondary School,\n\nName: '+name+'\nPhone: '+phone+'\nSubject: '+subject+'\n\nMessage:\n'+message);
   window.open(wa,'_blank');
 }
+</script>
+<script>
+// Auto-update year
+(function(){
+  var y = new Date().getFullYear();
+  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
+})();
 </script>
 </body></html>

@@ -48,7 +48,7 @@
 </div></nav>
 <div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
 
-<div class="page-hero"><h2>💰 Fees Structure</h2><p>Clear breakdown of school fees per term — Academic Year 2025</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Fees Structure</span></div></div>
+<div class="page-hero"><h2>💰 Fees Structure</h2><p>Clear breakdown of school fees per term — Academic Year <span class="auto-year">2026</span></p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Fees Structure</span></div></div>
 
 <section style="padding:60px 0;background:var(--gray-light)">
   <div class="section-inner">
@@ -150,7 +150,14 @@
 </ul></div>
   <div class="footer-col"><h4>Programmes</h4><ul><li><a href="academics.html">O Level</a></li><li><a href="academics.html#alevel">A Level</a></li><li><a href="vocational.html">Vocational Skills</a></li><li><a href="library.html">Library</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
-</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
 <script type="text/javascript">function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+</script>
+<script>
+// Auto-update year
+(function(){
+  var y = new Date().getFullYear();
+  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
+})();
 </script>
 </body></html>

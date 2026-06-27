@@ -290,7 +290,7 @@
 </ul></div>
   <div class="footer-col"><h4>Portals</h4><ul><li><a href="assignments.html">Assignment Portal</a></li><li><a href="results.html">Results Portal</a></li><li><a href="notices.html">Notice Board</a></li><li><a href="admin.html">Admin Portal</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
-</div><div class="footer-bottom"><p>© 2025 Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
 
 <script>
 // ============================================================
@@ -632,5 +632,12 @@ teacherLogin = function(){
   setTimeout(renderMyMarksHistory, 100);
 };
 
+</script>
+<script>
+// Auto-update year
+(function(){
+  var y = new Date().getFullYear();
+  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
+})();
 </script>
 </body></html>
