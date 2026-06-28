@@ -3,158 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News & Events - Kiyuni Secondary School</title>
+<title>School News - Kiyuni Secondary School Mubende</title>
+<meta name="description" content="Latest news and updates from Kiyuni Secondary School, Kiyuni Town, Mubende District Uganda.">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.news-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:.3s}
+.news-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:.3s;cursor:pointer}
 .news-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);transform:translateY(-3px)}
-.news-top{height:180px;overflow:hidden;background:#ccc;position:relative}
-.news-top img{width:100%;height:100%;object-fit:cover}
-.news-placeholder{height:180px;display:flex;align-items:center;justify-content:center;font-size:56px}
-.news-cat{position:absolute;top:14px;left:14px;background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
-.news-body{padding:20px}
-.news-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.news-date{font-size:11px;color:var(--gray);font-weight:500}
-.news-body h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:10px;line-height:1.4}
-.news-body p{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:14px}
-.read-more{color:var(--green);font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-.read-more:hover{text-decoration:underline}
-.events-section{background:var(--green);padding:70px 0}
-.events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.event-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:22px;display:flex;gap:18px;align-items:flex-start}
-.event-date-box{background:var(--gold);border-radius:10px;padding:10px 14px;text-align:center;flex-shrink:0;min-width:56px}
-.event-date-box .day{font-size:22px;font-weight:900;color:var(--dark);line-height:1;font-family:'Merriweather',serif}
-.event-date-box .month{font-size:10px;font-weight:700;color:var(--dark);text-transform:uppercase;letter-spacing:.5px}
-.event-body h4{color:#fff;font-size:15px;font-weight:700;margin-bottom:6px}
-.event-body p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.6}
-.event-tag{display:inline-block;background:rgba(255,255,255,.15);color:#fff;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:8px}
-.notice-board{background:var(--gold-light);border:2px solid var(--gold);border-radius:14px;padding:32px;margin-top:50px}
-.notice-board h3{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.notice-list{list-style:none}
-.notice-item{padding:12px 0;border-bottom:1px solid rgba(249,168,37,.3);display:flex;gap:12px;align-items:flex-start;font-size:14px;color:#444}
-.notice-item:last-child{border-bottom:none}
-.notice-item::before{content:'📌';flex-shrink:0}
-@media(max-width:1024px){.news-grid{grid-template-columns:repeat(2,1fr)}.events-grid{grid-template-columns:1fr}}
-@media(max-width:768px){.news-grid{grid-template-columns:1fr}}
+.news-img{height:200px;overflow:hidden;position:relative}
+.news-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.news-card:hover .news-img img{transform:scale(1.05)}
+.news-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:56px}
+.news-cat-badge{position:absolute;top:12px;left:12px;background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase}
+.news-body{padding:18px}
+.news-date{font-size:11px;color:var(--green);font-weight:700;letter-spacing:.5px;margin-bottom:6px}
+.news-card h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.4}
+.news-card p{font-size:13px;color:#555;line-height:1.65;margin-bottom:10px}
+.news-read{color:var(--green);font-size:13px;font-weight:700}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.f-btn{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:.2s;font-family:'Inter',sans-serif}
+.f-btn:hover,.f-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:16px;max-width:720px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-img{width:100%;height:280px;object-fit:cover;border-radius:16px 16px 0 0;display:block}
+.modal-img-placeholder{height:180px;display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:16px 16px 0 0}
+.modal-body{padding:28px}
+.modal-close-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin:0 28px 24px}
+.loading{text-align:center;padding:60px 20px;color:var(--gray)}
+@media(max-width:1024px){.news-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.news-grid{grid-template-columns:1fr}}
 </style>
-
-<meta name="description" content="Latest news and updates from Kiyuni Secondary School, Kiyuni Town, Mubende District Uganda.">
-<meta name="keywords" content="Kiyuni Secondary School, Kiyuni SS, secondary school Mubende, Uganda secondary school, School News - Kiyuni Secondary School Mubende">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="School News - Kiyuni Secondary School Mubende">
-<meta property="og:description" content="Latest news and updates from Kiyuni Secondary School, Kiyuni Town, Mubende District Uganda.">
-<meta property="og:image" content="https://kiyuniss.github.io/kiyuniss/images/badge/badge.png">
-<meta property="og:url" content="https://kiyuniss.github.io/kiyuniss/news.html">
-<meta property="og:type" content="website">
-<link rel="canonical" href="https://kiyuniss.github.io/kiyuniss/news.html">
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
 <nav><div class="nav-inner">
   <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
-  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html" class="active">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li>
+    <li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li>
+    <li><a href="library.html">Library</a></li>
+    <li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li>
+    <li><a href="notices.html">Notices</a></li>
+    <li><a href="fees.html">Fees</a></li>
+    <li><a href="news.html" class="active">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="admissions.html" class="nav-apply">Apply Now</a></li>
+  </ul>
   <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
 </div></nav>
-<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
+<a href="index.html">Home</a><a href="about.html">About</a><a href="staff.html">Staff</a><a href="academics.html">Academics</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="notices.html">Notices</a><a href="fees.html">Fees</a><a href="news.html">News</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
 
-<div class="page-hero"><h2>News & Events</h2><p>Stay updated with the latest happenings at Kiyuni Secondary School</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">News & Events</span></div></div>
+<div class="page-hero"><h2>School News</h2><p>Latest stories and updates from Kiyuni Secondary School</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">News</span></div></div>
 
-<!-- NEWS -->
-<section style="padding:70px 0;background:var(--gray-light)">
+<section style="padding:60px 0;background:var(--gray-light)">
   <div class="section-inner">
-    <div class="section-head">
-      <div class="section-tag">Latest News</div>
-      <h2 class="section-title">School News</h2>
-      <div class="divider"></div>
-      <p class="section-subtitle">Updates from Kiyuni Secondary School — academic achievements, events, and community news.</p>
-    </div>
-    <div class="news-grid">
-      <div class="news-card">
-        <div class="news-top" style="position:relative"><div class="news-placeholder" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7)">🏆</div><span class="news-cat">Academic</span></div>
-        <div class="news-body"><div class="news-meta"><span class="news-date">📅 2025</span></div><h3>Students Excel in UNEB Examinations</h3><p>Kiyuni Secondary School students continue to perform well in national examinations, with outstanding results across both O Level (UCE) and A Level (UACE) programmes.</p><a href="contact.html" class="read-more">Contact us for details →</a></div>
-      </div>
-      <div class="news-card">
-        <div class="news-top" style="position:relative"><div class="news-placeholder" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9)">💻</div><span class="news-cat">Technology</span></div>
-        <div class="news-body"><div class="news-meta"><span class="news-date">📅 2025</span></div><h3>Coding Programme Gains Strong Momentum</h3><p>Our vocational coding and computer studies programme continues to attract enthusiastic students eager to develop digital skills for the 21st century economy.</p><a href="vocational.html" class="read-more">Learn about vocational skills →</a></div>
-      </div>
-      <div class="news-card">
-        <div class="news-top" style="position:relative"><div class="news-placeholder" style="background:linear-gradient(135deg,#F1F8E9,#DCEDC8)">🌱</div><span class="news-cat">Agriculture</span></div>
-        <div class="news-body"><div class="news-meta"><span class="news-date">📅 2025</span></div><h3>School Farm Records Successful Harvest</h3><p>Students in the agriculture vocational programme celebrated a successful harvest season, putting their classroom learning into real-world farming practice.</p><a href="vocational.html" class="read-more">Learn about agriculture →</a></div>
-      </div>
-      <div class="news-card">
-        <div class="news-top" style="position:relative"><div class="news-placeholder" style="background:linear-gradient(135deg,#FCE4EC,#F8BBD0)">📚</div><span class="news-cat">Library</span></div>
-        <div class="news-body"><div class="news-meta"><span class="news-date">📅 2025</span></div><h3>Digital Library Launched for Students</h3><p>Students can now access study materials, notes, and past papers for all O Level and A Level subjects through the school's new digital library system.</p><a href="library.html" class="read-more">Visit the library →</a></div>
-      </div>
-      <div class="news-card">
-        <div class="news-top" style="position:relative"><div class="news-placeholder" style="background:linear-gradient(135deg,#FFF8E1,#FFE082)">⚽</div><span class="news-cat">Sports</span></div>
-        <div class="news-body"><div class="news-meta"><span class="news-date">📅 2025</span></div><h3>Inter-School Sports Competitions</h3><p>Kiyuni Secondary School students participated in inter-school sports competitions, showcasing their talent in football, athletics, and other sports events.</p><a href="contact.html" class="read-more">Contact us for details →</a></div>
-      </div>
-      <div class="news-card">
-        <div class="news-top" style="position:relative"><div class="news-placeholder" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)">🧵</div><span class="news-cat">Vocational</span></div>
-        <div class="news-body"><div class="news-meta"><span class="news-date">📅 2025</span></div><h3>Tailoring Students Showcase Their Work</h3><p>Students from the tailoring and fashion vocational programme displayed their completed garments, demonstrating the practical skills they have developed during the year.</p><a href="vocational.html" class="read-more">Learn about tailoring →</a></div>
-      </div>
-    </div>
-
-    <!-- NOTICE BOARD -->
-    <div class="notice-board">
-      <h3>📋 Notice Board</h3>
-      <ul class="notice-list">
-        <li class="notice-item">Admissions are currently open for S1, S5, and transfer students. Contact the school office for details.</li>
-        <li class="notice-item">Term dates and the school calendar are available from the school office — call 0704488636.</li>
-        <li class="notice-item">Parents and guardians are reminded to pay fees promptly at the beginning of each term.</li>
-        <li class="notice-item">Students are encouraged to use the digital library for study materials and past papers.</li>
-        <li class="notice-item">All visitors must report to the school office before proceeding to classrooms or other areas.</li>
-      </ul>
-    </div>
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="news-grid" id="newsGrid"><div class="loading" style="grid-column:1/-1"><p>Loading news...</p></div></div>
   </div>
 </section>
 
-<!-- EVENTS -->
-<section class="events-section">
-  <div class="section-inner">
-    <div class="section-head">
-      <div class="section-tag" style="color:var(--gold)">Upcoming Events</div>
-      <h2 class="section-title" style="color:#fff">School Events Calendar</h2>
-      <div class="divider" style="background:var(--gold)"></div>
-    </div>
-    <div class="events-grid">
-      <div class="event-card"><div class="event-date-box"><div class="day">TBA</div><div class="month">2025</div></div><div class="event-body"><h4>Term Opening Day</h4><p>All students report to school for the start of the new term. Parents are welcome to drop off their children at the school gate.</p><span class="event-tag">Academic</span></div></div>
-      <div class="event-card"><div class="event-date-box"><div class="day">TBA</div><div class="month">2025</div></div><div class="event-body"><h4>Parent-Teacher Meeting</h4><p>Parents and guardians are invited to meet with teachers to discuss student progress and school developments.</p><span class="event-tag">Parents</span></div></div>
-      <div class="event-card"><div class="event-date-box"><div class="day">TBA</div><div class="month">2025</div></div><div class="event-body"><h4>Sports Day</h4><p>Annual sports day featuring football, athletics, netball, and other competitions. Students and parents are all welcome.</p><span class="event-tag">Sports</span></div></div>
-      <div class="event-card"><div class="event-date-box"><div class="day">TBA</div><div class="month">2025</div></div><div class="event-body"><h4>UNEB Mock Examinations</h4><p>S4 and S6 students sit mock examinations in preparation for the national UCE and UACE examinations.</p><span class="event-tag">Exams</span></div></div>
-    </div>
-    <p style="color:rgba(255,255,255,.6);font-size:13px;margin-top:24px;text-align:center">📞 Call 0704488636 for specific dates and the full school calendar.</p>
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="newsModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div id="modalTop"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <button class="modal-close-btn" onclick="closeModal()">Close</button>
   </div>
-</section>
+</div>
 
 <a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
 <footer><div class="footer-grid">
-  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Stay connected with news and events from Kiyuni Secondary School.</p></div>
-  <div class="footer-col"><h4>Quick Links</h4><ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="staff.html">Our Staff</a></li>
-<li><a href="academics.html">Academics</a></li>
-<li><a href="library.html">Library</a></li>
-<li><a href="student.html">Student Portal</a></li>
-<li><a href="assignments.html">Assignments</a></li>
-<li><a href="timetable.html">Timetable</a></li>
-<li><a href="notices.html">Notices</a></li>
-<li><a href="fees.html">Fees</a></li>
-<li><a href="admissions.html">Admissions</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul></div>
-  <div class="footer-col"><h4>News</h4><ul><li><a href="news.html">Latest News</a></li><li><a href="news.html">Events Calendar</a></li><li><a href="news.html">Notice Board</a></li><li><a href="news.html">Sports</a></li></ul></div>
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Kiyuni Town, Mubende District, Uganda.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="academics.html">Academics</a></li><li><a href="library.html">Library</a></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Programmes</h4><ul><li><a href="academics.html">O Level</a></li><li><a href="academics.html#alevel">A Level</a></li><li><a href="vocational.html">Vocational Skills</a></li><li><a href="library.html">Library</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
-</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
-<script>function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}</script>
-<script>
-// Auto-update year
-(function(){
-  var y = new Date().getFullYear();
-  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
-})();
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+<script type="text/javascript">
+var firebaseConfig = {
+  apiKey: "AIzaSyBvEE28ZPwd-txG1NfivOmqYoLH4pV5diM",
+  authDomain: "kiyuniss.firebaseapp.com",
+  databaseURL: "https://kiyuniss-default-rtdb.firebaseio.com",
+  projectId: "kiyuniss",
+  storageBucket: "kiyuniss.firebasestorage.app",
+  messagingSenderId: "419208772644",
+  appId: "1:419208772644:web:422a902b1e7d7825a32cb1"
+};
+
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+var ALL_NEWS = [];
+var currentCat = 'All';
+var catEmojis = {Academic:'🏆',Sports:'⚽',Technology:'💻',Agriculture:'🌱',Events:'🎉',General:'📰'};
+var catBgs = {Academic:'background:#E8F5E9;color:#1B5E20',Sports:'background:#E3F2FD;color:#1565C0',Technology:'background:#F3E5F5;color:#6A1B9A',Agriculture:'background:#F1F8E9;color:#33691E',Events:'background:#FFF8E1;color:#E65100',General:'background:#F5F5F5;color:#555'};
+
+function getDefaultNews(){
+  return [
+    {id:'dn1',title:'Alumni Secures Admission to Makerere University School of Law',content:'Kiyuni Secondary School is proud to announce that one of our former students, Mutumba Jamadah Jex-R, has secured admission to the Bachelor of Laws (LLB) programme at Makerere University.\n\nThis achievement demonstrates that hard work and dedication begun in secondary school opens doors to the highest levels of education in Uganda.\n\n"This is proof that what begins at Kiyuni can take you all the way to Makerere University," said Head Teacher Mr. Musa Bosa Mpungu.',category:'Academic',date:'2026-06-28',image:''},
+    {id:'dn2',title:'Computer Lab Upgraded with New Equipment',content:'Kiyuni Secondary School has installed new computers in the computer laboratory to support our Computer Studies and Coding vocational programmes.\n\nStudents in S3 through S6 will benefit from improved access to modern technology.',category:'Technology',date:'2026-06-15',image:''},
+    {id:'dn3',title:'Students Excel in End of Term Examinations',content:'Kiyuni Secondary School students recorded impressive results in the End of Term 1 2026 examinations.\n\nThe head teacher praised the dedication of both students and teachers.',category:'Academic',date:'2026-06-01',image:''},
+    {id:'dn4',title:'School Farm Records Successful Harvest',content:'Agriculture students celebrated a successful harvest season. Students growing maize, beans and vegetables demonstrated practical farming skills.\n\nSome of the harvest was used to supplement school meals.',category:'Agriculture',date:'2026-05-20',image:''},
+    {id:'dn5',title:'Sports Day 2026 — A Day of Champions',content:'Kiyuni Secondary School held its annual Sports Day with track and field events, football and netball tournaments.\n\nParents and community members attended to support their children.',category:'Sports',date:'2026-05-10',image:''},
+    {id:'dn6',title:'Official School Website Now Live',content:'The official Kiyuni Secondary School website is now live at kiyuniss.github.io/kiyuniss.\n\nFeatures include: student portal, digital library, online admission form, notice board, news and staff directory.\n\nShare the link with parents and students!',category:'Technology',date:'2026-04-01',image:''},
+  ];
+}
+
+function loadNews(){
+  db.ref('news').orderByChild('date').on('value', function(snap){
+    ALL_NEWS = [];
+    snap.forEach(function(c){ALL_NEWS.unshift(Object.assign({id:c.key},c.val()));});
+    if(!ALL_NEWS.length) ALL_NEWS = getDefaultNews();
+    renderFilter();
+    renderNews();
+  }, function(){
+    ALL_NEWS = getDefaultNews();
+    renderFilter();
+    renderNews();
+  });
+}
+
+function renderFilter(){
+  var cats = ['All'];
+  ALL_NEWS.forEach(function(n){if(cats.indexOf(n.category)<0) cats.push(n.category);});
+  var bar = document.getElementById('filterBar');
+  if(!bar) return;
+  bar.innerHTML = cats.map(function(c){
+    return '<button class="f-btn'+(c===currentCat?' active':'')+'" onclick="filterCat(this,\''+c+'\')">'+c+'</button>';
+  }).join('');
+}
+
+function filterCat(btn,cat){
+  currentCat=cat;
+  document.querySelectorAll('.f-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderNews();
+}
+
+function renderNews(){
+  var filtered = currentCat==='All'?ALL_NEWS:ALL_NEWS.filter(function(n){return n.category===currentCat;});
+  var grid = document.getElementById('newsGrid');
+  if(!grid) return;
+  if(!filtered.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px;color:var(--gray)">No news in this category yet.</div>';return;}
+  grid.innerHTML = filtered.map(function(n,i){
+    var emoji = catEmojis[n.category]||'📰';
+    var bg = catBgs[n.category]||'background:#F5F5F5;color:#555';
+    var preview = (n.content||'').replace(/\n/g,' ').substring(0,100)+'...';
+    var imgHtml = n.image
+      ? '<div class="news-img"><img src="'+n.image+'" alt="'+n.title+'"><span class="news-cat-badge">'+n.category+'</span></div>'
+      : '<div class="news-img"><div class="news-img-placeholder" style="'+bg+'">'+emoji+'</div><span class="news-cat-badge">'+n.category+'</span></div>';
+    return '<div class="news-card" onclick="openArticle('+i+',\''+currentCat+'\')">'+imgHtml+
+      '<div class="news-body"><div class="news-date">'+n.date+'</div><h3>'+n.title+'</h3><p>'+preview+'</p><span class="news-read">Read full article →</span></div></div>';
+  }).join('');
+  window._filteredNews = filtered;
+}
+
+function openArticle(idx,cat){
+  var filtered = cat==='All'?ALL_NEWS:ALL_NEWS.filter(function(n){return n.category===cat;});
+  var n = filtered[idx];
+  if(!n) return;
+  var emoji = catEmojis[n.category]||'📰';
+  var bg = catBgs[n.category]||'background:#F5F5F5;color:#555';
+  document.getElementById('modalTop').innerHTML = n.image
+    ? '<img src="'+n.image+'" class="modal-img" alt="'+n.title+'">'
+    : '<div class="modal-img-placeholder" style="'+bg+'">'+emoji+'</div>';
+  document.getElementById('modalBody').innerHTML =
+    '<span style="background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase">'+n.category+'</span>'+
+    '<h2 style="font-family:Merriweather,serif;font-size:22px;color:var(--dark);font-weight:900;margin:14px 0 6px;line-height:1.35">'+n.title+'</h2>'+
+    '<p style="font-size:12px;color:var(--gray);margin-bottom:18px">📅 '+n.date+'</p>'+
+    '<div style="font-size:15px;color:#444;line-height:1.9;white-space:pre-line">'+n.content+'</div>';
+  document.getElementById('newsModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('newsModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+
+loadNews();
 </script>
-</body></html>
+<script>(function(){var y=new Date().getFullYear();document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});})();</script>
+</body>
+</html>

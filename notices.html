@@ -3,167 +3,205 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notices - Kiyuni Secondary School</title>
+<title>Notice Board - Kiyuni Secondary School Mubende</title>
+<meta name="description" content="School notices and announcements from Kiyuni Secondary School, Mubende District Uganda.">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-.notice-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
-.nf-btn{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:.2s;font-family:'Inter',sans-serif}
-.nf-btn:hover,.nf-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
-.notices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.notice-card{background:#fff;border-radius:13px;border:1px solid var(--border);overflow:hidden;transition:.3s}
-.notice-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-2px)}
-.notice-top{padding:18px 20px 14px;border-bottom:1px solid var(--border)}
-.notice-cat{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.f-btn{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:.2s;font-family:'Inter',sans-serif}
+.f-btn:hover,.f-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+.notice-card{background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;transition:.3s}
+.notice-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.08);border-color:var(--green)}
+.notice-card.pinned{border-left:4px solid var(--gold)}
+.notice-img{width:100%;height:220px;object-fit:cover;display:block}
+.notice-body{padding:20px 22px}
+.notice-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.notice-cat{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
 .cat-academic{background:#E8F5E9;color:#1B5E20}
 .cat-exams{background:#FFEBEE;color:#C62828}
+.cat-timetable{background:#E0F2F1;color:#00695C}
 .cat-events{background:#E3F2FD;color:#1565C0}
 .cat-fees{background:#FFF8E1;color:#E65100}
 .cat-sports{background:#F3E5F5;color:#6A1B9A}
-.cat-general{background:var(--gray-light);color:#555}
-.cat-timetable{background:#E0F2F1;color:#00695C}
+.cat-general{background:#F5F5F5;color:#555}
 .cat-elections{background:#FCE4EC;color:#880E4F}
-.notice-card h3{font-size:15px;font-weight:700;color:var(--dark);line-height:1.4;margin-bottom:6px}
-.notice-meta{font-size:11px;color:var(--gray)}
-.notice-body{padding:16px 20px}
-.notice-body p{font-size:13px;color:#444;line-height:1.7}
-.notice-footer{padding:12px 20px;background:var(--gray-light);display:flex;justify-content:space-between;align-items:center}
-.notice-footer span{font-size:11px;color:var(--gray)}
-.pin-badge{background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
-.pinned-section{margin-bottom:36px}
-.pinned-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.pinned-header h3{font-size:16px;font-weight:700;color:var(--dark)}
-.pinned-strip{background:var(--gold-light);border:2px solid var(--gold);border-radius:12px;padding:20px 24px;margin-bottom:12px}
-.pinned-strip h4{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.pinned-strip p{font-size:13px;color:#444;line-height:1.7}
-.pinned-strip .meta{font-size:11px;color:var(--gray);margin-top:8px}
-.no-notices{text-align:center;padding:60px 20px;color:var(--gray)}
-.no-notices .icon{font-size:52px;margin-bottom:12px}
-@media(max-width:1024px){.notices-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.notices-grid{grid-template-columns:1fr}}
+.pin-badge{background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+.notice-title{font-size:17px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.35}
+.notice-content{font-size:14px;color:#444;line-height:1.8;white-space:pre-line}
+.notice-meta{font-size:12px;color:var(--gray);margin-top:12px;padding-top:10px;border-top:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap}
+.pinned-section{margin-bottom:32px}
+.pinned-section h3{font-family:'Merriweather',serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.all-section h3{font-family:'Merriweather',serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:14px}
+.loading{text-align:center;padding:40px;color:var(--gray)}
+.loading .spin{font-size:32px;animation:spin 1s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:50px 20px;color:var(--gray)}
+.empty .icon{font-size:48px;margin-bottom:12px}
 </style>
-
-<meta name="description" content="School notices and announcements from Kiyuni Secondary School, Mubende District Uganda.">
-<meta name="keywords" content="Kiyuni Secondary School, Kiyuni SS, secondary school Mubende, Uganda secondary school, Notice Board - Kiyuni Secondary School Mubende">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="Notice Board - Kiyuni Secondary School Mubende">
-<meta property="og:description" content="School notices and announcements from Kiyuni Secondary School, Mubende District Uganda.">
-<meta property="og:image" content="https://kiyuniss.github.io/kiyuniss/images/badge/badge.png">
-<meta property="og:url" content="https://kiyuniss.github.io/kiyuniss/notices.html">
-<meta property="og:type" content="website">
-<link rel="canonical" href="https://kiyuniss.github.io/kiyuniss/notices.html">
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
 <nav><div class="nav-inner">
   <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
-  <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html" class="active">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li>
+    <li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li>
+    <li><a href="library.html">Library</a></li>
+    <li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li>
+    <li><a href="notices.html" class="active">Notices</a></li>
+    <li><a href="fees.html">Fees</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="admissions.html" class="nav-apply">Apply Now</a></li>
+  </ul>
   <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
 </div></nav>
-<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
+<a href="index.html">Home</a><a href="about.html">About</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="notices.html">Notices</a><a href="fees.html">Fees</a><a href="news.html">News</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
 
-<div class="page-hero"><h2>📋 Notice Board</h2><p>Official school announcements, timetables, events and news</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Notices</span></div></div>
+<div class="page-hero"><h2>Notice Board</h2><p>Official school announcements, timetables and events</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Notices</span></div></div>
 
 <section style="padding:60px 0;background:var(--gray-light)">
   <div class="section-inner">
-    <!-- PINNED -->
-    <div class="pinned-section">
-      <div class="pinned-header"><span style="font-size:20px">📌</span><h3>Pinned Announcements</h3></div>
-      <div id="pinnedList"><p style="color:var(--gray);font-size:14px">No pinned announcements at this time.</p></div>
-    </div>
-
-    <!-- FILTERS -->
-    <div class="notice-filters">
-      <button class="nf-btn active" onclick="filterNotices('all',this)">All</button>
-      <button class="nf-btn" onclick="filterNotices('academic',this)">📚 Academic</button>
-      <button class="nf-btn" onclick="filterNotices('exams',this)">📝 Exams</button>
-      <button class="nf-btn" onclick="filterNotices('timetable',this)">🗓️ Timetable</button>
-      <button class="nf-btn" onclick="filterNotices('events',this)">🎉 Events</button>
-      <button class="nf-btn" onclick="filterNotices('elections',this)">🗳️ Elections</button>
-      <button class="nf-btn" onclick="filterNotices('fees',this)">💰 Fees</button>
-      <button class="nf-btn" onclick="filterNotices('sports',this)">⚽ Sports</button>
-      <button class="nf-btn" onclick="filterNotices('general',this)">📢 General</button>
-    </div>
-
-    <div class="notices-grid" id="noticesGrid"></div>
-    <div class="no-notices" id="noNotices" style="display:none"><div class="icon">📭</div><p>No notices in this category yet.</p></div>
+    <div class="filter-bar" id="filterBar"></div>
+    <div id="pinnedSection" class="pinned-section"></div>
+    <div id="allSection" class="all-section"></div>
   </div>
 </section>
 
 <a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 <footer><div class="footer-grid">
-  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Stay updated with official announcements from school administration.</p></div>
-  <div class="footer-col"><h4>Quick Links</h4><ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="staff.html">Our Staff</a></li>
-<li><a href="academics.html">Academics</a></li>
-<li><a href="library.html">Library</a></li>
-<li><a href="student.html">Student Portal</a></li>
-<li><a href="assignments.html">Assignments</a></li>
-<li><a href="timetable.html">Timetable</a></li>
-<li><a href="notices.html">Notices</a></li>
-<li><a href="fees.html">Fees</a></li>
-<li><a href="admissions.html">Admissions</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul></div>
-  <div class="footer-col"><h4>Portals</h4><ul><li><a href="results.html">Results Portal</a></li><li><a href="assignments.html">Assignments</a></li><li><a href="notices.html">Notice Board</a></li><li><a href="admin.html">Admin Portal</a></li></ul></div>
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Kiyuni Town, Mubende District, Uganda.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="staff.html">Our Staff</a></li><li><a href="academics.html">Academics</a></li><li><a href="library.html">Library</a></li><li><a href="student.html">Student Portal</a></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Programmes</h4><ul><li><a href="academics.html">O Level</a></li><li><a href="academics.html#alevel">A Level</a></li><li><a href="vocational.html">Vocational Skills</a></li><li><a href="library.html">Library</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
-</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
 
-<script>
-var currentFilter='all';
-function getNotices(){var d=localStorage.getItem('kiyuni_notices');return d?JSON.parse(d):[];}
-var catMap={academic:'cat-academic',exams:'cat-exams',events:'cat-events',fees:'cat-fees',sports:'cat-sports',general:'cat-general',timetable:'cat-timetable',elections:'cat-elections'};
-var catIcons={academic:'📚',exams:'📝',events:'🎉',fees:'💰',sports:'⚽',general:'📢',timetable:'🗓️',elections:'🗳️'};
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
-function filterNotices(cat,btn){
+<script type="text/javascript">
+// Firebase init
+var firebaseConfig = {
+  apiKey: "AIzaSyBvEE28ZPwd-txG1NfivOmqYoLH4pV5diM",
+  authDomain: "kiyuniss.firebaseapp.com",
+  databaseURL: "https://kiyuniss-default-rtdb.firebaseio.com",
+  projectId: "kiyuniss",
+  storageBucket: "kiyuniss.firebasestorage.app",
+  messagingSenderId: "419208772644",
+  appId: "1:419208772644:web:422a902b1e7d7825a32cb1"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+var ALL_NOTICES = [];
+var currentFilter = 'all';
+
+var CAT_COLORS = {
+  academic:'cat-academic',exams:'cat-exams',timetable:'cat-timetable',
+  events:'cat-events',fees:'cat-fees',sports:'cat-sports',
+  general:'cat-general',elections:'cat-elections'
+};
+
+// Load notices from Firebase
+function loadNotices(){
+  document.getElementById('pinnedSection').innerHTML = '<div class="loading"><div class="spin">⏳</div><p style="margin-top:10px">Loading notices...</p></div>';
+  db.ref('notices').orderByChild('date').on('value', function(snapshot){
+    ALL_NOTICES = [];
+    snapshot.forEach(function(child){
+      ALL_NOTICES.unshift(Object.assign({id:child.key}, child.val()));
+    });
+    // Add defaults if Firebase is empty
+    if(ALL_NOTICES.length === 0){
+      ALL_NOTICES = getDefaultNotices();
+    }
+    renderFilterBar();
+    renderNotices();
+  }, function(error){
+    // Firebase failed - use defaults
+    ALL_NOTICES = getDefaultNotices();
+    renderFilterBar();
+    renderNotices();
+  });
+}
+
+function getDefaultNotices(){
+  return [
+    {id:'d1',title:'Admissions Open — 2026/2027 Academic Year',content:'Kiyuni Secondary School is pleased to announce that admissions are now open for the 2026/2027 academic year.\n\nWe are accepting applications for:\n• Senior 1 (O Level entry)\n• Senior 5 (A Level entry)\n• Transfer students\n\nRequirements: PLE/UCE results, passport photos, birth certificate copy.\n\nContact us on 0704488636 or apply online through our website.',category:'academic',date:'2026-06-01',postedBy:'Head Teacher',pinned:true,image:''},
+    {id:'d2',title:'Term 2 2026 — School Re-Opening',content:'Term 2 2026 begins on Monday 4th August 2026.\n\nAll students must report with:\n• Full school fees\n• School uniform\n• Stationery and textbooks\n\nContact 0704488636 for the fees structure.',category:'general',date:'2026-06-15',postedBy:'Head Teacher',pinned:true,image:''},
+    {id:'d3',title:'End of Term 1 Examinations Schedule',content:'End of Term 1 examinations will be held from Monday 14th to Friday 18th July 2026.\n\nAll students must clear fees before sitting exams.\n\nResults will be available on the closing day.',category:'exams',date:'2026-06-20',postedBy:'DOS',pinned:false,image:''},
+    {id:'d4',title:'Parents Meeting — Term 1 2026',content:'Parents meeting scheduled for Saturday 5th July 2026 at 10:00 AM at the school hall.\n\nAgenda: academic performance, fees review, school development.\n\nAll parents are strongly encouraged to attend.',category:'events',date:'2026-06-10',postedBy:'Head Teacher',pinned:false,image:''},
+    {id:'d5',title:'Sports Day 2026',content:'Annual Sports Day will be held on Friday 27th June 2026 starting at 9:00 AM.\n\nEvents include track and field, football, netball and traditional games.\n\nParents are warmly invited to attend.',category:'sports',date:'2026-06-05',postedBy:'Sports Department',pinned:false,image:''},
+  ];
+}
+
+function renderFilterBar(){
+  var cats = ['all'];
+  ALL_NOTICES.forEach(function(n){if(cats.indexOf(n.category)<0) cats.push(n.category);});
+  var bar = document.getElementById('filterBar');
+  if(!bar) return;
+  bar.innerHTML = cats.map(function(cat){
+    var label = cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1);
+    return '<button class="f-btn'+(currentFilter===cat?' active':'')+'" onclick="filterBy(this,\''+cat+'\')">'+label+'</button>';
+  }).join('');
+}
+
+function filterBy(btn,cat){
   currentFilter=cat;
-  document.querySelectorAll('.nf-btn').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.f-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   renderNotices();
 }
 
-function renderNotices(){
-  var notices=getNotices();
-  var pinned=notices.filter(function(n){return n.pinned;});
-  var filtered=notices.filter(function(n){
-    return !n.pinned&&(currentFilter==='all'||n.category===currentFilter);
-  }).sort(function(a,b){return b.id-a.id;});
-
-  // Pinned
-  var pList=document.getElementById('pinnedList');
-  if(pinned.length===0){pList.innerHTML='<p style="color:var(--gray);font-size:14px">No pinned announcements at this time.</p>';}
-  else{pList.innerHTML=pinned.map(function(n){
-    return '<div class="pinned-strip"><h4>📌 '+n.title+'<span class="pin-badge">PINNED</span></h4><p>'+n.content+'</p><div class="meta">📅 '+n.date+' &nbsp;|&nbsp; '+catIcons[n.category]+' '+n.category.charAt(0).toUpperCase()+n.category.slice(1)+'</div></div>';
-  }).join('');}
-
-  // Regular
-  var grid=document.getElementById('noticesGrid');
-  var noN=document.getElementById('noNotices');
-  if(filtered.length===0){grid.innerHTML='';noN.style.display='block';return;}
-  noN.style.display='none';
-  grid.innerHTML=filtered.map(function(n){
-    return '<div class="notice-card">'
-      +'<div class="notice-top">'
-      +'<span class="notice-cat '+(catMap[n.category]||'cat-general')+'">'+catIcons[n.category]+' '+n.category+'</span>'
-      +'<h3>'+n.title+'</h3>'
-      +'<div class="notice-meta">📅 '+n.date+(n.postedBy?' &nbsp;|&nbsp; Posted by: '+n.postedBy:'')+'</div>'
-      +'</div>'
-      +'<div class="notice-body"><p>'+n.content.replace(/\n/g,'<br>')+'</p></div>'
-      +'<div class="notice-footer"><span>Kiyuni Secondary School</span>'+(n.expires?'<span>Expires: '+n.expires+'</span>':'')+'</div>'
-      +'</div>';
-  }).join('');
+function noticeCard(n){
+  var catClass = CAT_COLORS[n.category]||'cat-general';
+  var catLabel = n.category?n.category.charAt(0).toUpperCase()+n.category.slice(1):'General';
+  var imgHtml = n.image ? '<img src="'+n.image+'" class="notice-img" alt="'+n.title+'">' : '';
+  return '<div class="notice-card'+(n.pinned?' pinned':'')+'">'+
+    imgHtml+
+    '<div class="notice-body">'+
+    '<div class="notice-top">'+
+    '<span class="notice-cat '+catClass+'">'+catLabel+'</span>'+
+    (n.pinned?'<span class="pin-badge">📌 Pinned</span>':'')+
+    '</div>'+
+    '<div class="notice-title">'+n.title+'</div>'+
+    '<div class="notice-content">'+n.content+'</div>'+
+    '<div class="notice-meta">'+
+    '<span>📅 '+n.date+'</span>'+
+    (n.postedBy?'<span>👤 '+n.postedBy+'</span>':'')+
+    '</div>'+
+    '</div></div>';
 }
 
+function renderNotices(){
+  var filtered = currentFilter==='all'?ALL_NOTICES:ALL_NOTICES.filter(function(n){return n.category===currentFilter;});
+  var pinned = filtered.filter(function(n){return n.pinned;});
+  var regular = filtered.filter(function(n){return !n.pinned;});
+
+  var ps = document.getElementById('pinnedSection');
+  var as = document.getElementById('allSection');
+
+  if(pinned.length){
+    ps.innerHTML = '<h3>📌 Pinned Announcements</h3>'+pinned.map(noticeCard).join('');
+  } else {
+    ps.innerHTML = '';
+  }
+
+  if(regular.length){
+    as.innerHTML = '<h3>All Notices</h3>'+regular.map(noticeCard).join('');
+  } else if(!pinned.length){
+    as.innerHTML = '<div class="empty"><div class="icon">📭</div><p>No notices in this category yet.</p></div>';
+  } else {
+    as.innerHTML = '';
+  }
+}
+
+loadNotices();
 function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
-renderNotices();
 </script>
-<script>
-// Auto-update year
-(function(){
-  var y = new Date().getFullYear();
-  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
-})();
-</script>
-</body></html>
+<script>(function(){var y=new Date().getFullYear();document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});})();</script>
+</body>
+</html>

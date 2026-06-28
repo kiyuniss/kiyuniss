@@ -277,6 +277,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
               <label for="nt_pn" style="margin:0;font-size:14px;cursor:pointer">Pin this notice</label>
             </div>
           </div>
+          <div class="fg"><label>Image URL (optional)</label><input type="text" id="nt_img" placeholder="Paste image link e.g. https://... or leave blank"></div>
           <div class="fg"><label>Content *</label><textarea id="nt_co" placeholder="Full notice content..."></textarea></div>
           <button class="btn btn-gold" onclick="postNtc()">Post Notice</button>
           <span class="ok" id="nt_ok"></span>
@@ -295,6 +296,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
             <div class="fg"><label>Category</label><select id="nw_ca"><option>Academic</option><option>Sports</option><option>Technology</option><option>Agriculture</option><option>Events</option><option>General</option></select></div>
             <div class="fg"><label>Date</label><input type="date" id="nw_dt"></div>
           </div>
+          <div class="fg"><label>Image URL (optional)</label><input type="text" id="nw_img" placeholder="Paste image link e.g. https://... or leave blank"></div>
           <div class="fg"><label>Content *</label><textarea id="nw_co" style="height:120px" placeholder="Full article content..."></textarea></div>
           <button class="btn btn-g" onclick="postNws()">Publish</button>
           <span class="ok" id="nw_ok"></span>
@@ -430,6 +432,22 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
   </div>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyBvEE28ZPwd-txG1NfivOmqYoLH4pV5diM",
+  authDomain: "kiyuniss.firebaseapp.com",
+  databaseURL: "https://kiyuniss-default-rtdb.firebaseio.com",
+  projectId: "kiyuniss",
+  storageBucket: "kiyuniss.firebasestorage.app",
+  messagingSenderId: "419208772644",
+  appId: "1:419208772644:web:422a902b1e7d7825a32cb1"
+};
+firebase.initializeApp(firebaseConfig);
+var fbdb = firebase.database();
+</script>
 <script type="text/javascript">
 // STORAGE
 function gd(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
@@ -617,17 +635,32 @@ function delAsn(id){
 function postNtc(){
   var ti=gi('nt_ti').trim(),co=gi('nt_co').trim();
   if(!ti||!co){alert('Please fill in Title and Content.');return;}
-  var n=gd('kiyuni_notices',[]);
-  n.unshift({id:Date.now(),title:ti,content:co,category:gi('nt_ca'),
+  var notice={title:ti,content:co,category:gi('nt_ca'),
     date:gi('nt_dt')||td(),expires:gi('nt_ex'),postedBy:gi('nt_by'),
-    pinned:document.getElementById('nt_pn').checked});
-  sd('kiyuni_notices',n);
-  si('nt_ti','');si('nt_co','');si('nt_by','');si('nt_ex','');
-  document.getElementById('nt_pn').checked=false;
-  ok('nt_ok','Notice posted!');renderNtc();loadDash();
+    pinned:document.getElementById('nt_pn').checked,image:gi('nt_img')||''};
+  // Save to Firebase
+  fbdb.ref('notices').push(notice).then(function(){
+    // Also save to localStorage as backup
+    var n=gd('kiyuni_notices',[]);
+    n.unshift(Object.assign({id:Date.now()},notice));
+    sd('kiyuni_notices',n);
+    si('nt_ti','');si('nt_co','');si('nt_by','');si('nt_ex','');si('nt_img','');
+    document.getElementById('nt_pn').checked=false;
+    ok('nt_ok','Notice posted to all visitors!');renderNtc();loadDash();
+  }).catch(function(e){
+    alert('Firebase error: '+e.message+'. Saving locally only.');
+    var n=gd('kiyuni_notices',[]);
+    n.unshift(Object.assign({id:Date.now()},notice));
+    sd('kiyuni_notices',n);
+    ok('nt_ok','Notice saved locally!');renderNtc();loadDash();
+  });
 }
 function delNtc(id){
-  if(!confirm('Delete?'))return;
+  if(!confirm('Delete this notice?'))return;
+  // Delete from Firebase if it has a Firebase key
+  if(typeof id === 'string' && id.length > 10){
+    fbdb.ref('notices/'+id).remove();
+  }
   sd('kiyuni_notices',gd('kiyuni_notices',[]).filter(function(n){return n.id!==id;}));
   renderNtc();loadDash();
 }
@@ -643,13 +676,27 @@ function renderNtc(){
 function postNws(){
   var ti=gi('nw_ti').trim(),co=gi('nw_co').trim();
   if(!ti||!co){alert('Please fill in Headline and Content.');return;}
-  var n=gd('kiyuni_news',[]);
-  n.unshift({id:Date.now(),title:ti,content:co,category:gi('nw_ca'),date:gi('nw_dt')||td()});
-  sd('kiyuni_news',n);si('nw_ti','');si('nw_co','');
-  ok('nw_ok','Published!');renderNws();
+  var article={title:ti,content:co,category:gi('nw_ca'),
+    date:gi('nw_dt')||td(),image:gi('nw_img')||''};
+  // Save to Firebase
+  fbdb.ref('news').push(article).then(function(){
+    var n=gd('kiyuni_news',[]);
+    n.unshift(Object.assign({id:Date.now()},article));
+    sd('kiyuni_news',n);
+    si('nw_ti','');si('nw_co','');si('nw_img','');
+    ok('nw_ok','Published to all visitors!');renderNws();
+  }).catch(function(e){
+    var n=gd('kiyuni_news',[]);
+    n.unshift(Object.assign({id:Date.now()},article));
+    sd('kiyuni_news',n);si('nw_ti','');si('nw_co','');
+    ok('nw_ok','Published locally!');renderNws();
+  });
 }
 function delNws(id){
-  if(!confirm('Delete?'))return;
+  if(!confirm('Delete this article?'))return;
+  if(typeof id === 'string' && id.length > 10){
+    fbdb.ref('news/'+id).remove();
+  }
   sd('kiyuni_news',gd('kiyuni_news',[]).filter(function(n){return n.id!==id;}));
   renderNws();
 }
