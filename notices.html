@@ -114,14 +114,15 @@ function loadNotices(){
     snapshot.forEach(function(child){
       ALL_NOTICES.unshift(Object.assign({id:child.key}, child.val()));
     });
-    // Add defaults if Firebase is empty
+    // Only use defaults if Firebase has NO notices at all
+    // Once admin has posted anything, defaults are hidden
     if(ALL_NOTICES.length === 0){
       ALL_NOTICES = getDefaultNotices();
     }
     renderFilterBar();
     renderNotices();
   }, function(error){
-    // Firebase failed - use defaults
+    // Firebase connection failed - use defaults as fallback only
     ALL_NOTICES = getDefaultNotices();
     renderFilterBar();
     renderNotices();

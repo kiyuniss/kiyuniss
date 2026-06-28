@@ -655,21 +655,40 @@ function postNtc(){
     ok('nt_ok','Notice saved locally!');renderNtc();loadDash();
   });
 }
-function delNtc(id){
+function delNtc(id){if(id && id.dataset) id=id.dataset.key;
   if(!confirm('Delete this notice?'))return;
-  // Delete from Firebase if it has a Firebase key
-  if(typeof id === 'string' && id.length > 10){
-    fbdb.ref('notices/'+id).remove();
-  }
-  sd('kiyuni_notices',gd('kiyuni_notices',[]).filter(function(n){return n.id!==id;}));
-  renderNtc();loadDash();
+  fbdb.ref('notices/'+id).remove().then(function(){
+    sd('kiyuni_notices',gd('kiyuni_notices',[]).filter(function(n){return n.id!==id;}));
+    renderNtc();loadDash();
+  }).catch(function(){
+    sd('kiyuni_notices',gd('kiyuni_notices',[]).filter(function(n){return n.id!==id;}));
+    renderNtc();loadDash();
+  });
 }
 function renderNtc(){
   var el=document.getElementById('nt_tbl');if(!el)return;
-  var n=gd('kiyuni_notices',[]);
-  if(!n.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No notices yet.</p>';return;}
-  el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Pinned</th><th>Action</th></tr></thead><tbody>'+
-    n.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td><td>'+(x.pinned?'<span class="pin-chip">YES</span>':'No')+'</td><td><button class="btn btn-r btn-sm" onclick="delNtc('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  // Load from Firebase first
+  fbdb.ref('notices').orderByChild('date').once('value').then(function(snap){
+    var notices = [];
+    snap.forEach(function(c){notices.unshift(Object.assign({fbKey:c.key},c.val()));});
+    if(!notices.length){
+      el.innerHTML='<p style="color:var(--gray);font-size:14px">No notices posted yet. Post one above.</p>';
+      return;
+    }
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Pinned</th><th>Action</th></tr></thead><tbody>'+
+      notices.map(function(x){
+        return '<tr><td style="font-weight:600">'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td>'+
+          '<td>'+(x.pinned?'<span class="pin-chip">YES</span>':'No')+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delNtc(this.dataset.key)" data-key="'+x.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    // Fallback to localStorage
+    var n=gd('kiyuni_notices',[]);
+    if(!n.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No notices yet.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Pinned</th><th>Action</th></tr></thead><tbody>'+
+      n.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td><td>'+(x.pinned?'<span class="pin-chip">YES</span>':'No')+'</td><td><button class="btn btn-r btn-sm" onclick="delNtc('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+  });
 }
 
 // NEWS
@@ -692,20 +711,37 @@ function postNws(){
     ok('nw_ok','Published locally!');renderNws();
   });
 }
-function delNws(id){
+function delNws(id){if(id && id.dataset) id=id.dataset.key;
   if(!confirm('Delete this article?'))return;
-  if(typeof id === 'string' && id.length > 10){
-    fbdb.ref('news/'+id).remove();
-  }
-  sd('kiyuni_news',gd('kiyuni_news',[]).filter(function(n){return n.id!==id;}));
-  renderNws();
+  fbdb.ref('news/'+id).remove().then(function(){
+    sd('kiyuni_news',gd('kiyuni_news',[]).filter(function(n){return n.id!==id;}));
+    renderNws();
+  }).catch(function(){
+    sd('kiyuni_news',gd('kiyuni_news',[]).filter(function(n){return n.id!==id;}));
+    renderNws();
+  });
 }
 function renderNws(){
   var el=document.getElementById('nw_tbl');if(!el)return;
-  var n=gd('kiyuni_news',[]);
-  if(!n.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No articles yet.</p>';return;}
-  el.innerHTML='<table class="tbl"><thead><tr><th>Headline</th><th>Category</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
-    n.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td><td><button class="btn btn-r btn-sm" onclick="delNws('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  fbdb.ref('news').orderByChild('date').once('value').then(function(snap){
+    var news = [];
+    snap.forEach(function(c){news.unshift(Object.assign({fbKey:c.key},c.val()));});
+    if(!news.length){
+      el.innerHTML='<p style="color:var(--gray);font-size:14px">No articles posted yet. Post one above.</p>';
+      return;
+    }
+    el.innerHTML='<table class="tbl"><thead><tr><th>Headline</th><th>Category</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
+      news.map(function(x){
+        return '<tr><td style="font-weight:600">'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delNws(this.dataset.key)" data-key="'+x.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    var n=gd('kiyuni_news',[]);
+    if(!n.length){el.innerHTML='<p style="color:var(--gray);font-size:14px">No articles yet.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Headline</th><th>Category</th><th>Date</th><th>Action</th></tr></thead><tbody>'+
+      n.map(function(x){return '<tr><td>'+x.title+'</td><td>'+x.category+'</td><td>'+x.date+'</td><td><button class="btn btn-r btn-sm" onclick="delNws('+x.id+')">Del</button></td></tr>';}).join('')+'</tbody></table>';
+  });
 }
 
 // INQUIRIES
