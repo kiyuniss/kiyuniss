@@ -108,6 +108,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
 /* RESPONSIVE */
 @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.stats{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.stats{grid-template-columns:1fr}.r2,.r3{grid-template-columns:1fr}}
+
+.img-field-wrap{position:relative}
+.img-options{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.img-opt-btn{background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--gray);cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;display:flex;align-items:center;gap:6px}
+.img-opt-btn:hover{border-color:var(--green);color:var(--green)}
+.img-preview{margin-top:8px;display:none}
+.img-preview img{max-height:120px;border-radius:8px;border:1px solid var(--border)}
+.img-helper{background:#E3F2FD;border:1px solid #90CAF9;border-radius:8px;padding:14px 16px;margin-top:8px;font-size:13px;color:#1565C0;display:none;line-height:1.8}
+.img-helper ol{padding-left:18px;margin:6px 0 0}
+.img-helper code{background:rgba(255,255,255,.7);padding:2px 6px;border-radius:4px;font-size:12px}
 </style>
 </head>
 <body>
@@ -277,7 +287,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
               <label for="nt_pn" style="margin:0;font-size:14px;cursor:pointer">Pin this notice</label>
             </div>
           </div>
-          <div class="fg"><label>Image URL (optional)</label><input type="text" id="nt_img" placeholder="Paste image link e.g. https://... or leave blank"></div>
+          <div class="fg">
+            <label>Photo (optional)</label>
+            <div class="img-field-wrap">
+              <input type="text" id="nt_img" placeholder="Paste image URL here or use buttons below" oninput="previewImg('nt_img','nt_prev')">
+              <div class="img-options">
+                <button type="button" class="img-opt-btn" onclick="openDrive('nt_img','nt_prev')">📁 Open Google Drive</button>
+                <button type="button" class="img-opt-btn" onclick="openImgbb('nt_img','nt_prev')">⬆️ Upload to imgbb</button>
+                <button type="button" class="img-opt-btn" onclick="showDriveHelp('nt_help')">❓ How to get Drive link</button>
+              </div>
+              <div class="img-preview" id="nt_prev"><img src="" alt="Preview"></div>
+              <div class="img-helper" id="nt_help">
+                <strong>How to use Google Drive photo:</strong>
+                <ol>
+                  <li>Click <strong>Open Google Drive</strong> above</li>
+                  <li>Upload your photo to Drive</li>
+                  <li>Right click photo → <strong>Share</strong> → <strong>Anyone with link</strong></li>
+                  <li>Right click photo → <strong>Get link</strong> → Copy it</li>
+                  <li>The link looks like: <code>https://drive.google.com/file/d/FILEID/view</code></li>
+                  <li>Copy just the <strong>FILEID</strong> part</li>
+                  <li>Paste this in the URL field: <code>https://drive.google.com/uc?export=view&id=FILEID</code></li>
+                </ol>
+                <p style="margin-top:8px"><strong>Or use imgbb</strong> — upload photo, copy <strong>Direct link</strong>, paste above.</p>
+              </div>
+            </div>
+          </div>
           <div class="fg"><label>Content *</label><textarea id="nt_co" placeholder="Full notice content..."></textarea></div>
           <button class="btn btn-gold" onclick="postNtc()">Post Notice</button>
           <span class="ok" id="nt_ok"></span>
@@ -296,7 +330,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
             <div class="fg"><label>Category</label><select id="nw_ca"><option>Academic</option><option>Sports</option><option>Technology</option><option>Agriculture</option><option>Events</option><option>General</option></select></div>
             <div class="fg"><label>Date</label><input type="date" id="nw_dt"></div>
           </div>
-          <div class="fg"><label>Image URL (optional)</label><input type="text" id="nw_img" placeholder="Paste image link e.g. https://... or leave blank"></div>
+          <div class="fg">
+            <label>Photo (optional)</label>
+            <div class="img-field-wrap">
+              <input type="text" id="nw_img" placeholder="Paste image URL here or use buttons below" oninput="previewImg('nw_img','nw_prev')">
+              <div class="img-options">
+                <button type="button" class="img-opt-btn" onclick="openDrive('nw_img','nw_prev')">📁 Open Google Drive</button>
+                <button type="button" class="img-opt-btn" onclick="openImgbb('nw_img','nw_prev')">⬆️ Upload to imgbb</button>
+                <button type="button" class="img-opt-btn" onclick="showDriveHelp('nw_help')">❓ How to get Drive link</button>
+              </div>
+              <div class="img-preview" id="nw_prev"><img src="" alt="Preview"></div>
+              <div class="img-helper" id="nw_help">
+                <strong>How to use Google Drive photo:</strong>
+                <ol>
+                  <li>Click <strong>Open Google Drive</strong> above</li>
+                  <li>Upload your photo to Drive</li>
+                  <li>Right click photo → <strong>Share</strong> → <strong>Anyone with link</strong></li>
+                  <li>Right click photo → <strong>Get link</strong> → Copy it</li>
+                  <li>The link looks like: <code>https://drive.google.com/file/d/FILEID/view</code></li>
+                  <li>Copy just the <strong>FILEID</strong> part</li>
+                  <li>Paste this in the URL field: <code>https://drive.google.com/uc?export=view&id=FILEID</code></li>
+                </ol>
+                <p style="margin-top:8px"><strong>Or use imgbb</strong> — upload photo, copy <strong>Direct link</strong>, paste above.</p>
+              </div>
+            </div>
+          </div>
           <div class="fg"><label>Content *</label><textarea id="nw_co" style="height:120px" placeholder="Full article content..."></textarea></div>
           <button class="btn btn-g" onclick="postNws()">Publish</button>
           <span class="ok" id="nw_ok"></span>
@@ -433,8 +491,102 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
 </div>
 
 <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js">
+// ── PHOTO HELPER ─────────────────────
+function openDrive(inputId, prevId){
+  window.open('https://drive.google.com','_blank');
+  // Show instruction after opening
+  setTimeout(function(){
+    alert('Steps:\n1. Upload your photo to Google Drive\n2. Right click it → Share → Anyone with link\n3. Right click → Get link → Copy\n4. Change the link to:\nhttps://drive.google.com/uc?export=view&id=FILEID\n(Replace FILEID with the ID from your link)\n5. Paste in the Image URL field');
+  }, 500);
+}
+
+function openImgbb(inputId, prevId){
+  window.open('https://imgbb.com','_blank');
+  setTimeout(function(){
+    alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
+  }, 500);
+}
+
+function showDriveHelp(helpId){
+  var el = document.getElementById(helpId);
+  if(!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function previewImg(inputId, prevId){
+  var url = document.getElementById(inputId).value.trim();
+  var prev = document.getElementById(prevId);
+  if(!prev) return;
+  if(url){
+    prev.style.display = 'block';
+    prev.querySelector('img').src = url;
+    prev.querySelector('img').onerror = function(){
+      prev.style.display = 'none';
+    };
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function convertDriveLink(url){
+  // Auto-convert Google Drive share links to direct image links
+  var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if(match){
+    return 'https://drive.google.com/uc?export=view&id=' + match[1];
+  }
+  return url;
+}
+
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js">
+// ── PHOTO HELPER ─────────────────────
+function openDrive(inputId, prevId){
+  window.open('https://drive.google.com','_blank');
+  // Show instruction after opening
+  setTimeout(function(){
+    alert('Steps:\n1. Upload your photo to Google Drive\n2. Right click it → Share → Anyone with link\n3. Right click → Get link → Copy\n4. Change the link to:\nhttps://drive.google.com/uc?export=view&id=FILEID\n(Replace FILEID with the ID from your link)\n5. Paste in the Image URL field');
+  }, 500);
+}
+
+function openImgbb(inputId, prevId){
+  window.open('https://imgbb.com','_blank');
+  setTimeout(function(){
+    alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
+  }, 500);
+}
+
+function showDriveHelp(helpId){
+  var el = document.getElementById(helpId);
+  if(!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function previewImg(inputId, prevId){
+  var url = document.getElementById(inputId).value.trim();
+  var prev = document.getElementById(prevId);
+  if(!prev) return;
+  if(url){
+    prev.style.display = 'block';
+    prev.querySelector('img').src = url;
+    prev.querySelector('img').onerror = function(){
+      prev.style.display = 'none';
+    };
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function convertDriveLink(url){
+  // Auto-convert Google Drive share links to direct image links
+  var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if(match){
+    return 'https://drive.google.com/uc?export=view&id=' + match[1];
+  }
+  return url;
+}
+
+</script>
 <script>
 var firebaseConfig = {
   apiKey: "AIzaSyBvEE28ZPwd-txG1NfivOmqYoLH4pV5diM",
@@ -447,6 +599,53 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var fbdb = firebase.database();
+
+// ── PHOTO HELPER ─────────────────────
+function openDrive(inputId, prevId){
+  window.open('https://drive.google.com','_blank');
+  // Show instruction after opening
+  setTimeout(function(){
+    alert('Steps:\n1. Upload your photo to Google Drive\n2. Right click it → Share → Anyone with link\n3. Right click → Get link → Copy\n4. Change the link to:\nhttps://drive.google.com/uc?export=view&id=FILEID\n(Replace FILEID with the ID from your link)\n5. Paste in the Image URL field');
+  }, 500);
+}
+
+function openImgbb(inputId, prevId){
+  window.open('https://imgbb.com','_blank');
+  setTimeout(function(){
+    alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
+  }, 500);
+}
+
+function showDriveHelp(helpId){
+  var el = document.getElementById(helpId);
+  if(!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function previewImg(inputId, prevId){
+  var url = document.getElementById(inputId).value.trim();
+  var prev = document.getElementById(prevId);
+  if(!prev) return;
+  if(url){
+    prev.style.display = 'block';
+    prev.querySelector('img').src = url;
+    prev.querySelector('img').onerror = function(){
+      prev.style.display = 'none';
+    };
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function convertDriveLink(url){
+  // Auto-convert Google Drive share links to direct image links
+  var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if(match){
+    return 'https://drive.google.com/uc?export=view&id=' + match[1];
+  }
+  return url;
+}
+
 </script>
 <script type="text/javascript">
 // STORAGE
@@ -637,7 +836,7 @@ function postNtc(){
   if(!ti||!co){alert('Please fill in Title and Content.');return;}
   var notice={title:ti,content:co,category:gi('nt_ca'),
     date:gi('nt_dt')||td(),expires:gi('nt_ex'),postedBy:gi('nt_by'),
-    pinned:document.getElementById('nt_pn').checked,image:gi('nt_img')||''};
+    pinned:document.getElementById('nt_pn').checked,image:convertDriveLink(gi('nt_img')||'')};
   // Save to Firebase
   fbdb.ref('notices').push(notice).then(function(){
     // Also save to localStorage as backup
@@ -696,7 +895,7 @@ function postNws(){
   var ti=gi('nw_ti').trim(),co=gi('nw_co').trim();
   if(!ti||!co){alert('Please fill in Headline and Content.');return;}
   var article={title:ti,content:co,category:gi('nw_ca'),
-    date:gi('nw_dt')||td(),image:gi('nw_img')||''};
+    date:gi('nw_dt')||td(),image:convertDriveLink(gi('nw_img')||'')};
   // Save to Firebase
   fbdb.ref('news').push(article).then(function(){
     var n=gd('kiyuni_news',[]);
@@ -979,6 +1178,53 @@ function appDelete(btn){
   renderApps();
 }
 
+
+// ── PHOTO HELPER ─────────────────────
+function openDrive(inputId, prevId){
+  window.open('https://drive.google.com','_blank');
+  // Show instruction after opening
+  setTimeout(function(){
+    alert('Steps:\n1. Upload your photo to Google Drive\n2. Right click it → Share → Anyone with link\n3. Right click → Get link → Copy\n4. Change the link to:\nhttps://drive.google.com/uc?export=view&id=FILEID\n(Replace FILEID with the ID from your link)\n5. Paste in the Image URL field');
+  }, 500);
+}
+
+function openImgbb(inputId, prevId){
+  window.open('https://imgbb.com','_blank');
+  setTimeout(function(){
+    alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
+  }, 500);
+}
+
+function showDriveHelp(helpId){
+  var el = document.getElementById(helpId);
+  if(!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function previewImg(inputId, prevId){
+  var url = document.getElementById(inputId).value.trim();
+  var prev = document.getElementById(prevId);
+  if(!prev) return;
+  if(url){
+    prev.style.display = 'block';
+    prev.querySelector('img').src = url;
+    prev.querySelector('img').onerror = function(){
+      prev.style.display = 'none';
+    };
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function convertDriveLink(url){
+  // Auto-convert Google Drive share links to direct image links
+  var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if(match){
+    return 'https://drive.google.com/uc?export=view&id=' + match[1];
+  }
+  return url;
+}
+
 </script>
 <script>
 // Auto-update year
@@ -986,6 +1232,53 @@ function appDelete(btn){
   var y = new Date().getFullYear();
   document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
 })();
+
+// ── PHOTO HELPER ─────────────────────
+function openDrive(inputId, prevId){
+  window.open('https://drive.google.com','_blank');
+  // Show instruction after opening
+  setTimeout(function(){
+    alert('Steps:\n1. Upload your photo to Google Drive\n2. Right click it → Share → Anyone with link\n3. Right click → Get link → Copy\n4. Change the link to:\nhttps://drive.google.com/uc?export=view&id=FILEID\n(Replace FILEID with the ID from your link)\n5. Paste in the Image URL field');
+  }, 500);
+}
+
+function openImgbb(inputId, prevId){
+  window.open('https://imgbb.com','_blank');
+  setTimeout(function(){
+    alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
+  }, 500);
+}
+
+function showDriveHelp(helpId){
+  var el = document.getElementById(helpId);
+  if(!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function previewImg(inputId, prevId){
+  var url = document.getElementById(inputId).value.trim();
+  var prev = document.getElementById(prevId);
+  if(!prev) return;
+  if(url){
+    prev.style.display = 'block';
+    prev.querySelector('img').src = url;
+    prev.querySelector('img').onerror = function(){
+      prev.style.display = 'none';
+    };
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function convertDriveLink(url){
+  // Auto-convert Google Drive share links to direct image links
+  var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if(match){
+    return 'https://drive.google.com/uc?export=view&id=' + match[1];
+  }
+  return url;
+}
+
 </script>
 </body>
 </html>
