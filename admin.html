@@ -293,7 +293,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
               <input type="text" id="nt_img" placeholder="Paste image URL here or use buttons below" oninput="previewImg('nt_img','nt_prev')">
               <div class="img-options">
                 <button type="button" class="img-opt-btn" onclick="openDrive('nt_img','nt_prev')">📁 Open Google Drive</button>
-                <button type="button" class="img-opt-btn" onclick="openImgbb('nt_img','nt_prev')">⬆️ Upload to imgbb</button>
+                <button type="button" class="img-opt-btn" onclick="openImgbb('nt_img','nt_prev')">⬆️ Upload to Postimages</button>
                 <button type="button" class="img-opt-btn" onclick="showDriveHelp('nt_help')">❓ How to get Drive link</button>
               </div>
               <div class="img-preview" id="nt_prev"><img src="" alt="Preview"></div>
@@ -336,7 +336,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
               <input type="text" id="nw_img" placeholder="Paste image URL here or use buttons below" oninput="previewImg('nw_img','nw_prev')">
               <div class="img-options">
                 <button type="button" class="img-opt-btn" onclick="openDrive('nw_img','nw_prev')">📁 Open Google Drive</button>
-                <button type="button" class="img-opt-btn" onclick="openImgbb('nw_img','nw_prev')">⬆️ Upload to imgbb</button>
+                <button type="button" class="img-opt-btn" onclick="openImgbb('nw_img','nw_prev')">⬆️ Upload to Postimages</button>
                 <button type="button" class="img-opt-btn" onclick="showDriveHelp('nw_help')">❓ How to get Drive link</button>
               </div>
               <div class="img-preview" id="nw_prev"><img src="" alt="Preview"></div>
@@ -502,7 +502,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://imgbb.com','_blank');
+  window.open('https://postimages.org','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -550,7 +550,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://imgbb.com','_blank');
+  window.open('https://postimages.org','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -610,7 +610,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://imgbb.com','_blank');
+  window.open('https://postimages.org','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -1189,7 +1189,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://imgbb.com','_blank');
+  window.open('https://postimages.org','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -1243,7 +1243,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://imgbb.com','_blank');
+  window.open('https://postimages.org','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
