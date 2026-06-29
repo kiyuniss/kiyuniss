@@ -156,6 +156,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
       <a href="#" onclick="go('ntc',this)">Notice Board</a>
       <a href="#" onclick="go('nws',this)">School News</a>
       <a href="#" onclick="go('inq',this)">Admissions Inquiries</a>
+        <a href="#" onclick="go('lib',this)">Library Materials</a>
         <a href="#" onclick="go('apps',this)">Online Applications</a>
       <span class="nav-sec">System</span>
       <a href="#" onclick="go('lib',this)">Library Guide</a>
@@ -293,7 +294,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
               <input type="text" id="nt_img" placeholder="Paste image URL here or use buttons below" oninput="previewImg('nt_img','nt_prev')">
               <div class="img-options">
                 <button type="button" class="img-opt-btn" onclick="openDrive('nt_img','nt_prev')">📁 Open Google Drive</button>
-                <button type="button" class="img-opt-btn" onclick="openImgbb('nt_img','nt_prev')">⬆️ Upload to Postimages</button>
+                <button type="button" class="img-opt-btn" onclick="openImgbb('nt_img','nt_prev')">⬆️ Upload to imgbb</button>
                 <button type="button" class="img-opt-btn" onclick="showDriveHelp('nt_help')">❓ How to get Drive link</button>
               </div>
               <div class="img-preview" id="nt_prev"><img src="" alt="Preview"></div>
@@ -336,7 +337,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
               <input type="text" id="nw_img" placeholder="Paste image URL here or use buttons below" oninput="previewImg('nw_img','nw_prev')">
               <div class="img-options">
                 <button type="button" class="img-opt-btn" onclick="openDrive('nw_img','nw_prev')">📁 Open Google Drive</button>
-                <button type="button" class="img-opt-btn" onclick="openImgbb('nw_img','nw_prev')">⬆️ Upload to Postimages</button>
+                <button type="button" class="img-opt-btn" onclick="openImgbb('nw_img','nw_prev')">⬆️ Upload to imgbb</button>
                 <button type="button" class="img-opt-btn" onclick="showDriveHelp('nw_help')">❓ How to get Drive link</button>
               </div>
               <div class="img-preview" id="nw_prev"><img src="" alt="Preview"></div>
@@ -439,6 +440,80 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
         </div>
       </div>
 
+
+      <!-- LIBRARY -->
+      <div class="sec" id="sec-lib">
+        <h2>Library Materials</h2>
+        <p class="desc">Add study materials, past papers, notes, videos and links for students</p>
+        <div class="card">
+          <h3>Add New Resource</h3>
+          <div class="r2">
+            <div class="fg"><label>Title *</label><input type="text" id="lb_ti" placeholder="e.g. O Level Mathematics Notes Term 1"></div>
+            <div class="fg"><label>Subject *</label>
+              <select id="lb_su">
+                <option value="">Select Subject</option>
+                <optgroup label="O Level">
+                  <option>Mathematics</option><option>English</option><option>Physics</option>
+                  <option>Chemistry</option><option>Biology</option><option>History</option>
+                  <option>Geography</option><option>Agriculture</option><option>Literature</option>
+                  <option>CRE/IRE</option><option>Luganda</option><option>Kiswahili</option><option>ICT</option>
+                </optgroup>
+                <optgroup label="A Level">
+                  <option>Mathematics</option><option>Physics</option><option>Chemistry</option>
+                  <option>Biology</option><option>Economics</option><option>History</option>
+                  <option>Geography</option><option>General Paper</option><option>Literature</option>
+                </optgroup>
+                <optgroup label="Other">
+                  <option>All Subjects</option><option>Sciences</option><option>Humanities</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="r3">
+            <div class="fg"><label>Level *</label>
+              <select id="lb_lv">
+                <option value="O Level">O Level</option>
+                <option value="A Level">A Level</option>
+                <option value="External">External Resource</option>
+              </select>
+            </div>
+            <div class="fg"><label>Type *</label>
+              <select id="lb_ty">
+                <option value="Past Paper">Past Paper</option>
+                <option value="Notes">Notes</option>
+                <option value="Textbook">Textbook</option>
+                <option value="Video">Video</option>
+                <option value="Link">External Link</option>
+              </select>
+            </div>
+            <div class="fg"><label>Added By</label>
+              <input type="text" id="lb_by" placeholder="e.g. Librarian">
+            </div>
+          </div>
+          <div class="fg"><label>Resource URL * (link to PDF, video or website)</label>
+            <input type="text" id="lb_url" placeholder="e.g. https://drive.google.com/... or https://youtube.com/...">
+          </div>
+          <div class="fg"><label>Description</label>
+            <textarea id="lb_ds" placeholder="Brief description of this resource..." style="height:70px"></textarea>
+          </div>
+          <button class="btn btn-g" onclick="addLib()">Add to Library</button>
+          <span class="ok" id="lb_ok"></span>
+        </div>
+        <div class="card">
+          <h3>All Library Materials</h3>
+          <div class="srow" style="margin-bottom:14px">
+            <input type="text" id="lb_sq" placeholder="Search..." oninput="renderLib()" style="flex:1">
+            <select id="lb_sf" onchange="renderLib()">
+              <option value="">All Types</option>
+              <option>Past Paper</option><option>Notes</option>
+              <option>Textbook</option><option>Video</option><option>Link</option>
+            </select>
+          </div>
+          <div id="lb_tbl" style="overflow-x:auto"></div>
+          <p style="font-size:12px;color:var(--gray);margin-top:10px">Note: Default free resources (UNEB, Khan Academy etc.) are built into the website and cannot be deleted from here. Only materials you add above appear in this list.</p>
+        </div>
+      </div>
+
       <!-- LIBRARY GUIDE -->
       <div class="sec" id="sec-lib">
         <h2>Library Management</h2>
@@ -502,7 +577,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://postimages.org','_blank');
+  window.open('https://imgbb.com','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -536,6 +611,54 @@ function convertDriveLink(url){
     return 'https://drive.google.com/uc?export=view&id=' + match[1];
   }
   return url;
+}
+
+
+// ── LIBRARY ──────────────────────────
+function addLib(){
+  var ti=gi('lb_ti').trim(),su=gi('lb_su'),lv=gi('lb_lv'),ty=gi('lb_ty'),url=gi('lb_url').trim();
+  if(!ti||!su||!url){alert('Please fill in Title, Subject and URL.');return;}
+  var item={title:ti,subject:su,level:lv,type:ty,url:url,
+    description:gi('lb_ds').trim(),addedBy:gi('lb_by').trim(),
+    addedOn:new Date().toLocaleDateString('en-UG')};
+  fbdb.ref('library').push(item).then(function(){
+    ok('lb_ok','Resource added to library!');
+    si('lb_ti','');si('lb_url','');si('lb_ds','');si('lb_by','');
+    renderLib();
+  }).catch(function(e){
+    alert('Error: '+e.message);
+  });
+}
+
+function delLib(key){if(key&&key.dataset)key=key.dataset.key;
+  if(!confirm('Remove this resource from the library?')) return;
+  fbdb.ref('library/'+key).remove().then(function(){
+    renderLib();
+  });
+}
+
+function renderLib(){
+  var el=document.getElementById('lb_tbl');if(!el)return;
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  var q=gi('lb_sq').toLowerCase();
+  var sf=gi('lb_sf');
+  fbdb.ref('library').once('value').then(function(snap){
+    var items=[];
+    snap.forEach(function(c){items.push(Object.assign({fbKey:c.key},c.val()));});
+    var f=items.filter(function(i){
+      return (!q||i.title.toLowerCase().includes(q)||i.subject.toLowerCase().includes(q))&&(!sf||i.type===sf);
+    });
+    if(!f.length){el.innerHTML='<p style="color:var(--gray);font-size:14px;padding:10px 0">No materials added yet. Add resources above to build the library.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Subject</th><th>Level</th><th>Type</th><th>Added By</th><th>Action</th></tr></thead><tbody>'+
+      f.map(function(i){
+        return '<tr><td style="font-weight:600"><a href="'+i.url+'" target="_blank" style="color:var(--green)">'+i.title+'</a></td>'+
+          '<td>'+i.subject+'</td><td>'+i.level+'</td><td>'+i.type+'</td>'+
+          '<td>'+(i.addedBy||'—')+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delLib(this.dataset.key)" data-key="'+i.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    el.innerHTML='<p style="color:#C62828;font-size:13px">Could not load library. Check Firebase connection.</p>';
+  });
 }
 
 </script>
@@ -550,7 +673,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://postimages.org','_blank');
+  window.open('https://imgbb.com','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -584,6 +707,54 @@ function convertDriveLink(url){
     return 'https://drive.google.com/uc?export=view&id=' + match[1];
   }
   return url;
+}
+
+
+// ── LIBRARY ──────────────────────────
+function addLib(){
+  var ti=gi('lb_ti').trim(),su=gi('lb_su'),lv=gi('lb_lv'),ty=gi('lb_ty'),url=gi('lb_url').trim();
+  if(!ti||!su||!url){alert('Please fill in Title, Subject and URL.');return;}
+  var item={title:ti,subject:su,level:lv,type:ty,url:url,
+    description:gi('lb_ds').trim(),addedBy:gi('lb_by').trim(),
+    addedOn:new Date().toLocaleDateString('en-UG')};
+  fbdb.ref('library').push(item).then(function(){
+    ok('lb_ok','Resource added to library!');
+    si('lb_ti','');si('lb_url','');si('lb_ds','');si('lb_by','');
+    renderLib();
+  }).catch(function(e){
+    alert('Error: '+e.message);
+  });
+}
+
+function delLib(key){if(key&&key.dataset)key=key.dataset.key;
+  if(!confirm('Remove this resource from the library?')) return;
+  fbdb.ref('library/'+key).remove().then(function(){
+    renderLib();
+  });
+}
+
+function renderLib(){
+  var el=document.getElementById('lb_tbl');if(!el)return;
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  var q=gi('lb_sq').toLowerCase();
+  var sf=gi('lb_sf');
+  fbdb.ref('library').once('value').then(function(snap){
+    var items=[];
+    snap.forEach(function(c){items.push(Object.assign({fbKey:c.key},c.val()));});
+    var f=items.filter(function(i){
+      return (!q||i.title.toLowerCase().includes(q)||i.subject.toLowerCase().includes(q))&&(!sf||i.type===sf);
+    });
+    if(!f.length){el.innerHTML='<p style="color:var(--gray);font-size:14px;padding:10px 0">No materials added yet. Add resources above to build the library.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Subject</th><th>Level</th><th>Type</th><th>Added By</th><th>Action</th></tr></thead><tbody>'+
+      f.map(function(i){
+        return '<tr><td style="font-weight:600"><a href="'+i.url+'" target="_blank" style="color:var(--green)">'+i.title+'</a></td>'+
+          '<td>'+i.subject+'</td><td>'+i.level+'</td><td>'+i.type+'</td>'+
+          '<td>'+(i.addedBy||'—')+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delLib(this.dataset.key)" data-key="'+i.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    el.innerHTML='<p style="color:#C62828;font-size:13px">Could not load library. Check Firebase connection.</p>';
+  });
 }
 
 </script>
@@ -610,7 +781,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://postimages.org','_blank');
+  window.open('https://imgbb.com','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -644,6 +815,54 @@ function convertDriveLink(url){
     return 'https://drive.google.com/uc?export=view&id=' + match[1];
   }
   return url;
+}
+
+
+// ── LIBRARY ──────────────────────────
+function addLib(){
+  var ti=gi('lb_ti').trim(),su=gi('lb_su'),lv=gi('lb_lv'),ty=gi('lb_ty'),url=gi('lb_url').trim();
+  if(!ti||!su||!url){alert('Please fill in Title, Subject and URL.');return;}
+  var item={title:ti,subject:su,level:lv,type:ty,url:url,
+    description:gi('lb_ds').trim(),addedBy:gi('lb_by').trim(),
+    addedOn:new Date().toLocaleDateString('en-UG')};
+  fbdb.ref('library').push(item).then(function(){
+    ok('lb_ok','Resource added to library!');
+    si('lb_ti','');si('lb_url','');si('lb_ds','');si('lb_by','');
+    renderLib();
+  }).catch(function(e){
+    alert('Error: '+e.message);
+  });
+}
+
+function delLib(key){if(key&&key.dataset)key=key.dataset.key;
+  if(!confirm('Remove this resource from the library?')) return;
+  fbdb.ref('library/'+key).remove().then(function(){
+    renderLib();
+  });
+}
+
+function renderLib(){
+  var el=document.getElementById('lb_tbl');if(!el)return;
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  var q=gi('lb_sq').toLowerCase();
+  var sf=gi('lb_sf');
+  fbdb.ref('library').once('value').then(function(snap){
+    var items=[];
+    snap.forEach(function(c){items.push(Object.assign({fbKey:c.key},c.val()));});
+    var f=items.filter(function(i){
+      return (!q||i.title.toLowerCase().includes(q)||i.subject.toLowerCase().includes(q))&&(!sf||i.type===sf);
+    });
+    if(!f.length){el.innerHTML='<p style="color:var(--gray);font-size:14px;padding:10px 0">No materials added yet. Add resources above to build the library.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Subject</th><th>Level</th><th>Type</th><th>Added By</th><th>Action</th></tr></thead><tbody>'+
+      f.map(function(i){
+        return '<tr><td style="font-weight:600"><a href="'+i.url+'" target="_blank" style="color:var(--green)">'+i.title+'</a></td>'+
+          '<td>'+i.subject+'</td><td>'+i.level+'</td><td>'+i.type+'</td>'+
+          '<td>'+(i.addedBy||'—')+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delLib(this.dataset.key)" data-key="'+i.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    el.innerHTML='<p style="color:#C62828;font-size:13px">Could not load library. Check Firebase connection.</p>';
+  });
 }
 
 </script>
@@ -708,6 +927,7 @@ function go(name,link){
   if(name==='ntc'){renderNtc();var d=document.getElementById('nt_dt');if(d&&!d.value)d.value=td();}
   if(name==='nws'){renderNws();var d2=document.getElementById('nw_dt');if(d2&&!d2.value)d2.value=td();}
   if(name==='inq')renderInq();
+  if(name==='lib')renderLib();
   if(name==='apps')renderApps();
   if(name==='cfg')renderCfg();
   return false;
@@ -1189,7 +1409,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://postimages.org','_blank');
+  window.open('https://imgbb.com','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -1223,6 +1443,54 @@ function convertDriveLink(url){
     return 'https://drive.google.com/uc?export=view&id=' + match[1];
   }
   return url;
+}
+
+
+// ── LIBRARY ──────────────────────────
+function addLib(){
+  var ti=gi('lb_ti').trim(),su=gi('lb_su'),lv=gi('lb_lv'),ty=gi('lb_ty'),url=gi('lb_url').trim();
+  if(!ti||!su||!url){alert('Please fill in Title, Subject and URL.');return;}
+  var item={title:ti,subject:su,level:lv,type:ty,url:url,
+    description:gi('lb_ds').trim(),addedBy:gi('lb_by').trim(),
+    addedOn:new Date().toLocaleDateString('en-UG')};
+  fbdb.ref('library').push(item).then(function(){
+    ok('lb_ok','Resource added to library!');
+    si('lb_ti','');si('lb_url','');si('lb_ds','');si('lb_by','');
+    renderLib();
+  }).catch(function(e){
+    alert('Error: '+e.message);
+  });
+}
+
+function delLib(key){if(key&&key.dataset)key=key.dataset.key;
+  if(!confirm('Remove this resource from the library?')) return;
+  fbdb.ref('library/'+key).remove().then(function(){
+    renderLib();
+  });
+}
+
+function renderLib(){
+  var el=document.getElementById('lb_tbl');if(!el)return;
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  var q=gi('lb_sq').toLowerCase();
+  var sf=gi('lb_sf');
+  fbdb.ref('library').once('value').then(function(snap){
+    var items=[];
+    snap.forEach(function(c){items.push(Object.assign({fbKey:c.key},c.val()));});
+    var f=items.filter(function(i){
+      return (!q||i.title.toLowerCase().includes(q)||i.subject.toLowerCase().includes(q))&&(!sf||i.type===sf);
+    });
+    if(!f.length){el.innerHTML='<p style="color:var(--gray);font-size:14px;padding:10px 0">No materials added yet. Add resources above to build the library.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Subject</th><th>Level</th><th>Type</th><th>Added By</th><th>Action</th></tr></thead><tbody>'+
+      f.map(function(i){
+        return '<tr><td style="font-weight:600"><a href="'+i.url+'" target="_blank" style="color:var(--green)">'+i.title+'</a></td>'+
+          '<td>'+i.subject+'</td><td>'+i.level+'</td><td>'+i.type+'</td>'+
+          '<td>'+(i.addedBy||'—')+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delLib(this.dataset.key)" data-key="'+i.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    el.innerHTML='<p style="color:#C62828;font-size:13px">Could not load library. Check Firebase connection.</p>';
+  });
 }
 
 </script>
@@ -1243,7 +1511,7 @@ function openDrive(inputId, prevId){
 }
 
 function openImgbb(inputId, prevId){
-  window.open('https://postimages.org','_blank');
+  window.open('https://imgbb.com','_blank');
   setTimeout(function(){
     alert('Steps:\n1. Click "Start uploading"\n2. Select your photo\n3. Click Upload\n4. Once uploaded, click the image\n5. Copy the "Direct link"\n6. Paste it in the Image URL field');
   }, 500);
@@ -1277,6 +1545,54 @@ function convertDriveLink(url){
     return 'https://drive.google.com/uc?export=view&id=' + match[1];
   }
   return url;
+}
+
+
+// ── LIBRARY ──────────────────────────
+function addLib(){
+  var ti=gi('lb_ti').trim(),su=gi('lb_su'),lv=gi('lb_lv'),ty=gi('lb_ty'),url=gi('lb_url').trim();
+  if(!ti||!su||!url){alert('Please fill in Title, Subject and URL.');return;}
+  var item={title:ti,subject:su,level:lv,type:ty,url:url,
+    description:gi('lb_ds').trim(),addedBy:gi('lb_by').trim(),
+    addedOn:new Date().toLocaleDateString('en-UG')};
+  fbdb.ref('library').push(item).then(function(){
+    ok('lb_ok','Resource added to library!');
+    si('lb_ti','');si('lb_url','');si('lb_ds','');si('lb_by','');
+    renderLib();
+  }).catch(function(e){
+    alert('Error: '+e.message);
+  });
+}
+
+function delLib(key){if(key&&key.dataset)key=key.dataset.key;
+  if(!confirm('Remove this resource from the library?')) return;
+  fbdb.ref('library/'+key).remove().then(function(){
+    renderLib();
+  });
+}
+
+function renderLib(){
+  var el=document.getElementById('lb_tbl');if(!el)return;
+  el.innerHTML='<p style="color:var(--gray);font-size:13px">Loading...</p>';
+  var q=gi('lb_sq').toLowerCase();
+  var sf=gi('lb_sf');
+  fbdb.ref('library').once('value').then(function(snap){
+    var items=[];
+    snap.forEach(function(c){items.push(Object.assign({fbKey:c.key},c.val()));});
+    var f=items.filter(function(i){
+      return (!q||i.title.toLowerCase().includes(q)||i.subject.toLowerCase().includes(q))&&(!sf||i.type===sf);
+    });
+    if(!f.length){el.innerHTML='<p style="color:var(--gray);font-size:14px;padding:10px 0">No materials added yet. Add resources above to build the library.</p>';return;}
+    el.innerHTML='<table class="tbl"><thead><tr><th>Title</th><th>Subject</th><th>Level</th><th>Type</th><th>Added By</th><th>Action</th></tr></thead><tbody>'+
+      f.map(function(i){
+        return '<tr><td style="font-weight:600"><a href="'+i.url+'" target="_blank" style="color:var(--green)">'+i.title+'</a></td>'+
+          '<td>'+i.subject+'</td><td>'+i.level+'</td><td>'+i.type+'</td>'+
+          '<td>'+(i.addedBy||'—')+'</td>'+
+          '<td><button class="btn btn-r btn-sm" onclick="delLib(this.dataset.key)" data-key="'+i.fbKey+'">Del</button></td></tr>';
+      }).join('')+'</tbody></table>';
+  }).catch(function(){
+    el.innerHTML='<p style="color:#C62828;font-size:13px">Could not load library. Check Firebase connection.</p>';
+  });
 }
 
 </script>

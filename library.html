@@ -3,322 +3,349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Library - Kiyuni Secondary School</title>
+<title>Digital Library - Kiyuni Secondary School Mubende</title>
+<meta name="description" content="Access study notes, past papers, textbooks and video lessons at Kiyuni Secondary School digital library.">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-.lib-search-box{background:linear-gradient(135deg,var(--green) 0%,#1a3a1c 100%);padding:60px 0}
-.lib-search-inner{max-width:700px;margin:0 auto;padding:0 24px;text-align:center}
-.lib-search-inner h2{font-family:'Merriweather',serif;font-size:32px;color:#fff;font-weight:900;margin-bottom:10px}
-.lib-search-inner p{color:rgba(255,255,255,.8);font-size:15px;margin-bottom:30px}
-.search-form{background:#fff;border-radius:14px;padding:28px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
-.search-form label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:6px}
-.search-form select,.search-form input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;color:#222;outline:none;font-family:'Inter',sans-serif;transition:.2s;margin-bottom:16px}
-.search-form select:focus,.search-form input:focus{border-color:var(--green)}
-.search-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.search-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;margin-top:4px}
-.search-btn:hover{background:var(--green-mid)}
+/* SEARCH BAR */
+.lib-search{background:#fff;border-radius:14px;border:1px solid var(--border);padding:24px;margin-bottom:28px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.lib-search-row{display:flex;gap:12px;flex-wrap:wrap}
+.lib-search-row input{flex:1;min-width:200px;border:1.5px solid var(--border);border-radius:8px;padding:12px 16px;font-size:14px;font-family:'Inter',sans-serif;outline:none}
+.lib-search-row input:focus{border-color:var(--green)}
+.lib-search-row select{border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;background:#fff}
+.lib-search-row select:focus{border-color:var(--green)}
+.search-count{font-size:13px;color:var(--gray);margin-top:10px}
 
-/* RESULTS */
-.results-section{padding:50px 0;background:var(--gray-light);min-height:300px}
-.results-inner{max-width:1200px;margin:0 auto;padding:0 24px}
-.results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
-.results-header h3{font-family:'Merriweather',serif;font-size:22px;color:var(--dark)}
-.results-count{font-size:13px;color:var(--gray);background:#fff;border:1px solid var(--border);padding:5px 14px;border-radius:20px}
-.books-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.book-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:22px 18px;transition:.3s;text-align:center}
-.book-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-3px);border-color:var(--green)}
-.book-cover{width:70px;height:90px;background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);border-radius:6px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:3px 3px 8px rgba(0,0,0,.15)}
-.book-subject-tag{display:inline-block;background:var(--green-pale);color:var(--green);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
-.book-card h4{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.4}
-.book-card p{font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:12px}
-.book-level{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-bottom:12px}
-.book-level.o{background:#E8F5E9;color:#1B5E20}
-.book-level.a{background:#FFF8E1;color:#F57F17}
-.read-btn{display:block;background:var(--green);color:#fff;border:none;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;transition:.2s;font-family:'Inter',sans-serif}
-.read-btn:hover{background:var(--green-mid)}
-.no-results{text-align:center;padding:60px 20px;color:var(--gray)}
-.no-results .icon{font-size:56px;margin-bottom:16px}
-.no-results h3{font-size:20px;color:var(--dark);margin-bottom:8px}
+/* TYPE FILTER TABS */
+.type-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.type-tab{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px}
+.type-tab:hover,.type-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
 
-/* SUBJECTS NAV */
-.subjects-nav{background:#fff;padding:40px 0;border-bottom:1px solid var(--border)}
-.subjects-inner{max-width:1200px;margin:0 auto;padding:0 24px}
-.subjects-inner h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:16px}
-.subject-tabs{display:flex;flex-wrap:wrap;gap:8px}
-.subject-tab{background:var(--gray-light);border:1px solid var(--border);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:500;color:#333;cursor:pointer;transition:.2s;border:none;font-family:'Inter',sans-serif}
-.subject-tab:hover,.subject-tab.active{background:var(--green);color:#fff}
-.level-filter{display:flex;gap:10px;margin-bottom:16px}
-.level-btn{background:var(--gray-light);border:1px solid var(--border);border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif}
-.level-btn:hover,.level-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+/* SUBJECT SECTIONS */
+.lib-section{margin-bottom:40px}
+.lib-section-hd{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--gold)}
+.lib-section-hd h3{font-family:'Merriweather',serif;font-size:19px;font-weight:700;color:var(--dark)}
+.lib-section-hd .count{background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
 
-@media(max-width:1024px){.books-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:768px){.books-grid{grid-template-columns:repeat(2,1fr)}.search-form .form-row{grid-template-columns:1fr}}
-@media(max-width:480px){.books-grid{grid-template-columns:1fr}}
+/* MATERIAL CARDS */
+.lib-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.lib-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:18px;transition:.3s;text-decoration:none;display:flex;flex-direction:column;gap:10px}
+.lib-card:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(27,94,32,.1);transform:translateY(-2px)}
+.lib-card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.icon-pdf{background:#FFEBEE}
+.icon-video{background:#E3F2FD}
+.icon-link{background:#E8F5E9}
+.icon-notes{background:#FFF8E1}
+.icon-book{background:#F3E5F5}
+.lib-card h4{font-size:13px;font-weight:700;color:var(--dark);line-height:1.4;flex:1}
+.lib-card .meta{font-size:11px;color:var(--gray)}
+.lib-badges{display:flex;gap:6px;flex-wrap:wrap}
+.lib-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.badge-pdf{background:#FFEBEE;color:#C62828}
+.badge-video{background:#E3F2FD;color:#1565C0}
+.badge-link{background:#E8F5E9;color:#1B5E20}
+.badge-notes{background:#FFF8E1;color:#E65100}
+.badge-book{background:#F3E5F5;color:#6A1B9A}
+.lib-action{background:var(--green);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;text-align:center;transition:.2s;margin-top:auto}
+.lib-action:hover{background:var(--green-mid)}
+.lib-action.ext{background:var(--gold);color:var(--dark)}
+
+/* EMPTY STATE */
+.lib-empty{text-align:center;padding:60px 20px;color:var(--gray);grid-column:1/-1}
+.lib-empty .icon{font-size:52px;margin-bottom:14px}
+
+/* LOADING */
+.lib-loading{text-align:center;padding:60px;color:var(--gray);font-size:15px}
+
+/* STATS BAR */
+.lib-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.lib-stat{background:#fff;border-radius:10px;border:1px solid var(--border);padding:16px;text-align:center}
+.lib-stat .n{font-size:24px;font-weight:700;color:var(--green);font-family:'Merriweather',serif}
+.lib-stat .l{font-size:11px;color:var(--gray);margin-top:3px}
+
+@media(max-width:1024px){.lib-grid{grid-template-columns:repeat(3,1fr)}.lib-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.lib-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.lib-grid{grid-template-columns:1fr}.lib-stats{grid-template-columns:1fr 1fr}}
 </style>
-
-<meta name="description" content="Access study notes, past papers and revision materials at the Kiyuni Secondary School digital library. O Level and A Level resources.">
-<meta name="keywords" content="Kiyuni Secondary School, Kiyuni SS, secondary school Mubende, Uganda secondary school, Digital Library - Kiyuni Secondary School Mubende">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="Digital Library - Kiyuni Secondary School Mubende">
-<meta property="og:description" content="Access study notes, past papers and revision materials at the Kiyuni Secondary School digital library. O Level and A Level resources.">
-<meta property="og:image" content="https://kiyuniss.github.io/kiyuniss/images/badge/badge.png">
-<meta property="og:url" content="https://kiyuniss.github.io/kiyuniss/library.html">
-<meta property="og:type" content="website">
-<link rel="canonical" href="https://kiyuniss.github.io/kiyuniss/library.html">
 </head>
 <body>
+<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li>
+    <li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li>
+    <li><a href="library.html" class="active">Library</a></li>
+    <li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li>
+    <li><a href="notices.html">Notices</a></li>
+    <li><a href="fees.html">Fees</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="admissions.html" class="nav-apply">Apply Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
+<a href="index.html">Home</a><a href="about.html">About</a><a href="staff.html">Staff</a><a href="academics.html">Academics</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees</a><a href="news.html">News</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
 
-<!-- NAV -->
-<div class="topbar"><div class="topbar-inner"><div style="display:flex;gap:18px;align-items:center"><span>📞 0704488636 / 0786512025</span><span>📍 Kiyuni Town, Mubende</span></div><div><a href="admissions.html">Apply Now</a><a href="contact.html">Contact</a></div></div></div>
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="logo-area"><img src="images/badge/badge.png" alt="Badge"><div class="logo-text"><h1>Kiyuni Secondary School</h1><p>Education Determines The Future</p></div></a>
-    <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="about.html">About ▾</a><div class="dropdown-menu"><a href="about.html">Our School</a><a href="about.html#headteacher">Head Teacher</a><a href="staff.html">Our Staff</a></div></li><li class="dropdown"><a href="academics.html">Academics ▾</a><div class="dropdown-menu"><a href="academics.html">O Level</a><a href="academics.html#alevel">A Level</a><a href="vocational.html">Vocational Skills</a></div></li><li><a href="library.html" class="active">Library</a></li><li class="dropdown"><a href="student.html">Students ▾</a><div class="dropdown-menu"><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a></div></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li><li><a href="admissions.html" class="nav-apply">Apply Now</a></li></ul>
-    <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div class="mobile-menu" id="mobileMenu"><button class="mobile-close" onclick="toggleMobile()">&#10005;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="staff.html">Our Staff</a><a href="academics.html">Academics</a><a href="vocational.html">Vocational Skills</a><a href="library.html">Library</a><a href="student.html">Student Portal</a><a href="assignments.html">Assignments</a><a href="timetable.html">Timetable</a><a href="notices.html">Notices</a><a href="fees.html">Fees Structure</a><a href="facilities.html">Facilities</a><a href="admissions.html">Admissions</a><a href="news.html">News</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Portal</a><a href="developer.html">Developer</a></div>
+<div class="page-hero"><h2>Digital Library</h2><p>Study notes, past papers, textbooks, videos and online resources — all free</p><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Library</span></div></div>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <h2>📚 School Library</h2>
-  <p>Access study materials, notes, and past papers by subject and level</p>
-  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff">Library</span></div>
-</div>
+<section style="padding:50px 0;background:var(--gray-light)">
+  <div class="section-inner">
 
-<!-- SEARCH BOX -->
-<div class="lib-search-box">
-  <div class="lib-search-inner">
-    <div class="search-form">
-      <div class="form-row">
-        <div>
-          <label for="levelSelect">Select Level</label>
-          <select id="levelSelect">
-            <option value="">-- Choose Level --</option>
-            <option value="o">O Level (S1 – S4)</option>
-            <option value="a">A Level (S5 – S6)</option>
-          </select>
-        </div>
-        <div>
-          <label for="subjectSelect">Select Subject</label>
-          <select id="subjectSelect">
-            <option value="">-- Choose Subject --</option>
-          </select>
-        </div>
+    <!-- STATS -->
+    <div class="lib-stats" id="libStats">
+      <div class="lib-stat"><div class="n" id="statTotal">0</div><div class="l">Total Resources</div></div>
+      <div class="lib-stat"><div class="n" id="statPapers">0</div><div class="l">Past Papers</div></div>
+      <div class="lib-stat"><div class="n" id="statNotes">0</div><div class="l">Notes & Textbooks</div></div>
+      <div class="lib-stat"><div class="n" id="statVideos">0</div><div class="l">Videos & Links</div></div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="lib-search">
+      <div class="lib-search-row">
+        <input type="text" id="libQ" placeholder="Search by subject, topic or keyword..." oninput="filterLib()">
+        <select id="libLevel" onchange="filterLib()">
+          <option value="">All Levels</option>
+          <option value="O Level">O Level</option>
+          <option value="A Level">A Level</option>
+          <option value="External">External Resources</option>
+        </select>
+        <select id="libSubject" onchange="filterLib()">
+          <option value="">All Subjects</option>
+        </select>
       </div>
-      <label for="searchInput">Search by keyword (optional)</label>
-      <input type="text" id="searchInput" placeholder="e.g. Past papers, Notes, Revision...">
-      <button class="search-btn" onclick="searchBooks()">🔍 Search Library</button>
+      <div class="search-count" id="libCount"></div>
     </div>
-  </div>
-</div>
 
-<!-- SUBJECT TABS -->
-<div class="subjects-nav">
-  <div class="subjects-inner">
-    <div class="level-filter">
-      <button class="level-btn active" onclick="filterLevel('all',this)">All Materials</button>
-      <button class="level-btn" onclick="filterLevel('o',this)">O Level Only</button>
-      <button class="level-btn" onclick="filterLevel('a',this)">A Level Only</button>
-    </div>
-    <h3>Browse by Subject:</h3>
-    <div class="subject-tabs" id="subjectTabs"></div>
-  </div>
-</div>
+    <!-- TYPE TABS -->
+    <div class="type-tabs" id="typeTabs"></div>
 
-<!-- RESULTS -->
-<section class="results-section">
-  <div class="results-inner">
-    <div class="results-header">
-      <h3 id="resultsTitle">All Library Materials</h3>
-      <span class="results-count" id="resultsCount">0 materials found</span>
-    </div>
-    <div class="books-grid" id="booksGrid"></div>
-    <div class="no-results" id="noResults" style="display:none">
-      <div class="icon">📭</div>
-      <h3>No materials found</h3>
-      <p>Try a different subject or level. More materials are being added regularly.</p>
-    </div>
+    <!-- RESULTS -->
+    <div id="libContent"><div class="lib-loading">Loading library...</div></div>
+
   </div>
 </section>
 
-<!-- FOOTER -->
-<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Access your study materials anytime through our digital school library.</p></div>
-    <div class="footer-col"><h4>Quick Links</h4><ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="staff.html">Our Staff</a></li>
-<li><a href="academics.html">Academics</a></li>
-<li><a href="library.html">Library</a></li>
-<li><a href="student.html">Student Portal</a></li>
-<li><a href="assignments.html">Assignments</a></li>
-<li><a href="timetable.html">Timetable</a></li>
-<li><a href="notices.html">Notices</a></li>
-<li><a href="fees.html">Fees</a></li>
-<li><a href="admissions.html">Admissions</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul></div>
-    <div class="footer-col"><h4>Library</h4><ul><li><a href="library.html">O Level Materials</a></li><li><a href="library.html">A Level Materials</a></li><li><a href="library.html">Past Papers</a></li><li><a href="library.html">Notes & Guides</a></li></ul></div>
-    <div class="footer-col"><h4>Contact Us</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
-  </div>
-  <div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School. All Rights Reserved.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div>
-</footer>
+<a href="https://api.whatsapp.com/send?phone=256704488636" class="wa-float" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-<script>
-// ============================================================
-// LIBRARY DATA — ADD YOUR PDF FILES HERE
-// To add a real PDF: change "path" to e.g. "library/o-level/physics/notes.pdf"
-// ============================================================
-var libraryData = [
-  // O LEVEL
-  {title:"Physics Notes — Waves & Sound",subject:"Physics",level:"o",type:"Notes",icon:"🔬",desc:"Comprehensive notes on waves, sound, and light for O Level students.",path:"#"},
-  {title:"Physics Past Papers 2022",subject:"Physics",level:"o",type:"Past Paper",icon:"🔬",desc:"UNEB past examination papers for O Level Physics 2022.",path:"#"},
-  {title:"Chemistry — Organic Chemistry Notes",subject:"Chemistry",level:"o",type:"Notes",icon:"⚗️",desc:"Detailed notes on organic chemistry reactions and compounds.",path:"#"},
-  {title:"Chemistry Past Papers 2023",subject:"Chemistry",level:"o",type:"Past Paper",icon:"⚗️",desc:"UNEB O Level Chemistry past papers with marking guides.",path:"#"},
-  {title:"Mathematics Revision Guide",subject:"Mathematics",level:"o",type:"Revision",icon:"📐",desc:"Complete revision guide covering all O Level Mathematics topics.",path:"#"},
-  {title:"Mathematics Past Papers 2022",subject:"Mathematics",level:"o",type:"Past Paper",icon:"📐",desc:"Past papers for O Level Mathematics with worked solutions.",path:"#"},
-  {title:"Biology — Cell Structure Notes",subject:"Biology",level:"o",type:"Notes",icon:"🧬",desc:"Notes on cell biology, reproduction, and ecology for O Level.",path:"#"},
-  {title:"Biology Past Papers 2023",subject:"Biology",level:"o",type:"Past Paper",icon:"🧬",desc:"UNEB Biology past papers for O Level with answers.",path:"#"},
-  {title:"English Language — Essay Writing Guide",subject:"English",level:"o",type:"Guide",icon:"📝",desc:"Guide to essay writing, comprehension, and grammar for O Level English.",path:"#"},
-  {title:"English Literature Notes",subject:"Literature",level:"o",type:"Notes",icon:"📖",desc:"Notes and analysis for set books in O Level Literature in English.",path:"#"},
-  {title:"History — Pre-Colonial Uganda Notes",subject:"History",level:"o",type:"Notes",icon:"🏛️",desc:"Notes on pre-colonial and colonial history of Uganda and East Africa.",path:"#"},
-  {title:"Geography — Map Reading Guide",subject:"Geography",level:"o",type:"Guide",icon:"🌍",desc:"Complete guide to map reading and physical geography for O Level.",path:"#"},
-  {title:"Agriculture — Crop Production Notes",subject:"Agriculture",level:"o",type:"Notes",icon:"🌱",desc:"Notes on crop production, soil science, and farm management.",path:"#"},
-  {title:"CRE — Old Testament Notes",subject:"CRE",level:"o",type:"Notes",icon:"✝️",desc:"Comprehensive notes on the Old and New Testament for O Level CRE.",path:"#"},
-  {title:"Islamic Religious Education Notes",subject:"IRE",level:"o",type:"Notes",icon:"☪️",desc:"O Level IRE notes covering the Quran, Hadith, and Islamic history.",path:"#"},
-  {title:"Luganda — Olulimi Olw'eggwanga",subject:"Luganda",level:"o",type:"Notes",icon:"🇺🇬",desc:"Luganda language notes on grammar, oral literature, and writing.",path:"#"},
-  {title:"Computer Studies — Basic Programming",subject:"Computer",level:"o",type:"Notes",icon:"💻",desc:"Introduction to computers, programming basics, and MS Office for O Level.",path:"#"},
-  {title:"Music — Theory and Practice Notes",subject:"Music",level:"o",type:"Notes",icon:"🎵",desc:"Music theory, notation, and Ugandan traditional music for O Level.",path:"#"},
-  {title:"Physical Education — Theory Notes",subject:"PE",level:"o",type:"Notes",icon:"⚽",desc:"PE theory notes covering health, fitness, and sports science.",path:"#"},
-  // A LEVEL
-  {title:"Physics — Electromagnetism Notes",subject:"Physics",level:"a",type:"Notes",icon:"🔬",desc:"A Level Physics notes on electromagnetism, quantum physics, and mechanics.",path:"#"},
-  {title:"Physics A Level Past Papers 2023",subject:"Physics",level:"a",type:"Past Paper",icon:"🔬",desc:"UNEB A Level Physics past papers paper 1 and paper 2.",path:"#"},
-  {title:"Chemistry — Equilibrium & Kinetics",subject:"Chemistry",level:"a",type:"Notes",icon:"⚗️",desc:"Advanced chemistry notes on chemical equilibrium and reaction kinetics.",path:"#"},
-  {title:"Chemistry A Level Past Papers",subject:"Chemistry",level:"a",type:"Past Paper",icon:"⚗️",desc:"UNEB A Level Chemistry past examination papers with marking schemes.",path:"#"},
-  {title:"Mathematics — Pure Maths Notes",subject:"Mathematics",level:"a",type:"Notes",icon:"📐",desc:"Pure mathematics notes covering calculus, algebra, and statistics.",path:"#"},
-  {title:"Subsidiary Mathematics Notes",subject:"Sub Maths",level:"a",type:"Notes",icon:"🔢",desc:"Subsidiary Mathematics notes and revision questions for A Level.",path:"#"},
-  {title:"Biology — Genetics & Evolution",subject:"Biology",level:"a",type:"Notes",icon:"🧬",desc:"A Level Biology notes on genetics, evolution, and cell biochemistry.",path:"#"},
-  {title:"Economics — Macro & Micro Notes",subject:"Economics",level:"a",type:"Notes",icon:"📊",desc:"Comprehensive economics notes on macroeconomics and microeconomics.",path:"#"},
-  {title:"Economics Past Papers 2023",subject:"Economics",level:"a",type:"Past Paper",icon:"📊",desc:"UNEB A Level Economics past papers with model answers.",path:"#"},
-  {title:"History — African Nationalism Notes",subject:"History",level:"a",type:"Notes",icon:"🏛️",desc:"A Level History notes on African nationalism and independence movements.",path:"#"},
-  {title:"Geography — Human Geography Notes",subject:"Geography",level:"a",type:"Notes",icon:"🌍",desc:"Advanced geography notes on human geography, development, and environment.",path:"#"},
-  {title:"General Paper — Essay Skills",subject:"General Paper",level:"a",type:"Guide",icon:"✍️",desc:"Guide to writing General Paper essays, current affairs, and arguments.",path:"#"},
-  {title:"Entrepreneurship — Business Notes",subject:"Entrepreneurship",level:"a",type:"Notes",icon:"💼",desc:"A Level Entrepreneurship notes on business planning and management.",path:"#"},
-  {title:"ICT — Advanced Computer Notes",subject:"ICT",level:"a",type:"Notes",icon:"🖥️",desc:"A Level ICT notes on networking, databases, and programming.",path:"#"},
-  {title:"Literature — Poetry Analysis",subject:"Literature",level:"a",type:"Notes",icon:"📖",desc:"A Level Literature notes on poetry, drama, and novel analysis.",path:"#"},
-  {title:"Art & Design — Techniques Guide",subject:"Art",level:"a",type:"Guide",icon:"🎨",desc:"A Level Art notes covering design principles and practical techniques.",path:"#"}
+<footer><div class="footer-grid">
+  <div class="footer-brand"><div class="footer-logo"><img src="images/badge/badge.png" alt="Badge"><div><h3>Kiyuni Secondary School</h3><p>"Education Determines The Future"</p></div></div><p>Kiyuni Town, Mubende District, Uganda.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="staff.html">Our Staff</a></li><li><a href="academics.html">Academics</a></li><li><a href="library.html">Library</a></li><li><a href="student.html">Student Portal</a></li><li><a href="notices.html">Notices</a></li><li><a href="fees.html">Fees</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Library</h4><ul><li><a href="library.html">Past Papers</a></li><li><a href="library.html">Study Notes</a></li><li><a href="library.html">Textbooks</a></li><li><a href="library.html">Video Lessons</a></li><li><a href="library.html">External Links</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><p>📞 0704488636<br>📞 0786512025</p><p style="margin-top:10px">📍 Kiyuni Town, Mubende</p></div>
+</div><div class="footer-bottom"><p><span class="auto-year">2026</span> Kiyuni Secondary School.</p><a href="developer.html">Designed by Mutumba Jamadah Jex-R</a></div></footer>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+<script type="text/javascript">
+// Firebase init
+var firebaseConfig = {
+  apiKey: "AIzaSyBvEE28ZPwd-txG1NfivOmqYoLH4pV5diM",
+  authDomain: "kiyuniss.firebaseapp.com",
+  databaseURL: "https://kiyuniss-default-rtdb.firebaseio.com",
+  projectId: "kiyuniss",
+  storageBucket: "kiyuniss.firebasestorage.app",
+  messagingSenderId: "419208772644",
+  appId: "1:419208772644:web:422a902b1e7d7825a32cb1"
+};
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+// TYPE CONFIG
+var TYPES = {
+  'All':       {icon:'📚', color:''},
+  'Past Paper':{icon:'📝', color:'badge-pdf', cardIcon:'icon-pdf'},
+  'Notes':     {icon:'📒', color:'badge-notes', cardIcon:'icon-notes'},
+  'Textbook':  {icon:'📗', color:'badge-book', cardIcon:'icon-book'},
+  'Video':     {icon:'▶️', color:'badge-video', cardIcon:'icon-video'},
+  'Link':      {icon:'🌐', color:'badge-link', cardIcon:'icon-link'},
+};
+
+// DEFAULT LIBRARY ITEMS — Free online resources always visible
+var DEFAULT_ITEMS = [
+  // ── O LEVEL PAST PAPERS ──────────────────────────
+  {id:'d01',title:'O Level Mathematics Past Papers 2015-2024',subject:'Mathematics',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Mathematics past papers. Download and practice to excel in your UCE exams.'},
+  {id:'d02',title:'O Level English Language Past Papers 2015-2024',subject:'English',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level English Language past papers with marking guides.'},
+  {id:'d03',title:'O Level Physics Past Papers 2015-2024',subject:'Physics',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Physics past papers. Essential for UCE preparation.'},
+  {id:'d04',title:'O Level Chemistry Past Papers 2015-2024',subject:'Chemistry',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Chemistry past papers and marking guides.'},
+  {id:'d05',title:'O Level Biology Past Papers 2015-2024',subject:'Biology',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Biology past papers for UCE examination preparation.'},
+  {id:'d06',title:'O Level History Past Papers 2015-2024',subject:'History',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level History past papers.'},
+  {id:'d07',title:'O Level Geography Past Papers 2015-2024',subject:'Geography',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Geography past papers.'},
+  {id:'d08',title:'O Level Agriculture Past Papers 2015-2024',subject:'Agriculture',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Agriculture past papers.'},
+  {id:'d09',title:'O Level Literature Past Papers 2015-2024',subject:'Literature',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Literature in English past papers.'},
+  {id:'d10',title:'O Level CRE/IRE Past Papers 2015-2024',subject:'CRE/IRE',level:'O Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB O Level Religious Education past papers.'},
+
+  // ── A LEVEL PAST PAPERS ──────────────────────────
+  {id:'d11',title:'A Level Mathematics Past Papers 2015-2024',subject:'Mathematics',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB A Level Mathematics past papers for UACE preparation.'},
+  {id:'d12',title:'A Level Physics Past Papers 2015-2024',subject:'Physics',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB A Level Physics past papers.'},
+  {id:'d13',title:'A Level Chemistry Past Papers 2015-2024',subject:'Chemistry',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB A Level Chemistry past papers.'},
+  {id:'d14',title:'A Level Biology Past Papers 2015-2024',subject:'Biology',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB A Level Biology past papers.'},
+  {id:'d15',title:'A Level Economics Past Papers 2015-2024',subject:'Economics',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB A Level Economics past papers.'},
+  {id:'d16',title:'General Paper Past Papers 2015-2024',subject:'General Paper',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB General Paper past papers for UACE.'},
+  {id:'d17',title:'A Level History Past Papers 2015-2024',subject:'History',level:'A Level',type:'Past Paper',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official UNEB A Level History past papers.'},
+
+  // ── FREE VIDEO LESSONS ──────────────────────────
+  {id:'d18',title:'Mathematics Video Lessons — Khan Academy',subject:'Mathematics',level:'O Level',type:'Video',url:'https://www.khanacademy.org/math',description:'Free video lessons covering all mathematics topics. Step-by-step explanations suitable for O and A Level students.'},
+  {id:'d19',title:'Physics Video Lessons — Khan Academy',subject:'Physics',level:'O Level',type:'Video',url:'https://www.khanacademy.org/science/physics',description:'Free physics video lessons covering mechanics, electricity, waves and more.'},
+  {id:'d20',title:'Chemistry Video Lessons — Khan Academy',subject:'Chemistry',level:'O Level',type:'Video',url:'https://www.khanacademy.org/science/chemistry',description:'Free chemistry lessons from atoms to reactions, suitable for O and A Level.'},
+  {id:'d21',title:'Biology Video Lessons — Khan Academy',subject:'Biology',level:'O Level',type:'Video',url:'https://www.khanacademy.org/science/biology',description:'Free biology video lessons covering cells, genetics, ecosystems and more.'},
+  {id:'d22',title:'Economics Video Lessons — Khan Academy',subject:'Economics',level:'A Level',type:'Video',url:'https://www.khanacademy.org/economics-finance-domain',description:'Free economics lessons covering micro and macroeconomics for A Level students.'},
+  {id:'d23',title:'Uganda Secondary School Lessons — YouTube',subject:'All Subjects',level:'O Level',type:'Video',url:'https://www.youtube.com/results?search_query=uganda+secondary+school+lessons+o+level',description:'YouTube search for Uganda O Level lessons. Find videos on any subject taught in Uganda curriculum.'},
+  {id:'d24',title:'A Level Science Lessons — YouTube',subject:'All Subjects',level:'A Level',type:'Video',url:'https://www.youtube.com/results?search_query=uganda+a+level+science+lessons',description:'YouTube search for Uganda A Level science lessons covering Physics, Chemistry and Biology.'},
+
+  // ── FREE TEXTBOOKS ──────────────────────────
+  {id:'d25',title:'Free Science Textbooks — CK-12',subject:'Sciences',level:'O Level',type:'Textbook',url:'https://www.ck12.org',description:'Free online textbooks for Physics, Chemistry, Biology and Mathematics. Read online or download as PDF.'},
+  {id:'d26',title:'Mathematics Textbook — OpenStax',subject:'Mathematics',level:'A Level',type:'Textbook',url:'https://openstax.org/subjects/math',description:'Free university-level mathematics textbooks. Good for A Level students wanting extra depth.'},
+  {id:'d27',title:'Biology Textbook — OpenStax',subject:'Biology',level:'A Level',type:'Textbook',url:'https://openstax.org/subjects/science',description:'Free Biology textbooks from OpenStax. Covers A Level Biology topics in detail.'},
+
+  // ── EXTERNAL LINKS ──────────────────────────
+  {id:'d28',title:'UNEB Official Website — Download Past Papers',subject:'All Subjects',level:'External',type:'Link',url:'https://www.uneb.ac.ug/index.php/downloads/',description:'Official Uganda National Examinations Board website. Download all UCE and UACE past papers directly from UNEB.'},
+  {id:'d29',title:'BBC Bitesize — Revision Materials',subject:'All Subjects',level:'External',type:'Link',url:'https://www.bbc.co.uk/bitesize',description:'Free revision materials from BBC. Covers sciences, humanities, languages and more with quizzes and summaries.'},
+  {id:'d30',title:'Khan Academy — Free Lessons All Subjects',subject:'All Subjects',level:'External',type:'Link',url:'https://www.khanacademy.org',description:'World-class free education. Lessons, exercises and videos for Mathematics, Sciences, Economics and more.'},
+  {id:'d31',title:'NCDC Uganda — National Curriculum',subject:'All Subjects',level:'External',type:'Link',url:'https://www.ncdc.go.ug',description:'National Curriculum Development Centre Uganda. Access the official Uganda curriculum documents and learning materials.'},
+  {id:'d32',title:'Quizlet — Flashcards and Study Sets',subject:'All Subjects',level:'External',type:'Link',url:'https://quizlet.com',description:'Create or use existing flashcards for any subject. Great for memorising definitions, vocabulary and key concepts.'},
+  {id:'d33',title:'Coursera — Free Online Courses',subject:'All Subjects',level:'External',type:'Link',url:'https://www.coursera.org',description:'Free online courses from top universities worldwide. Audit courses for free in any subject.'},
 ];
 
-var oSubjects=["Physics","Chemistry","Mathematics","Biology","English","Literature","History","Geography","Agriculture","CRE","IRE","Luganda","Computer","Music","PE"];
-var aSubjects=["Physics","Chemistry","Mathematics","Sub Maths","Biology","Economics","History","Geography","General Paper","Entrepreneurship","ICT","Literature","Art"];
+var ALL_ITEMS = [];
+var currentType = 'All';
 
-var currentLevel="all";
-var currentSubject="all";
-
-function populateSubjectDropdown(level){
-  var sel=document.getElementById('subjectSelect');
-  sel.innerHTML='<option value="">-- All Subjects --</option>';
-  var subs=level==='o'?oSubjects:level==='a'?aSubjects:oSubjects.concat(aSubjects.filter(function(s){return oSubjects.indexOf(s)<0;}));
-  subs.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o);});
-}
-
-function buildSubjectTabs(){
-  var container=document.getElementById('subjectTabs');
-  var subs=currentLevel==='o'?oSubjects:currentLevel==='a'?aSubjects:oSubjects.concat(aSubjects.filter(function(s){return oSubjects.indexOf(s)<0;}));
-  container.innerHTML='<button class="subject-tab active" onclick="filterSubject(\'all\',this)">All Subjects</button>';
-  subs.forEach(function(s){
-    var b=document.createElement('button');
-    b.className='subject-tab';
-    b.textContent=s;
-    b.onclick=function(){filterSubject(s,this);};
-    container.appendChild(b);
+function loadLibrary(){
+  db.ref('library').on('value', function(snap){
+    var firebaseItems = [];
+    snap.forEach(function(c){
+      firebaseItems.push(Object.assign({id:c.key}, c.val()));
+    });
+    var fbIds = firebaseItems.map(function(i){return i.id;});
+    var defaults = DEFAULT_ITEMS.filter(function(i){return fbIds.indexOf(i.id)<0;});
+    ALL_ITEMS = firebaseItems.concat(defaults);
+    buildSubjectFilter();
+    buildTypeTabs();
+    updateStats();
+    filterLib();
+  }, function(){
+    ALL_ITEMS = DEFAULT_ITEMS.slice();
+    buildSubjectFilter();
+    buildTypeTabs();
+    updateStats();
+    filterLib();
   });
 }
 
-function renderBooks(data){
-  var grid=document.getElementById('booksGrid');
-  var noR=document.getElementById('noResults');
-  var count=document.getElementById('resultsCount');
-  grid.innerHTML='';
-  if(data.length===0){noR.style.display='block';count.textContent='0 materials found';return;}
-  noR.style.display='none';
-  count.textContent=data.length+' material'+(data.length===1?'':'s')+' found';
-  data.forEach(function(b){
-    var card=document.createElement('div');
-    card.className='book-card';
-    var pathAttr=b.path==='#'?'onclick="alert(\'PDF coming soon! Upload the file to library/'+b.level+'-level/'+b.subject.toLowerCase()+'/\')" href="#"':'href="'+b.path+'" target="_blank"';
-    card.innerHTML='<div class="book-cover">'+b.icon+'</div>'
-      +'<div class="book-subject-tag">'+b.subject+'</div>'
-      +'<span class="book-level '+b.level+'">'+( b.level==='o'?'O Level':'A Level')+'</span>'
-      +'<h4>'+b.title+'</h4>'
-      +'<p>'+b.desc+'</p>'
-      +'<a class="read-btn" '+pathAttr+'>'+( b.path==='#'?'📄 Coming Soon':'📥 Open PDF')+'</a>';
-    grid.appendChild(card);
-  });
+function buildSubjectFilter(){
+  var subjects = [];
+  ALL_ITEMS.forEach(function(i){if(subjects.indexOf(i.subject)<0) subjects.push(i.subject);});
+  subjects.sort();
+  var sel = document.getElementById('libSubject');
+  sel.innerHTML = '<option value="">All Subjects</option>'+
+    subjects.map(function(s){return '<option value="'+s+'">'+s+'</option>';}).join('');
 }
 
-function filterBooks(){
-  var filtered=libraryData.filter(function(b){
-    var lvl=currentLevel==='all'||b.level===currentLevel;
-    var sub=currentSubject==='all'||b.subject===currentSubject;
-    return lvl&&sub;
-  });
-  var title=document.getElementById('resultsTitle');
-  title.textContent=(currentSubject==='all'?'All':currentSubject)+' Materials'+(currentLevel==='all'?'':' — '+(currentLevel==='o'?'O Level':'A Level'));
-  renderBooks(filtered);
+function buildTypeTabs(){
+  var types = Object.keys(TYPES);
+  var tabs = document.getElementById('typeTabs');
+  tabs.innerHTML = types.map(function(t){
+    return '<button class="type-tab'+(t===currentType?' active':'')+'" onclick="setType(this,\''+t+'\')">'+TYPES[t].icon+' '+t+'</button>';
+  }).join('');
 }
 
-function filterLevel(lvl,btn){
-  currentLevel=lvl;currentSubject='all';
-  document.querySelectorAll('.level-btn').forEach(function(b){b.classList.remove('active');});
+function setType(btn,type){
+  currentType=type;
+  document.querySelectorAll('.type-tab').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
-  buildSubjectTabs();
-  filterBooks();
+  filterLib();
 }
 
-function filterSubject(sub,btn){
-  currentSubject=sub;
-  document.querySelectorAll('.subject-tab').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  filterBooks();
+function updateStats(){
+  var papers = ALL_ITEMS.filter(function(i){return i.type==='Past Paper';}).length;
+  var notes = ALL_ITEMS.filter(function(i){return i.type==='Notes'||i.type==='Textbook';}).length;
+  var videos = ALL_ITEMS.filter(function(i){return i.type==='Video'||i.type==='Link';}).length;
+  document.getElementById('statTotal').textContent = ALL_ITEMS.length;
+  document.getElementById('statPapers').textContent = papers;
+  document.getElementById('statNotes').textContent = notes;
+  document.getElementById('statVideos').textContent = videos;
 }
 
-function searchBooks(){
-  var lvl=document.getElementById('levelSelect').value;
-  var sub=document.getElementById('subjectSelect').value;
-  var kw=document.getElementById('searchInput').value.toLowerCase();
-  var filtered=libraryData.filter(function(b){
-    var lvlMatch=!lvl||b.level===lvl;
-    var subMatch=!sub||b.subject===sub;
-    var kwMatch=!kw||b.title.toLowerCase().includes(kw)||b.subject.toLowerCase().includes(kw)||b.desc.toLowerCase().includes(kw);
-    return lvlMatch&&subMatch&&kwMatch;
+function filterLib(){
+  var q = (document.getElementById('libQ').value||'').toLowerCase();
+  var level = document.getElementById('libLevel').value;
+  var subject = document.getElementById('libSubject').value;
+
+  var filtered = ALL_ITEMS.filter(function(i){
+    var matchQ = !q || i.title.toLowerCase().includes(q) || i.subject.toLowerCase().includes(q) || (i.description||'').toLowerCase().includes(q);
+    var matchL = !level || i.level===level;
+    var matchS = !subject || i.subject===subject;
+    var matchT = currentType==='All' || i.type===currentType;
+    return matchQ && matchL && matchS && matchT;
   });
-  var title=document.getElementById('resultsTitle');
-  title.textContent='Search Results'+(sub?' — '+sub:'')+(lvl?' ('+( lvl==='o'?'O Level':'A Level')+')':'');
-  renderBooks(filtered);
-  document.querySelector('.results-section').scrollIntoView({behavior:'smooth'});
+
+  var cnt = document.getElementById('libCount');
+  if(cnt) cnt.textContent = filtered.length + ' resource' + (filtered.length===1?'':'s') + ' found';
+
+  renderLibrary(filtered);
 }
 
-document.getElementById('levelSelect').addEventListener('change',function(){
-  populateSubjectDropdown(this.value);
-});
+function renderLibrary(items){
+  var container = document.getElementById('libContent');
+  if(!container) return;
 
-// INIT
-populateSubjectDropdown('');
-buildSubjectTabs();
-filterBooks();
+  if(!items.length){
+    container.innerHTML = '<div class="lib-empty"><div class="icon">📭</div><p>No resources found. Try a different search or filter.</p></div>';
+    return;
+  }
+
+  // Group by level
+  var groups = {};
+  var levelOrder = ['O Level','A Level','External'];
+  var levelLabels = {'O Level':'O Level (S1 - S4)','A Level':'A Level (S5 - S6)','External':'External Resources'};
+  var levelIcons = {'O Level':'📗','A Level':'📘','External':'🌐'};
+
+  items.forEach(function(item){
+    var lv = item.level||'External';
+    if(!groups[lv]) groups[lv] = [];
+    groups[lv].push(item);
+  });
+
+  var html = '';
+  levelOrder.forEach(function(lv){
+    if(!groups[lv]||!groups[lv].length) return;
+    var grp = groups[lv];
+    html += '<div class="lib-section">';
+    html += '<div class="lib-section-hd"><span style="font-size:22px">'+levelIcons[lv]+'</span><h3>'+levelLabels[lv]+'</h3><span class="count">'+grp.length+' resources</span></div>';
+    html += '<div class="lib-grid">';
+    grp.forEach(function(item){
+      var typeConf = TYPES[item.type]||TYPES['Link'];
+      var cardIcon = typeConf.cardIcon||'icon-link';
+      var badgeClass = typeConf.color||'badge-link';
+      var isExternal = item.url && item.url.startsWith('http');
+      html += '<div class="lib-card">';
+      html += '<div class="lib-card-icon '+cardIcon+'">'+typeConf.icon+'</div>';
+      html += '<h4>'+item.title+'</h4>';
+      html += '<div class="meta">'+item.subject+'</div>';
+      html += '<div class="lib-badges"><span class="lib-badge '+badgeClass+'">'+item.type+'</span><span class="lib-badge" style="background:#F5F5F5;color:#555">'+item.level+'</span></div>';
+      if(item.description){
+        html += '<p style="font-size:12px;color:#555;line-height:1.6;margin:0">'+item.description.substring(0,80)+'...</p>';
+      }
+      if(item.url && item.url!=='#'){
+        html += '<a href="'+item.url+'" target="'+(isExternal?'_blank':'_self')+'" class="lib-action'+(isExternal?' ext':'')+'">'+( isExternal?'Open Resource →':'Download →')+'</a>';
+      }
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+
+  container.innerHTML = html;
+}
+
 function toggleMobile(){var m=document.getElementById('mobileMenu');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+
+loadLibrary();
 </script>
-<script>
-// Auto-update year
-(function(){
-  var y = new Date().getFullYear();
-  document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});
-})();
-</script>
+<script>(function(){var y=new Date().getFullYear();document.querySelectorAll('.auto-year').forEach(function(el){el.textContent=y;});})();</script>
 </body>
 </html>
