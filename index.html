@@ -39,20 +39,18 @@
 <style>
 /* ── HERO ─────────────────────────────── */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#0a1f0d}
-.hero-bg{position:absolute;inset:0;background:url('images/compound/compound1.jpg') center/cover no-repeat;opacity:.75;filter:blur(0px);transform:scale(1.02)}
+.hero-bg{position:absolute;inset:0;background:url('images/compound/compound1.png') center/cover no-repeat;opacity:.75;filter:blur(0px);transform:scale(1.02)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,30,13,.78) 0%,rgba(27,94,32,.55) 50%,rgba(10,30,13,.72) 100%)}
 .hero-pattern{position:absolute;inset:0;opacity:.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:32px 32px}
 .hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:100px 24px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-left{}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(249,168,37,.15);border:1px solid rgba(249,168,37,.4);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 16px;border-radius:20px;margin-bottom:24px}
-.hero-eyebrow span{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(249,168,37,.25),rgba(249,168,37,.1));border:1.5px solid var(--gold);color:var(--gold);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;border-radius:30px;margin-bottom:24px;box-shadow:0 0 20px rgba(249,168,37,.3),inset 0 1px 0 rgba(255,255,255,.1);backdrop-filter:blur(8px)}
+.hero-eyebrow span{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 1.5s infinite;box-shadow:0 0 8px var(--gold)}.hero-eyebrow span{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
 .hero h1{font-family:'Merriweather',serif;font-size:52px;color:#fff;font-weight:900;line-height:1.12;margin-bottom:8px}
 .hero h1 span{color:var(--gold);position:relative}
 .hero h1 span::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:3px;background:var(--gold);border-radius:2px}
-.hero-motto{font-size:14px;color:rgba(255,255,255,.6);font-style:italic;margin:20px 0 18px;display:flex;align-items:center;gap:10px}
-.hero-motto::before{content:'';display:block;width:32px;height:2px;background:var(--gold);flex-shrink:0}
-.hero-desc{font-size:16px;color:rgba(255,255,255,.8);line-height:1.85;margin-bottom:36px}
+.hero-motto{font-size:18px;color:var(--gold);font-style:italic;margin:20px 0 18px;display:flex;align-items:center;gap:10px;font-weight:600}.hero-desc{font-size:16px;color:rgba(255,255,255,.8);line-height:1.85;margin-bottom:36px}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
 .btn-hero-primary{background:var(--gold);color:#0a1f0d;font-weight:800;padding:14px 28px;border-radius:50px;text-decoration:none;font-size:14px;transition:all .3s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px}
 .btn-hero-primary:hover{background:#F57F17;transform:translateY(-2px);box-shadow:0 8px 24px rgba(249,168,37,.4)}
@@ -285,13 +283,13 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
     <div class="popup-top">
       <button class="popup-close" onclick="closePopup()">✕</button>
       <img src="images/badge/badge.png" class="badge-img" alt="Badge" onerror="this.style.display='none'">
-      <h3>📢 School Announcement</h3>
+      <h3> School Announcement</h3>
       <p>Kiyuni Secondary School</p>
     </div>
     <div class="popup-body">
       <div class="popup-msg" id="popupMsg">Admissions are now open for the <span class="auto-year">2026</span>/<span id="ny">2027</span> academic year. Apply for S1, S5 and transfer places. Contact us today to secure your child's place at Kiyuni Secondary School.</div>
       <div class="popup-actions">
-        <a href="apply.html" class="popup-primary">📋 Apply Now</a>
+        <a href="apply.html" class="popup-primary"> Apply Now</a>
         <a href="admissions.html" class="popup-secondary">Learn More</a>
       </div>
       <span class="popup-dismiss" onclick="closePopup()">Dismiss — Don't show again today</span>
@@ -351,12 +349,12 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-eyebrow"><span></span>Mubende's Premier Secondary School</div>
-      <h1>Shaping <span>Tomorrow's</span><br>Leaders Today</h1>
+      <h1>KIYUNI<br><span>SECONDARY SCHOOL</span></h1>
       <p class="hero-motto">Education Determines The Future</p>
       <p class="hero-desc">Kiyuni Secondary School offers quality O and A Level education combined with vocational skills — building confident, skilled and disciplined graduates ready for university and life.</p>
       <div class="hero-btns">
-        <a href="admissions.html" class="btn-hero-primary">📋 Apply for Admission</a>
-        <a href="about.html" class="btn-hero-outline">🏫 Learn More</a>
+        <a href="admissions.html" class="btn-hero-primary"> Apply for Admission</a>
+        <a href="about.html" class="btn-hero-outline"> Learn More</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><div class="n" id="c1">0</div><div class="l">O &amp; A Level</div></div>
@@ -410,7 +408,7 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-img-wrap">
-        <div class="about-img"><img src="images/compound/compound1.jpg" alt="Kiyuni Secondary School"></div>
+        <div class="about-img"><img src="images/compound/compound1.png" alt="Kiyuni Secondary School"></div>
         <div class="about-badge-float"><span class="nb">O&A</span><span class="nl">Level School</span></div>
       </div>
       <div>
@@ -420,11 +418,11 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
         <p class="about-text">Kiyuni Secondary School is a reputable institution located in the heart of Kiyuni Town, Mubende District. We are committed to providing quality secondary education that prepares students for both national examinations and real life.</p>
         <p class="about-text">Under the leadership of our Head Teacher, Mr. Musa Bosa Mpungu, we nurture academic excellence alongside practical vocational skills — ensuring every graduate is confident, skilled and ready for the world.</p>
         <div class="about-pills">
-          <span class="pill">📍 Kiyuni Town, Mubende</span>
-          <span class="pill">🎓 O Level (S1–S4)</span>
-          <span class="pill">📘 A Level (S5–S6)</span>
-          <span class="pill">💻 Vocational Skills</span>
-          <span class="pill">📚 Digital Library</span>
+          <span class="pill">  Kiyuni Town, Mubende</span>
+          <span class="pill">  O Level (S1–S4)</span>
+          <span class="pill">   A Level (S5–S6)</span>
+          <span class="pill">    Vocational Skills</span>
+          <span class="pill">  Digital Library</span>
         </div>
         <a href="about.html" class="btn-green">Read More About Us →</a>
       </div>
@@ -442,19 +440,19 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
     </div>
     <div class="features-grid">
       <div class="feat-card">
-        <div class="feat-icon">🎓</div>
+        <div class="feat-icon"> </div>
         <h3>Quality O &amp; A Level Education</h3>
         <p>Experienced teachers delivering the Uganda national curriculum to the highest standard, with a focus on UNEB examination excellence.</p>
         <a href="academics.html" class="feat-link">View Academics</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">💻</div>
+        <div class="feat-icon"></div>
         <h3>Vocational &amp; Technical Skills</h3>
         <p>Computer studies, coding, tailoring and agriculture — practical skills that give every graduate an employment edge beyond their certificate.</p>
         <a href="vocational.html" class="feat-link">View Skills</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">📚</div>
+        <div class="feat-icon"></div>
         <h3>Digital Library System</h3>
         <p>Students access study notes, past papers and reference materials online, organised by subject and level — anytime, anywhere.</p>
         <a href="library.html" class="feat-link">Visit Library</a>
@@ -466,7 +464,7 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
         <a href="student.html" class="feat-link">Student Portal</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">⚖️</div>
+        <div class="feat-icon"></div>
         <h3>Discipline &amp; Character</h3>
         <p>We build more than academics. Kiyuni graduates are known for discipline, integrity and community values that last a lifetime.</p>
         <a href="about.html" class="feat-link">About Our Values</a>
@@ -490,11 +488,11 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
       <div class="divider" style="background:var(--gold)"></div>
     </div>
     <div class="prog-grid">
-      <a href="academics.html" class="prog-card"><div class="prog-num">01 — O Level</div><div class="prog-icon">📗</div><h3>Ordinary Level</h3><p>Senior 1 to Senior 4 — broad-based secondary education leading to the UCE national examination.</p><span class="prog-arrow">→</span></a>
-      <a href="academics.html#alevel" class="prog-card"><div class="prog-num">02 — A Level</div><div class="prog-icon">📘</div><h3>Advanced Level</h3><p>Senior 5 to Senior 6 — specialised study in Sciences, Arts or Business leading to the UACE.</p><span class="prog-arrow">→</span></a>
-      <a href="vocational.html" class="prog-card"><div class="prog-num">03 — Vocational</div><div class="prog-icon">🛠️</div><h3>Vocational Skills</h3><p>Computer, coding, tailoring and agriculture — practical skills for employment and entrepreneurship.</p><span class="prog-arrow">→</span></a>
-      <a href="library.html" class="prog-card"><div class="prog-num">04 — Library</div><div class="prog-icon">📚</div><h3>Digital Library</h3><p>Notes, past papers and study materials organised by subject and level — available online.</p><span class="prog-arrow">→</span></a>
-      <a href="fees.html" class="prog-card"><div class="prog-num">05 — Fees</div><div class="prog-icon">💰</div><h3>Fees Structure</h3><p>Clear and affordable fees structure. Contact the school bursar for the full breakdown per term.</p><span class="prog-arrow">→</span></a>
+      <a href="academics.html" class="prog-card"><div class="prog-num">01 — O Level</div><div class="prog-icon"> </div><h3>Ordinary Level</h3><p>Senior 1 to Senior 4 — broad-based secondary education leading to the UCE national examination.</p><span class="prog-arrow">→</span></a>
+      <a href="academics.html#alevel" class="prog-card"><div class="prog-num">02 — A Level</div><div class="prog-icon">  </div><h3>Advanced Level</h3><p>Senior 5 to Senior 6 — specialised study in Sciences, Arts or Business leading to the UACE.</p><span class="prog-arrow">→</span></a>
+      <a href="vocational.html" class="prog-card"><div class="prog-num">03 — Vocational</div><div class="prog-icon"> </div><h3>Vocational Skills</h3><p>Computer, coding, tailoring and agriculture — practical skills for employment and entrepreneurship.</p><span class="prog-arrow">→</span></a>
+      <a href="library.html" class="prog-card"><div class="prog-num">04 — Library</div><div class="prog-icon"> </div><h3>Digital Library</h3><p>Notes, past papers and study materials organised by subject and level — available online.</p><span class="prog-arrow">→</span></a>
+      <a href="fees.html" class="prog-card"><div class="prog-num">05 — Fees</div><div class="prog-icon"> </div><h3>Fees Structure</h3><p>Clear and affordable fees structure. Contact the school bursar for the full breakdown per term.</p><span class="prog-arrow">→</span></a>
       <a href="admissions.html" class="prog-card"><div class="prog-num">06 — Admissions</div><div class="prog-icon">📋</div><h3>Join Us</h3><p>Applications open for S1, S5 and transfers. Visit the school or call us to start the process today.</p><span class="prog-arrow">→</span></a>
     </div>
   </div>
@@ -538,12 +536,12 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
       <a href="facilities.html" class="btn-outline">View All →</a>
     </div>
     <div class="gallery-mosaic">
-      <div class="gal-item tall" style="height:452px"><img src="images/compound/compound1.jpg" alt="School"></div>
-      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound1.jpg" alt="School"></div>
-      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound1.jpg" alt="School"></div>
-      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound1.jpg" alt="School"></div>
-      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound1.jpg" alt="School"></div>
-      <div class="gal-item wide" style="height:220px;grid-column:span 2"><img src="images/compound/compound1.jpg" alt="School"></div>
+      <div class="gal-item tall" style="height:452px"><img src="images/compound/compound7.jpg" alt="School"></div>
+      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound2.jpg" alt="School"></div>
+      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound6.jpg" alt="School"></div>
+      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound5.jpg" alt="School"></div>
+      <div class="gal-item gal-1" style="height:220px"><img src="images/compound/compound4.jpg" alt="School"></div>
+      <div class="gal-item wide" style="height:220px;grid-column:span 2"><img src="images/compound/compound1.png" alt="School"></div>
     </div>
   </div>
 </section>
@@ -555,10 +553,10 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
     <h2>"Education Determines<br><span>The Future</span>"</h2>
     <p>This is more than words — it is the foundation of everything we do at Kiyuni Secondary School. Every lesson, every skill, every day at school is an investment in the future of our students and our community.</p>
     <div class="motto-badges">
-      <span class="motto-badge">📍 Kiyuni Town</span>
-      <span class="motto-badge">🏆 Academic Excellence</span>
-      <span class="motto-badge">🛠️ Practical Skills</span>
-      <span class="motto-badge">🤝 Strong Values</span>
+      <span class="motto-badge">  Kiyuni Town</span>
+      <span class="motto-badge">  Academic Excellence</span>
+      <span class="motto-badge">  Practical Skills</span>
+      <span class="motto-badge">  Strong Values</span>
     </div>
   </div>
 </section>
@@ -572,16 +570,16 @@ blockquote.ht-quote{font-family:'Merriweather',serif;font-size:20px;color:var(--
     </div>
     <div class="news-grid">
       <div class="news-card">
-        <div class="news-top"><div class="news-top-bg" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7)">🏆</div><span class="news-cat-tag">Academic</span></div>
-        <div class="news-body"><div class="news-date"><span class="auto-year">2026</span></div><h3>Students Excel in National Examinations</h3><p>Kiyuni Secondary School students continue to perform strongly in UNEB examinations across both O and A Level programmes.</p><a href="news.html" class="news-read">Read more</a></div>
+        <div class="news-top"><div class="news-top-bg" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7)"> </div><span class="news-cat-tag">Academic</span></div>
+        <div class="news-body"><div class="news-date"><span class="auto-year">2026</span></div><h3>Students Excel in 2025 National Examinations</h3><p>Kiyuni Secondary School students continue to perform strongly in UNEB examinations across both O and A Level programmes.</p><a href="news.html" class="news-read">Read more</a></div>
       </div>
       <div class="news-card">
-        <div class="news-top"><div class="news-top-bg" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9)">💻</div><span class="news-cat-tag">Technology</span></div>
-        <div class="news-body"><div class="news-date"><span class="auto-year">2026</span></div><h3>Coding Programme Attracts Growing Interest</h3><p>Our vocational coding and computer studies programme is gaining momentum with students eager to develop digital skills for the modern economy.</p><a href="vocational.html" class="news-read">Read more</a></div>
+        <div class="news-top"><div class="news-top-bg" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9)">   </div><span class="news-cat-tag">Technology</span></div>
+        <div class="news-body"><div class="news-date"><span class="auto-year">2025</span></div><h3>The yet to be introduced Coding Programme Attracts Growing Interest</h3><p>Our vocational coding and computer studies programme is gaining momentum with students eager to develop digital skills for the modern economy.</p><a href="vocational.html" class="news-read">Read more</a></div>
       </div>
       <div class="news-card">
         <div class="news-top"><div class="news-top-bg" style="background:linear-gradient(135deg,#F1F8E9,#DCEDC8)">🌱</div><span class="news-cat-tag">Agriculture</span></div>
-        <div class="news-body"><div class="news-date"><span class="auto-year">2026</span></div><h3>School Farm Records Successful Harvest Season</h3><p>Agriculture students celebrated a successful harvest, demonstrating the practical farming skills they have developed throughout the term.</p><a href="vocational.html" class="news-read">Read more</a></div>
+        <div class="news-body"><div class="news-date"><span class="auto-year">2026</span></div><h3>School Farm Records Successful Harvest Season</h3><p>Agriculture students celebrated a successful harvest, demonstrating the practical farming skills they have developed throughout the term, with teacher muwonge the agriculture teacher..</p><a href="vocational.html" class="news-read">Read more</a></div>
       </div>
     </div>
   </div>
